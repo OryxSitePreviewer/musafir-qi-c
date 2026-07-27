@@ -1,0 +1,134 @@
+---
+import '../styles/global.css';
+import Seo from '../components/Seo.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppBubble from '../components/WhatsAppBubble.astro';
+import { SITE } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  image?: string;
+  schemas?: Record<string, unknown>[];
+  /** Keeps a page out of search results. Used by the 404 page. */
+  noindex?: boolean;
+}
+
+const { title, description, path, image, schemas = [], noindex = false } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en-MY">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#DA291C" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Fonts are self hosted. Preload the two that paint above the fold. -->
+    <link
+      rel="preload"
+      href="/fonts/anton-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/ibm-plex-sans-latin-var.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <Seo
+      title={title}
+      description={description}
+      path={path}
+      image={image}
+      schemas={schemas}
+      noindex={noindex}
+    />
+
+    <!--
+      Google Analytics placeholder.
+      No tracking script is loaded unless googleAnalyticsId is set in src/data/site.ts.
+      Uncomment the block below and set the ID there to switch it on.
+    -->
+    {
+      SITE.googleAnalyticsId && (
+        <Fragment>
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${SITE.googleAnalyticsId}`}
+            is:inline
+          />
+          <script is:inline define:vars={{ gaId: SITE.googleAnalyticsId }}>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+              dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', gaId, { anonymize_ip: true });
+          </script>
+        </Fragment>
+      )
+    }
+
+    <!-- Flags JS as available so the scroll reveal can hide elements safely.
+         Without JS nothing is ever hidden. Runs before paint, so no flash. -->
+    <script is:inline>
+      document.documentElement.classList.add('js-on');
+    </script>
+  </head>
+
+  <body class="min-h-screen bg-white antialiased">
+    <a href="#main" class="skip-link">Skip to main content</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <WhatsAppBubble />
+
+    <script>
+      // Scroll reveal on section entry. One observer for the whole page.
+      // Disabled entirely when the visitor prefers reduced motion.
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const targets = document.querySelectorAll<HTMLElement>('.reveal');
+
+      if (reduceMotion.matches || !('IntersectionObserver' in window)) {
+        targets.forEach((el) => el.classList.add('is-visible'));
+      } else {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { rootMargin: '0px 0px -8% 0px', threshold: 0.05 }
+        );
+
+        targets.forEach((el, index) => {
+          // Small stagger so a row of cards does not snap in all at once.
+          el.style.transitionDelay = `${Math.min(index % 4, 3) * 70}ms`;
+          observer.observe(el);
+        });
+
+        // Safety net. A reveal animation must never be the reason content is
+        // missing, so anything still hidden after three seconds is shown
+        // regardless of whether the observer ever fired for it.
+        window.setTimeout(() => {
+          targets.forEach((el) => el.classList.add('is-visible'));
+        }, 3000);
+      }
+    </script>
+  </body>
+</html>

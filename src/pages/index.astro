@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import BuildYourBowl from '../components/BuildYourBowl.astro';
+import SignatureDishes from '../components/SignatureDishes.astro';
+import StepsStrip from '../components/StepsStrip.astro';
+import HalalBand from '../components/HalalBand.astro';
+import IngredientBarShowcase from '../components/IngredientBarShowcase.astro';
+import LocationsBand from '../components/LocationsBand.astro';
+import Faq from '../components/Faq.astro';
+import CtaBand from '../components/CtaBand.astro';
+
+import { SITE } from '../data/site';
+import {
+  allRestaurantsSchema,
+  faqSchema,
+  organisationSchema,
+  websiteSchema,
+} from '../lib/schema';
+
+const schemas = [
+  organisationSchema(),
+  websiteSchema(),
+  ...allRestaurantsSchema(),
+  faqSchema(),
+];
+---
+
+<!-- Title stays under 60 characters, so Google shows it whole. -->
+<Base
+  title={`${SITE.name} (${SITE.shortName}) | Malatang, Cyberjaya and KL`}
+  description={SITE.description}
+  path="/"
+  schemas={schemas}
+>
+  <Hero />
+  <BuildYourBowl />
+  <SignatureDishes />
+  <StepsStrip />
+  <HalalBand />
+  <IngredientBarShowcase />
+  <LocationsBand />
+  <Faq />
+  <CtaBand />
+</Base>

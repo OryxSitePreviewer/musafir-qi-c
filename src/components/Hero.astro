@@ -1,0 +1,89 @@
+---
+import { SITE, LABELS } from '../data/site';
+import { INGREDIENT_CLAIM } from '../data/ingredients';
+import Icon from './Icon.astro';
+
+const trustBullets = [
+  { label: 'Pork-Free', mark: true },
+  { label: 'Lard-Free', mark: true },
+  { label: `${INGREDIENT_CLAIM}+ Fresh Ingredients`, mark: false },
+  { label: 'Pay By Weight', mark: false },
+];
+---
+
+<section class="on-red relative overflow-hidden bg-mala-red text-white">
+  <!-- Heat shimmer behind the headline. Decorative, and removed entirely under
+       prefers-reduced-motion. See the .steam rule in global.css. -->
+  <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+    <div
+      class="steam absolute top-1/4 left-[12%] h-56 w-40 rounded-full bg-white/10 blur-3xl"
+      style="animation-delay: 0s;"
+    >
+    </div>
+    <div
+      class="steam absolute top-1/3 left-[45%] h-64 w-52 rounded-full bg-mala-gold/12 blur-3xl"
+      style="animation-delay: 2.4s;"
+    >
+    </div>
+    <div
+      class="steam absolute top-1/4 right-[10%] h-56 w-44 rounded-full bg-white/8 blur-3xl"
+      style="animation-delay: 4.6s;"
+    >
+    </div>
+  </div>
+
+  <div class="container-rail relative py-16 sm:py-24 lg:py-28">
+    <p class="flex items-center gap-3 text-xs font-bold tracking-[0.22em] text-white uppercase">
+      <span class="cjk shrink-0 text-lg whitespace-nowrap text-white">{SITE.chineseName}</span>
+      <span class="h-px w-8 shrink-0 bg-mala-gold"></span>
+      Cyberjaya and Kuala Lumpur
+    </p>
+
+    <!-- The first clause takes its own line from `sm` up. Below that it runs on,
+         because a forced break at 375px leaves a single orphaned word. -->
+    <h1 class="gold-on-red mt-5 max-w-4xl text-[length:var(--text-display-xl)]">
+      <span class="sm:block">Fill your own bowl.</span>{' '}<span
+        >Pay for what you took.</span
+      >
+    </h1>
+
+    <p class="mt-6 max-w-xl text-lg text-white sm:text-xl">
+      Walk the ingredient bar, pick whatever you want from over {INGREDIENT_CLAIM} fresh
+      ingredients, and we weigh it at the counter. No set menu, no pork, no lard.
+    </p>
+
+    <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+      <a href="/menu" class="btn btn-on-red">
+        {LABELS.menu}
+        <Icon name="arrow-right" size={18} />
+      </a>
+      <a href="/locations" class="btn btn-ghost-on-red">
+        <Icon name="pin" size={18} />
+        {LABELS.find}
+      </a>
+    </div>
+
+    <!-- Trust bullets. Green mark on the two that are kitchen policy claims. -->
+    <ul class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3">
+      {
+        trustBullets.map((bullet) => (
+          <li class="flex items-center gap-2 text-sm font-semibold text-white sm:text-base">
+            {bullet.mark ? (
+              <span class="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-mala-green text-white">
+                <Icon name="check" size={13} />
+              </span>
+            ) : (
+              <span class="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 border-mala-gold text-mala-gold">
+                <Icon name="check" size={13} />
+              </span>
+            )}
+            {bullet.label}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <!-- Gold rule closing the band. -->
+  <div class="h-1 w-full bg-mala-gold"></div>
+</section>

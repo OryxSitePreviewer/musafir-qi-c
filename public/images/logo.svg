@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 140" width="520" height="140" role="img" aria-label="Musafir Qi Malatang, Dr.MaLa">
+  <title>Musafir Qi Malatang (Dr.MaLa)</title>
+  <!--
+    ==========================================================================
+    TEMPORARY STAND-IN WORDMARK
+    ==========================================================================
+    Reconstructed from the brand name and the red and gold palette. This is NOT
+    the real Dr.MaLa logo. Replace this file with the supplied artwork before
+    launch and keep the filename so nothing else needs changing.
+
+    The type is set in a condensed system stack rather than converted to
+    outlines, so it stays selectable, searchable, and editable. If you export a
+    final logo, convert the type to paths at that point.
+    ==========================================================================
+  -->
+  <rect width="520" height="140" fill="#DA291C"/>
+  <rect x="0" y="0" width="520" height="5" fill="#D4AF37"/>
+  <rect x="0" y="135" width="520" height="5" fill="#D4AF37"/>
+
+  <!-- Bowl mark -->
+  <g transform="translate(28 34) scale(1.5)">
+    <path d="M6 21h36c0 10.5-8.06 19-18 19S6 31.5 6 21Z" fill="#DA291C" stroke="#D4AF37" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M3 21h42" stroke="#D4AF37" stroke-width="3" stroke-linecap="round"/>
+    <path d="M18 15c0-3 2.5-3.5 2.5-6.5M27 15c0-3.5 3-4 3-7" stroke="#D4AF37" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="24" cy="29" r="3.5" fill="#FFFFFF"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="130" y="80" font-family="Anton, 'Arial Narrow', Haettenschweiler, Impact, sans-serif" font-size="60" font-weight="700" fill="#D4AF37" letter-spacing="1">DR.MALA</text>
+  <text x="132" y="106" font-family="'IBM Plex Sans', 'Segoe UI', Arial, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF" letter-spacing="5.5">MUSAFIR QI MALATANG</text>
+</svg>

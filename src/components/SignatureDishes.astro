@@ -1,0 +1,68 @@
+---
+import { SIGNATURE_DISHES } from '../data/dishes';
+import SectionHeading from './SectionHeading.astro';
+import SpiceMeter from './SpiceMeter.astro';
+import Icon from './Icon.astro';
+---
+
+<section class="bg-white py-16 sm:py-20" aria-labelledby="signature-heading">
+  <div class="container-rail">
+    <SectionHeading
+      id="signature-heading"
+      eyebrow="What to order"
+      title="Three we are known for"
+      lede="Every bowl is built by you. These three are what you build it in."
+    />
+
+    <ul class="mt-10 grid gap-6 md:grid-cols-3">
+      {
+        SIGNATURE_DISHES.map((dish) => (
+          <li class="reveal card-hard card-hard-link flex flex-col overflow-hidden">
+            <img
+              src={dish.image}
+              alt={dish.imageAlt}
+              width="800"
+              height="600"
+              loading="lazy"
+              decoding="async"
+              class="aspect-[4/3] w-full border-b-2 border-mala-ink object-cover"
+            />
+
+            <div class="flex flex-1 flex-col p-5">
+              <div class="flex items-start justify-between gap-3">
+                <h3 class="text-[length:var(--text-display-sm)] text-mala-ink">{dish.name}</h3>
+                {dish.badge && (
+                  <span class="shrink-0 rounded-sm border-2 border-mala-gold px-2 py-1 text-[0.625rem] font-bold tracking-widest uppercase">
+                    {dish.badge}
+                  </span>
+                )}
+              </div>
+
+              {dish.chineseName && (
+                <p class="cjk mt-1 text-sm text-mala-ink-soft">{dish.chineseName}</p>
+              )}
+
+              <p class="mt-3 flex-1 text-sm text-mala-ink-soft">{dish.taste}</p>
+
+              {dish.spice > 0 && (
+                <div class="mt-4 border-t-2 border-black/10 pt-3">
+                  <SpiceMeter level={dish.spice} />
+                  <p class="mt-1 text-xs text-mala-ink-soft">
+                    Order it anywhere from no chilli up to extra spicy.
+                  </p>
+                </div>
+              )}
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="mt-8">
+      <a href="/menu" class="btn btn-primary">
+        See the menu
+        <Icon name="arrow-right" size={18} />
+      </a>
+    </p>
+  </div>
+</section>

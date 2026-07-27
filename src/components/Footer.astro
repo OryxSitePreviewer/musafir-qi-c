@@ -1,0 +1,125 @@
+---
+import { SITE } from '../data/site';
+import { NAV_ITEMS } from '../data/nav';
+import { LOCATIONS, directionsLink } from '../data/locations';
+import Wordmark from './Wordmark.astro';
+import Icon from './Icon.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer on-red bg-mala-ink text-white">
+  <div class="container-rail py-14">
+    <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+      <!-- Brand -->
+      <div class="lg:col-span-1">
+        <Wordmark variant="light" />
+        <p class="mt-4 max-w-xs text-sm text-white/75">
+          {SITE.tagline}
+        </p>
+        <p class="mt-4">
+          <span class="cjk text-2xl text-mala-gold">{SITE.chineseName}</span>
+        </p>
+        <ul class="mt-5 flex gap-3">
+          {
+            SITE.socials.map((social) => (
+              <li>
+                <a
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener"
+                  class="inline-flex h-11 w-11 items-center justify-center rounded-sm border-2 border-white/30 text-white transition-colors hover:border-mala-gold hover:text-mala-gold"
+                >
+                  <span class="sr-only">{`${SITE.shortName} on ${social.label}`}</span>
+                  <Icon name={social.icon} size={20} />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Outlets -->
+      {
+        LOCATIONS.map((location) => (
+          <div>
+            <h2 class="text-[1.375rem] text-mala-gold">{location.name}</h2>
+            <address class="mt-3 not-italic text-sm text-white/80">
+              <p>{location.shortAddress}</p>
+              <p class="mt-2 flex items-start gap-2">
+                <Icon name="clock" size={16} class="mt-0.5 shrink-0 text-mala-gold" />
+                <span>{location.hoursDisplay}</span>
+              </p>
+              <p class="mt-1 flex items-center gap-2">
+                <Icon name="phone" size={16} class="shrink-0 text-mala-gold" />
+                <a
+                  href={`tel:${location.phoneDisplay.replace(/\s/g, '')}`}
+                  class="flex min-h-11 items-center hover:text-mala-gold"
+                >
+                  {location.phoneDisplay}
+                </a>
+              </p>
+            </address>
+            <a
+              href={directionsLink(location)}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-white underline decoration-mala-gold decoration-2 underline-offset-4 hover:text-mala-gold"
+            >
+              <Icon name="directions" size={16} />
+              Get directions
+            </a>
+          </div>
+        ))
+      }
+
+      <!-- Quick links -->
+      <div>
+        <h2 class="text-[1.375rem] text-mala-gold">Quick links</h2>
+        <!-- Each row is a 44px tap target. A tight list of 18px links is the
+             classic mobile footer failure, and it is the one place on the page
+             where links stack close enough to mis-tap. -->
+        <ul class="mt-2 text-sm">
+          {
+            NAV_ITEMS.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class="flex min-h-11 items-center text-white/85 hover:text-mala-gold"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+          <li>
+            <a
+              href="/menu"
+              class="flex min-h-11 items-center text-white/85 hover:text-mala-gold"
+            >
+              Print the menu
+            </a>
+          </li>
+          <li>
+            <a
+              href={`mailto:${SITE.email}`}
+              class="flex min-h-11 items-center break-all text-white/85 hover:text-mala-gold"
+            >
+              {SITE.email}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div
+      class="mt-12 flex flex-col gap-3 border-t-2 border-white/15 pt-6 text-sm text-white/60 sm:flex-row sm:items-center sm:justify-between"
+    >
+      <p>&copy; {year} {SITE.name}. All rights reserved.</p>
+      <p class="flex items-center gap-2">
+        <Icon name="leaf" size={16} class="text-mala-green" />
+        Pork free and lard free kitchen
+      </p>
+    </div>
+  </div>
+</footer>

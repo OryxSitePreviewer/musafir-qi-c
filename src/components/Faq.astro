@@ -1,0 +1,124 @@
+---
+import { FAQS } from '../data/faq';
+import SectionHeading from './SectionHeading.astro';
+import Icon from './Icon.astro';
+
+/**
+ * Built on <details> and <summary>, so it opens and closes with no JavaScript at
+ * all. The script below only adds the "one open at a time" behaviour and the
+ * chevron rotation, both of which are nice to have rather than load bearing.
+ */
+---
+
+<section class="bg-white py-16 sm:py-20" aria-labelledby="faq-heading">
+  <div class="container-rail">
+    <SectionHeading
+      id="faq-heading"
+      eyebrow="Before you come"
+      title="Questions people ask"
+      lede="If something is not answered here, message us on WhatsApp and a person will reply."
+    />
+
+    <div class="mt-10 max-w-3xl" id="faq-accordion">
+      {
+        FAQS.map((item, index) => (
+          <details class="faq-item border-b-2 border-black/10" name="faq" open={index === 0}>
+            <summary class="faq-summary">
+              <h3 class="text-[1.0625rem] font-semibold sm:text-[1.125rem]">{item.question}</h3>
+              <Icon name="chevron" size={20} class="faq-chevron shrink-0 text-mala-red" />
+            </summary>
+            <div class="pb-5 text-mala-ink-soft">
+              <p>{item.answer}</p>
+            </div>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 1.125rem;
+    cursor: pointer;
+    list-style: none;
+    min-height: 3.25rem;
+  }
+
+  /* Hide the native disclosure triangle in every engine. */
+  .faq-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-summary::marker {
+    content: '';
+  }
+
+  .faq-summary h3 {
+    font-family: var(--font-body);
+    text-transform: none;
+    line-height: 1.4;
+    letter-spacing: normal;
+  }
+
+  .faq-summary:hover h3 {
+    color: var(--mala-red);
+  }
+
+  .faq-item[open] .faq-chevron {
+    transform: rotate(180deg);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .faq-chevron {
+      transition: transform 0.2s ease;
+    }
+  }
+
+  /* Fallback for printing. The reliable version is the beforeprint handler in
+     the script below, because a closed <details> is collapsed by the element
+     itself and not only by a display rule on its child. */
+  @media print {
+    .faq-item > div {
+      display: block !important;
+    }
+  }
+</style>
+
+<script>
+  const items = Array.from(
+    document.querySelectorAll<HTMLDetailsElement>('#faq-accordion .faq-item')
+  );
+
+  // `name="faq"` already gives exclusive accordion behaviour in current browsers.
+  // This fallback covers older engines that ignore the attribute.
+  const supportsExclusive = 'name' in document.createElement('details');
+
+  if (!supportsExclusive) {
+    for (const item of items) {
+      item.addEventListener('toggle', () => {
+        if (!item.open) return;
+        for (const other of items) {
+          if (other !== item) other.open = false;
+        }
+      });
+    }
+  }
+
+  // Print every answer, not just the one that happens to be open, then put the
+  // accordion back the way the reader left it.
+  let openBeforePrint: HTMLDetailsElement[] = [];
+
+  window.addEventListener('beforeprint', () => {
+    openBeforePrint = items.filter((item) => item.open);
+    for (const item of items) item.open = true;
+  });
+
+  window.addEventListener('afterprint', () => {
+    for (const item of items) item.open = openBeforePrint.includes(item);
+  });
+</script>

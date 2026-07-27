@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { NAV_ITEMS } from '../data/nav';
+---
+
+<Base
+  title="Page not found"
+  description="That page does not exist. Here is where to go instead."
+  path="/404"
+  noindex
+>
+  <section class="on-red bg-mala-red py-20 text-white sm:py-28">
+    <div class="container-rail">
+      <p class="text-xs font-bold tracking-[0.2em] text-white uppercase">Error 404</p>
+      <h1 class="gold-on-red mt-3 text-[length:var(--text-display-lg)]">
+        That page is not on the menu
+      </h1>
+      <p class="mt-5 max-w-xl text-lg text-white">
+        The link is broken or the page moved. Pick where you want to go.
+      </p>
+
+      <ul class="mt-8 flex flex-wrap gap-3">
+        {
+          NAV_ITEMS.map((item) => (
+            <li>
+              <a href={item.href} class="btn btn-ghost-on-red btn-sm">
+                {item.label}
+                <Icon name="arrow-right" size={16} />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div class="h-1 w-full bg-mala-gold"></div>
+  </section>
+</Base>

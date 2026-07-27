@@ -1,0 +1,14 @@
+{
+  "name": "Musafir Qi Malatang (Dr.MaLa)",
+  "short_name": "Dr.MaLa",
+  "description": "Pick and weigh malatang in Cyberjaya and Kuala Lumpur. Pork free and lard free.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFF6E9",
+  "theme_color": "#DA291C",
+  "icons": [
+    { "src": "/images/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/images/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

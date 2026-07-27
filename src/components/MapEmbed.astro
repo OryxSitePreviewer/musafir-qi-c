@@ -1,0 +1,106 @@
+---
+import { mapEmbedLink, directionsLink, type Location } from '../data/locations';
+import Icon from './Icon.astro';
+
+interface Props {
+  location: Location;
+}
+
+const { location } = Astro.props;
+const embedSrc = mapEmbedLink(location);
+const directions = directionsLink(location);
+---
+
+<!--
+  The map iframe is not in the document until the visitor asks for it.
+  A Google Maps embed pulls roughly a megabyte of script and tiles, which would
+  cost several Lighthouse points on every page load for something most visitors
+  never open. The button below swaps in the iframe on click.
+  The directions link underneath works with no JavaScript at all.
+-->
+<div
+  class="map-embed relative overflow-hidden rounded-sm border-2 border-mala-ink"
+  data-src={embedSrc}
+  data-title={`Map showing ${location.fullName}`}
+>
+  <div class="map-placeholder flex aspect-[4/3] flex-col items-center justify-center gap-4 bg-mala-cream p-6 text-center sm:aspect-[16/10]">
+    <!-- Simple street grid so the slot does not read as a broken image. -->
+    <svg
+      viewBox="0 0 120 80"
+      class="absolute inset-0 h-full w-full opacity-25"
+      aria-hidden="true"
+      preserveAspectRatio="xMidYMid slice"
+    >
+      <rect width="120" height="80" fill="var(--mala-cream)"></rect>
+      <g stroke="var(--mala-ink)" stroke-width="0.8" opacity="0.45">
+        <path d="M0 20h120M0 46h120M0 66h120M22 0v80M58 0v80M92 0v80"></path>
+      </g>
+      <g stroke="var(--mala-gold)" stroke-width="2.5" opacity="0.7">
+        <path d="M0 33h120"></path>
+      </g>
+    </svg>
+
+    <div class="relative">
+      <Icon name="pin" size={32} class="mx-auto text-mala-red" />
+      <p class="mt-2 text-sm font-semibold text-mala-ink">{location.shortAddress}</p>
+      <button type="button" class="map-load btn btn-primary btn-sm mt-4">Load the map</button>
+      <p class="mt-3 text-xs text-mala-ink-soft">
+        Loads Google Maps. We keep it off until you ask so the page stays fast.
+      </p>
+    </div>
+  </div>
+</div>
+
+<p class="mt-3">
+  <a
+    href={directions}
+    target="_blank"
+    rel="noopener"
+    class="inline-flex items-center gap-2 text-sm font-semibold underline decoration-mala-gold decoration-2 underline-offset-4"
+  >
+    <Icon name="directions" size={16} />
+    Get directions
+  </a>
+</p>
+
+<style>
+  .map-embed iframe {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border: 0;
+  }
+
+  @media (min-width: 640px) {
+    .map-embed iframe {
+      aspect-ratio: 16 / 10;
+    }
+  }
+</style>
+
+<script>
+  for (const wrapper of document.querySelectorAll<HTMLElement>('.map-embed')) {
+    const button = wrapper.querySelector<HTMLButtonElement>('.map-load');
+    const placeholder = wrapper.querySelector<HTMLElement>('.map-placeholder');
+    if (!button || !placeholder) continue;
+
+    button.addEventListener(
+      'click',
+      () => {
+        const src = wrapper.dataset.src;
+        if (!src) return;
+
+        const frame = document.createElement('iframe');
+        frame.src = src;
+        frame.title = wrapper.dataset.title ?? 'Map';
+        frame.loading = 'lazy';
+        frame.referrerPolicy = 'no-referrer-when-downgrade';
+        frame.allowFullscreen = true;
+
+        placeholder.remove();
+        wrapper.append(frame);
+      },
+      { once: true }
+    );
+  }
+</script>

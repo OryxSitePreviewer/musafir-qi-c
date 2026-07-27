@@ -1,0 +1,146 @@
+---
+import { NAV_ITEMS } from '../data/nav';
+import { SITE, LABELS, whatsappLink } from '../data/site';
+import Wordmark from './Wordmark.astro';
+import Icon from './Icon.astro';
+
+const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const waHref = whatsappLink(
+  `Hi ${SITE.shortName}, I would like to ask about ordering.`
+);
+
+function isCurrent(href: string): boolean {
+  const normalised = href.replace(/\/+$/, '') || '/';
+  return normalised === currentPath;
+}
+---
+
+<header class="site-header on-red sticky top-0 z-50 bg-mala-red border-b-4 border-mala-gold">
+  <div class="container-rail flex items-center justify-between gap-4 py-3">
+    <a
+      href="/"
+      class="shrink-0 rounded-sm"
+      aria-label={`${SITE.name}, ${SITE.shortName}, home`}
+    >
+      <Wordmark variant="light" />
+    </a>
+
+    <!-- Desktop navigation -->
+    <nav class="hidden lg:block" aria-label="Primary">
+      <ul class="flex items-center gap-1">
+        {
+          NAV_ITEMS.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                aria-current={isCurrent(item.href) ? 'page' : undefined}
+                class:list={[
+                  'block rounded-sm px-3 py-2 text-sm font-semibold transition-colors',
+                  isCurrent(item.href)
+                    ? 'text-white underline decoration-mala-gold decoration-2 underline-offset-8'
+                                    : 'text-white hover:underline hover:decoration-mala-gold hover:decoration-2 hover:underline-offset-8',
+                ]}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <a
+        href={waHref}
+        target="_blank"
+        rel="noopener"
+        class="btn btn-gold btn-sm hidden sm:inline-flex"
+      >
+        <Icon name="whatsapp" size={20} />
+        {LABELS.whatsapp}
+      </a>
+
+      <button
+        type="button"
+        id="nav-toggle"
+        class="lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-sm border-2 border-white text-white"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+      >
+        <span class="sr-only">Open menu</span>
+        <Icon name="menu" size={24} class="nav-icon-open" />
+        <Icon name="close" size={24} class="nav-icon-close hidden" />
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile navigation -->
+  <nav
+    id="mobile-nav"
+    class="lg:hidden hidden border-t-2 border-mala-gold/40 bg-mala-red-dark"
+    aria-label="Primary mobile"
+  >
+    <ul class="container-rail flex flex-col py-2">
+      {
+        NAV_ITEMS.map((item) => (
+          <li class="border-b border-white/15 last:border-b-0">
+            <a
+              href={item.href}
+              aria-current={isCurrent(item.href) ? 'page' : undefined}
+              class:list={[
+                'block py-4 text-base font-semibold',
+                isCurrent(item.href) ? 'text-white underline decoration-mala-gold decoration-2 underline-offset-4' : 'text-white/85',
+              ]}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+      <li class="py-4 sm:hidden">
+        <a href={waHref} target="_blank" rel="noopener" class="btn btn-gold w-full">
+          <Icon name="whatsapp" size={20} />
+          {LABELS.whatsapp}
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<script>
+  // Mobile navigation toggle. Vanilla, no framework, no dependency.
+  const toggle = document.getElementById('nav-toggle');
+  const panel = document.getElementById('mobile-nav');
+
+  if (toggle && panel) {
+    const iconOpen = toggle.querySelector('.nav-icon-open');
+    const iconClose = toggle.querySelector('.nav-icon-close');
+    const label = toggle.querySelector('.sr-only');
+
+    const setOpen = (open: boolean) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      panel.classList.toggle('hidden', !open);
+      iconOpen?.classList.toggle('hidden', open);
+      iconClose?.classList.toggle('hidden', !open);
+      if (label) label.textContent = open ? 'Close menu' : 'Open menu';
+    };
+
+    toggle.addEventListener('click', () => {
+      setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+    });
+
+    // Escape closes the panel and returns focus to the button.
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+
+    // Reset state when the viewport grows past the desktop breakpoint.
+    const desktop = window.matchMedia('(min-width: 1024px)');
+    desktop.addEventListener('change', (event) => {
+      if (event.matches) setOpen(false);
+    });
+  }
+</script>

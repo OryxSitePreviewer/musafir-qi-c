@@ -1,0 +1,120 @@
+---
+import type { Location } from '../data/locations';
+
+interface Props {
+  location: Location;
+  /** 'light' sits on a dark or red surface. */
+  tone?: 'light' | 'dark';
+}
+
+const { location, tone = 'dark' } = Astro.props;
+
+/**
+ * Rendered as a static fallback and upgraded by the client script below.
+ * A visitor without JS still sees the printed hours, never a wrong badge.
+ */
+const hoursJson = JSON.stringify(location.hours);
+---
+
+<p
+  class="open-status"
+  data-hours={hoursJson}
+  data-tone={tone}
+  data-ready="false"
+>
+  <span class="open-status-dot" aria-hidden="true"></span>
+  <span class="open-status-label">{location.hoursDisplay}</span>
+  <span class="open-status-detail"></span>
+</p>
+
+<style>
+  .open-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .open-status-dot {
+    display: none;
+    height: 0.625rem;
+    width: 0.625rem;
+    flex-shrink: 0;
+    border-radius: 9999px;
+    background-color: var(--mala-ink);
+  }
+
+  .open-status[data-ready='true'] .open-status-dot {
+    display: inline-block;
+  }
+
+  .open-status[data-state='open'] .open-status-dot {
+    background-color: var(--mala-green);
+  }
+
+  .open-status[data-state='closed'] .open-status-dot {
+    background-color: var(--mala-red);
+  }
+
+  .open-status[data-state='open'] .open-status-label {
+    color: var(--color-mala-green-dark);
+  }
+
+  .open-status[data-state='closed'] .open-status-label {
+    color: var(--mala-red);
+  }
+
+  .open-status[data-tone='light'][data-state='open'] .open-status-label {
+    color: #6ee38d;
+  }
+
+  .open-status[data-tone='light'][data-state='closed'] .open-status-label {
+    color: #ffb3ad;
+  }
+
+  .open-status-detail {
+    font-weight: 400;
+    color: var(--color-mala-ink-soft);
+  }
+
+  .open-status[data-tone='light'] .open-status-detail {
+    color: rgb(255 255 255 / 0.7);
+  }
+</style>
+
+<script>
+  import { getOpenState, type HoursRule } from '../lib/openStatus';
+
+  function paint() {
+    const nodes = document.querySelectorAll<HTMLElement>('.open-status');
+    for (const node of nodes) {
+      const raw = node.dataset.hours;
+      if (!raw) continue;
+
+      let rules: HoursRule[];
+      try {
+        rules = JSON.parse(raw) as HoursRule[];
+      } catch {
+        // Malformed hours data. Leave the printed hours in place rather than
+        // showing a badge that might be wrong.
+        continue;
+      }
+
+      const state = getOpenState(rules);
+      const label = node.querySelector('.open-status-label');
+      const detail = node.querySelector('.open-status-detail');
+      if (label) label.textContent = state.label;
+      if (detail) detail.textContent = state.detail;
+      node.dataset.state = state.isOpen ? 'open' : 'closed';
+      node.dataset.ready = 'true';
+    }
+  }
+
+  paint();
+  // Repaint every minute so a page left open does not go stale.
+  setInterval(paint, 60_000);
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) paint();
+  });
+</script>

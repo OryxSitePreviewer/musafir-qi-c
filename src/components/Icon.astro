@@ -1,0 +1,228 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+/**
+ * Inline SVG icon set. No icon font, no sprite request, no emoji in body copy.
+ * Every icon is decorative by default and hidden from assistive technology.
+ * Pass a `title` when the icon carries meaning on its own.
+ */
+
+export type IconName =
+  | 'whatsapp'
+  | 'facebook'
+  | 'instagram'
+  | 'tiktok'
+  | 'pin'
+  | 'clock'
+  | 'phone'
+  | 'directions'
+  | 'chevron'
+  | 'menu'
+  | 'close'
+  | 'check'
+  | 'no-pork'
+  | 'leaf'
+  | 'scale'
+  | 'bowl'
+  | 'tongs'
+  | 'pot'
+  | 'chilli'
+  | 'print'
+  | 'arrow-right'
+  | 'plus'
+  | 'minus'
+  | 'mail';
+
+interface Props {
+  name: IconName;
+  class?: string;
+  size?: number;
+  title?: string;
+}
+
+const { name, class: className = '', size = 24, title } = Astro.props;
+const a11y: HTMLAttributes<'svg'> = title
+  ? { role: 'img', 'aria-label': title }
+  : { 'aria-hidden': 'true', focusable: 'false' };
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 24 24"
+  width={size}
+  height={size}
+  class={className}
+  {...a11y}
+>
+  {name === 'whatsapp' && (
+    <path
+      fill="currentColor"
+      d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.9-4.45 9.9-9.91C21.95 6.45 17.5 2 12.04 2Zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23a8.19 8.19 0 0 1 8.24 8.24c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.84-.2-.48-.4-.42-.56-.43h-.47c-.16 0-.43.06-.65.31-.23.25-.86.84-.86 2.05s.88 2.38 1 2.54c.13.17 1.74 2.65 4.21 3.72.59.25 1.05.4 1.4.52.59.18 1.13.16 1.55.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.08.15-1.18-.06-.11-.22-.17-.47-.29Z"
+    />
+  )}
+  {name === 'facebook' && (
+    <path
+      fill="currentColor"
+      d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.52 1.49-3.91 3.77-3.91 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.57v1.89h2.78l-.45 2.91h-2.33V22c4.78-.76 8.44-4.92 8.44-9.94Z"
+    />
+  )}
+  {name === 'instagram' && (
+    <g fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none" />
+    </g>
+  )}
+  {name === 'tiktok' && (
+    <path
+      fill="currentColor"
+      d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .77-5.06v-3.1a5.66 5.66 0 0 0-.77-.05A5.68 5.68 0 1 0 15.54 15V8.99a7.34 7.34 0 0 0 4.28 1.37V7.27a4.29 4.29 0 0 1-3.22-1.45Z"
+    />
+  )}
+  {name === 'pin' && (
+    <path
+      fill="currentColor"
+      d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"
+    />
+  )}
+  {name === 'clock' && (
+    <path
+      fill="currentColor"
+      d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Zm1-13h-2v6l5 3 1-1.63-4-2.37V7Z"
+    />
+  )}
+  {name === 'phone' && (
+    <path
+      fill="currentColor"
+      d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .5 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.5 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2Z"
+    />
+  )}
+  {name === 'directions' && (
+    <path
+      fill="currentColor"
+      d="m21.7 11.3-9-9a1 1 0 0 0-1.4 0l-9 9a1 1 0 0 0 0 1.4l9 9a1 1 0 0 0 1.4 0l9-9a1 1 0 0 0 0-1.4ZM14 14.5V12h-4v3H8v-4a1 1 0 0 1 1-1h5V7.5l3.5 3.5-3.5 3.5Z"
+    />
+  )}
+  {name === 'chevron' && (
+    <path
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="m6 9 6 6 6-6"
+    />
+  )}
+  {name === 'arrow-right' && (
+    <path
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="M5 12h14m-6-7 7 7-7 7"
+    />
+  )}
+  {name === 'menu' && (
+    <path
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.5"
+      stroke-linecap="round"
+      d="M4 7h16M4 12h16M4 17h16"
+    />
+  )}
+  {name === 'close' && (
+    <path
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.5"
+      stroke-linecap="round"
+      d="m6 6 12 12M18 6 6 18"
+    />
+  )}
+  {name === 'check' && (
+    <path
+      fill="none"
+      stroke="currentColor"
+      stroke-width="3"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="m4 12.5 5.5 5.5L20 6"
+    />
+  )}
+  {name === 'plus' && (
+    <path
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.5"
+      stroke-linecap="round"
+      d="M12 5v14M5 12h14"
+    />
+  )}
+  {name === 'minus' && (
+    <path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" d="M5 12h14" />
+  )}
+  {name === 'mail' && (
+    <path
+      fill="currentColor"
+      d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z"
+    />
+  )}
+  {name === 'no-pork' && (
+    <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M5.6 5.6l12.8 12.8" />
+      <path
+        fill="currentColor"
+        stroke="none"
+        d="M9.2 10.1c.4-.7 1.3-1.2 2.3-1.2h1.6c1.5 0 2.7 1 2.7 2.3v1.4c0 .6-.2 1.1-.6 1.5l-5.8-4c-.1 0-.2 0 0 0Z"
+        opacity="0.55"
+      />
+    </g>
+  )}
+  {name === 'leaf' && (
+    <path
+      fill="currentColor"
+      d="M20 3s-9-1-13 3c-3 3-3 8 0 11l1.5-1.5C6 12 9 8 15 7c-4 2-7 5-8 9.5l1.5 1.5C13 18 20 14 20 3Z"
+    />
+  )}
+  {name === 'scale' && (
+    <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 4v16M7 20h10M3 9h18" />
+      <path d="M6.5 9 3 16h7l-3.5-7ZM17.5 9 14 16h7l-3.5-7Z" />
+    </g>
+  )}
+  {name === 'bowl' && (
+    <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M2 11h20" />
+      <path d="M3.6 11.5v.4a8.4 8.4 0 0 0 16.8 0v-.4" />
+      <path d="M9.2 7.6c0-1.6 1.3-2.1 1.3-3.7M14.2 7.6c0-1.9 1.5-2.5 1.5-4.2" />
+    </g>
+  )}
+  {name === 'tongs' && (
+    <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="4" r="1.7" />
+      <path d="M10.6 5.6c-2.1 3.6-3.1 8.1-2.6 12.6.2 1.5 1 2.5 2 3.1" />
+      <path d="M13.4 5.6c2.1 3.6 3.1 8.1 2.6 12.6-.2 1.5-1 2.5-2 3.1" />
+    </g>
+  )}
+  {name === 'pot' && (
+    <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 10h16v6a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4v-6Z" />
+      <path d="M2 10h20M8 6c0-1 1-1.5 1-2.5M12 6c0-1 1-1.5 1-2.5M16 6c0-1 1-1.5 1-2.5" />
+    </g>
+  )}
+  {name === 'chilli' && (
+    <path
+      fill="currentColor"
+      d="M13.6 4.4c.3-1 1.2-1.9 2.4-2.2l.5 1.9c-.6.2-1 .6-1.1 1.1 3.2.9 5.1 3.7 5.1 7.3 0 4.7-3.6 8.5-8.3 8.5-4.4 0-7.6-2.8-9.2-6.7 2.6 1.9 5 2.4 7.1 1.6 2.6-1 4-3.6 3.9-6.4a4.6 4.6 0 0 0-.4-5.1Z"
+    />
+  )}
+  {name === 'print' && (
+    <path
+      fill="currentColor"
+      d="M18 7H6V3h12v4Zm2 2H4a2 2 0 0 0-2 2v6h4v4h12v-4h4v-6a2 2 0 0 0-2-2Zm-4 10H8v-5h8v5Z"
+    />
+  )}
+</svg>

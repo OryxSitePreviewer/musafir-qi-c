@@ -1,0 +1,98 @@
+---
+/**
+ * ============================================================================
+ * TEMPORARY STAND-IN LOGO
+ * ============================================================================
+ * This wordmark was reconstructed from the brand name and the red and gold
+ * palette. It is NOT the real Dr.MaLa logo and must be replaced before launch.
+ *
+ * To replace it:
+ *   1. Drop the real logo at public/images/logo.svg
+ *   2. Swap the markup below for a single <img> pointing at that file
+ *   3. Keep the accessible name identical so screen readers stay consistent
+ *
+ * Everything here is drawn with shapes and live text rather than converted
+ * outlines, so it scales cleanly and stays selectable and searchable.
+ * ============================================================================
+ */
+
+import { SITE } from '../data/site';
+
+interface Props {
+  /** 'light' sits on a red or dark band. 'dark' sits on white or cream. */
+  variant?: 'light' | 'dark';
+  class?: string;
+  /** Renders an h1-adjacent large lockup instead of the compact header size. */
+  size?: 'sm' | 'lg';
+}
+
+const { variant = 'light', class: className = '', size = 'sm' } = Astro.props;
+
+const markStroke = variant === 'light' ? 'var(--mala-gold)' : 'var(--mala-red)';
+const markFill = variant === 'light' ? 'var(--mala-white)' : 'var(--mala-ink)';
+// Reads from the shared property so the contrast switch documented in
+// global.css covers the lockup as well as the headlines.
+const nameColor = variant === 'light' ? 'var(--mala-gold-on-red)' : 'var(--mala-red)';
+const subColor = variant === 'light' ? 'var(--mala-white)' : 'var(--color-mala-ink-soft, #4a3d3b)';
+
+const markSize = size === 'lg' ? 52 : 38;
+const nameSize = size === 'lg' ? '2.5rem' : '1.5rem';
+const subSize = size === 'lg' ? '0.75rem' : '0.5625rem';
+---
+
+<span class={`inline-flex items-center gap-2.5 ${className}`}>
+  {/* Bowl mark. Gold rim, steam, and a chilli notch. */}
+  <svg
+    width={markSize}
+    height={markSize}
+    viewBox="0 0 48 48"
+    fill="none"
+    aria-hidden="true"
+    focusable="false"
+    class="shrink-0"
+  >
+    <path
+      d="M6 21h36c0 10.5-8.06 19-18 19S6 31.5 6 21Z"
+      fill={variant === 'light' ? 'var(--mala-red)' : 'var(--mala-cream)'}
+      stroke={markStroke}
+      stroke-width="3"
+      stroke-linejoin="round"></path>
+    <path d="M3 21h42" stroke={markStroke} stroke-width="3" stroke-linecap="round"></path>
+    <path
+      d="M18 15c0-3 2.5-3.5 2.5-6.5M27 15c0-3.5 3-4 3-7"
+      stroke={markStroke}
+      stroke-width="3"
+      stroke-linecap="round"></path>
+    <circle cx="24" cy="29" r="3.5" fill={markFill}></circle>
+  </svg>
+
+  <span class="flex flex-col leading-none">
+    <span
+      style={`font-family: var(--font-display); color: ${nameColor}; font-size: ${nameSize}; letter-spacing: 0.02em;`}
+      class="uppercase leading-none"
+    >
+      {SITE.shortName}
+    </span>
+    <span
+      style={`color: ${subColor}; font-size: ${subSize};`}
+      class="wordmark-sub mt-1 font-semibold uppercase leading-none"
+    >
+      {SITE.name}
+    </span>
+  </span>
+</span>
+
+<style>
+  /* Tracking is generous on wide screens and tightens on a small phone, so the
+     lockup never pushes the header past the viewport. */
+  .wordmark-sub {
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  @media (min-width: 400px) {
+    .wordmark-sub {
+      letter-spacing: 0.16em;
+    }
+  }
+</style>

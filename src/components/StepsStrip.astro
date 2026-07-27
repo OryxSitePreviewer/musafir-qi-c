@@ -1,0 +1,46 @@
+---
+import { STEPS } from '../data/steps';
+import SectionHeading from './SectionHeading.astro';
+import Icon from './Icon.astro';
+---
+
+<section class="bg-mala-ink py-16 text-white sm:py-20" aria-labelledby="steps-heading">
+  <div class="container-rail">
+    <SectionHeading
+      id="steps-heading"
+      eyebrow="First time here"
+      title="How it works"
+      lede="Four steps, in this order. It takes about a minute to understand and you will not need to read it twice."
+      tone="light"
+    />
+
+    <ol class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        STEPS.map((step) => (
+          <li class="reveal relative flex flex-col rounded-sm border-2 border-white/20 bg-white/5 p-5">
+            <span
+              class="text-[3.5rem] leading-none text-mala-gold"
+              style="font-family: var(--font-display);"
+              aria-hidden="true"
+            >
+              {String(step.number).padStart(2, '0')}
+            </span>
+            <h3 class="mt-3 text-[1.375rem] text-white">
+              <span class="sr-only">{`Step ${step.number}. `}</span>
+              {step.title}
+            </h3>
+            <p class="mt-2 flex-1 text-sm text-white/75">{step.summary}</p>
+            <Icon name={step.icon} size={28} class="mt-5 text-mala-gold" />
+          </li>
+        ))
+      }
+    </ol>
+
+    <p class="mt-8">
+      <a href="/how-it-works" class="btn btn-gold">
+        See how it works
+        <Icon name="arrow-right" size={18} />
+      </a>
+    </p>
+  </div>
+</section>

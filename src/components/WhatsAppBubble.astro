@@ -1,0 +1,22 @@
+---
+import { SITE, whatsappLink } from '../data/site';
+import Icon from './Icon.astro';
+
+const href = whatsappLink(`Hi ${SITE.shortName}, I would like to ask about ordering.`);
+---
+
+<!--
+  Floating WhatsApp bubble. 56px target, clear of the iOS home indicator, and
+  positioned bottom right where a thumb naturally rests on a phone.
+  On the home page it lifts above the sticky Build Your Bowl bar. See BuildYourBowl.astro.
+-->
+<a
+  href={href}
+  target="_blank"
+  rel="noopener"
+  class="whatsapp-bubble fixed bottom-5 right-4 z-40 inline-flex h-14 w-14 items-center justify-center rounded-full border-2 border-white bg-mala-green-dark text-white shadow-[0_4px_14px_rgba(0,0,0,0.3)] transition-transform hover:scale-105 sm:bottom-6 sm:right-6"
+  style="bottom: max(1.25rem, env(safe-area-inset-bottom));"
+>
+  <span class="sr-only">Message us on WhatsApp</span>
+  <Icon name="whatsapp" size={30} />
+</a>

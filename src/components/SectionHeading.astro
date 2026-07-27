@@ -1,0 +1,103 @@
+---
+/**
+ * Section heading with the rail rule.
+ *
+ * The gold rule starts where the title ends and runs off the right edge of the
+ * band. It is the one structural motif repeated on every section, and it echoes
+ * the ingredient bar you walk along in the shop.
+ *
+ * Built as a flex row rather than a pseudo element so the rule lands correctly
+ * whether the title is two words or wraps onto three lines.
+ * The parent band carries `overflow-x: clip`, which contains the bleed.
+ */
+
+interface Props {
+  id?: string;
+  eyebrow?: string;
+  title: string;
+  lede?: string;
+  /** Use on red or ink bands. */
+  tone?: 'light' | 'dark';
+  /** Heading level. Sections on a page under an h1 should stay at h2. */
+  level?: 2 | 3;
+  class?: string;
+}
+
+const {
+  id,
+  eyebrow,
+  title,
+  lede,
+  tone = 'dark',
+  level = 2,
+  class: className = '',
+} = Astro.props;
+
+const Tag = `h${level}` as 'h2' | 'h3';
+const onLight = tone === 'dark';
+---
+
+<div class={className}>
+  {
+    eyebrow && (
+      <p
+        class:list={[
+          'mb-3 text-xs font-bold tracking-[0.2em] uppercase',
+          onLight ? 'text-mala-red' : 'text-mala-gold',
+        ]}
+      >
+        {eyebrow}
+      </p>
+    )
+  }
+
+  <div class="flex items-center gap-4">
+    <Tag
+      id={id}
+      class:list={[
+        'min-w-0 max-w-3xl text-[length:var(--text-display-lg)]',
+        onLight ? 'text-mala-ink' : 'text-mala-gold',
+      ]}
+    >
+      {title}
+    </Tag>
+    <span class="rail-rule-line" aria-hidden="true"></span>
+  </div>
+
+  {
+    lede && (
+      <p
+        class:list={[
+          'mt-5 max-w-3xl text-base sm:text-lg',
+          onLight ? 'text-mala-ink-soft' : 'text-white/90',
+        ]}
+      >
+        {lede}
+      </p>
+    )
+  }
+</div>
+
+<style>
+  /* `flex: 1 1 0` matters. With an `auto` basis, or with a negative margin used to
+     force the bleed, the flex algorithm sizes this track from the heading's
+     max-content width and the heading then overflows instead of wrapping.
+     Basis zero keeps the heading shrinkable, and the bleed is drawn by the
+     pseudo element, which is outside flex layout entirely. */
+  .rail-rule-line {
+    position: relative;
+    height: 4px;
+    flex: 1 1 0;
+    min-width: 1.5rem;
+  }
+
+  .rail-rule-line::after {
+    content: '';
+    position: absolute;
+    inset-block: 0;
+    left: 0;
+    /* Runs past the content column. The band clips it at the viewport edge. */
+    width: 100vw;
+    background-color: var(--mala-gold);
+  }
+</style>

@@ -1,0 +1,91 @@
+---
+import { INGREDIENT_CATEGORIES, INGREDIENT_CLAIM } from '../data/ingredients';
+
+/**
+ * The ingredient bar band. A wide photo grid with one stat overlaid.
+ * The first image is the widest and carries the stat, so the eye lands there first.
+ */
+const shots = [
+  {
+    src: '/images/bar-wide.webp',
+    alt: 'The full length of the ingredient bar with trays of meatballs, vegetables, noodles, and seafood on ice',
+    width: 1600,
+    height: 900,
+    span: true,
+  },
+  {
+    src: '/images/bar-vegetables.webp',
+    alt: 'Trays of leafy greens, corn, lotus root, and mushrooms on the vegetable section of the bar',
+    width: 800,
+    height: 600,
+    span: false,
+  },
+  {
+    src: '/images/bar-meatballs.webp',
+    alt: 'Trays of beef and chicken meatballs, fish tofu, and sliced meat rolls',
+    width: 800,
+    height: 600,
+    span: false,
+  },
+];
+---
+
+<section class="bg-white py-16 sm:py-20" aria-labelledby="bar-heading">
+  <div class="container-rail">
+    <h2 id="bar-heading" class="sr-only">The ingredient bar</h2>
+
+    <div class="reveal relative">
+      <img
+        src={shots[0]!.src}
+        alt={shots[0]!.alt}
+        width={shots[0]!.width}
+        height={shots[0]!.height}
+        loading="lazy"
+        decoding="async"
+        class="aspect-[16/9] w-full rounded-sm border-2 border-mala-ink object-cover"
+      />
+
+      <!-- The single stat. Gold display type at 40px and up, which clears the
+           minimum size for gold on a dark surface. -->
+      <div
+        class="absolute right-3 bottom-3 left-3 border-l-4 border-mala-gold bg-mala-ink p-4 sm:right-auto sm:bottom-6 sm:left-6 sm:max-w-sm sm:p-6"
+      >
+        <p class="text-[clamp(2.5rem,5vw,3.5rem)] leading-none text-mala-gold">
+          {INGREDIENT_CLAIM}+ ingredients
+        </p>
+        <p class="mt-2 text-sm font-semibold text-white">Restocked daily.</p>
+      </div>
+    </div>
+
+    <div class="mt-4 grid gap-4 sm:grid-cols-2">
+      {
+        shots.slice(1).map((shot) => (
+          <img
+            src={shot.src}
+            alt={shot.alt}
+            width={shot.width}
+            height={shot.height}
+            loading="lazy"
+            decoding="async"
+            class="reveal aspect-[4/3] w-full rounded-sm border-2 border-mala-ink object-cover"
+          />
+        ))
+      }
+    </div>
+
+    <ul class="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold text-mala-ink-soft">
+      {
+        INGREDIENT_CATEGORIES.map((category) => (
+          <li class="flex items-center gap-2">
+            <span
+              class="inline-block h-2.5 w-2.5 rounded-full"
+              style={`background-color: var(--mala-${category.color === 'ink' ? 'ink' : category.color});`}
+            />
+            {category.heading}
+            <span class="tnum text-mala-ink-soft">{category.items.length}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,44 @@
+---
+import { SPICE_LEVELS } from '../data/dishes';
+import Icon from './Icon.astro';
+
+interface Props {
+  /** 0 to 4. */
+  level: number;
+  /** Shows the level name next to the meter. */
+  showLabel?: boolean;
+  /** 'light' sits on a dark or red surface, where red chillies would disappear. */
+  tone?: 'light' | 'dark';
+  class?: string;
+}
+
+const { level, showLabel = true, tone = 'dark', class: className = '' } = Astro.props;
+const match = SPICE_LEVELS.find((entry) => entry.level === level);
+const name = match ? match.name : 'No Chilli';
+const max = 4;
+
+const onLight = tone === 'dark';
+const filled = onLight ? 'text-mala-red' : 'text-mala-gold';
+const empty = onLight ? 'text-black/15' : 'text-white/25';
+---
+
+<div class={`flex items-center gap-2 ${className}`}>
+  <span
+    class="flex items-center gap-0.5"
+    role="img"
+    aria-label={`Spice level ${level} of ${max}, ${name}`}
+  >
+    {
+      Array.from({ length: max }).map((_, index) => (
+        <Icon name="chilli" size={16} class={index < level ? filled : empty} />
+      ))
+    }
+  </span>
+  {
+    showLabel && (
+      <span class="text-xs font-bold tracking-widest uppercase">
+        {level === 0 ? 'No chilli' : name}
+      </span>
+    )
+  }
+</div>

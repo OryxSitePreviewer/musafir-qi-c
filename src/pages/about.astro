@@ -1,0 +1,175 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Icon from '../components/Icon.astro';
+import CtaBand from '../components/CtaBand.astro';
+
+import { ABOUT_INTRO, ABOUT_SECTIONS, ABOUT_STATS } from '../data/about';
+import { SITE } from '../data/site';
+import { HALAL } from '../data/halal';
+import {
+  allRestaurantsSchema,
+  breadcrumbSchema,
+  organisationSchema,
+} from '../lib/schema';
+
+const schemas = [
+  organisationSchema(),
+  ...allRestaurantsSchema(),
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'About', path: '/about' },
+  ]),
+];
+---
+
+<Base
+  title="About"
+  description="The story behind Musafir Qi Malatang. What Musafir means, why we built it pick and weigh, our pork free and lard free commitment, and how we buy ingredients."
+  path="/about"
+  schemas={schemas}
+>
+  <section class="on-red bg-mala-red py-14 text-white sm:py-20">
+    <div class="container-rail">
+      <p class="flex items-center gap-3 text-xs font-bold tracking-[0.2em] text-white uppercase">
+        <span class="cjk shrink-0 text-lg whitespace-nowrap text-white">{SITE.chineseName}</span>
+        <span class="h-px w-8 shrink-0 bg-mala-gold"></span>
+        About us
+      </p>
+      <h1 class="gold-on-red mt-4 max-w-3xl text-[length:var(--text-display-lg)]">
+        Food a traveller can eat
+      </h1>
+      <p class="mt-5 max-w-2xl text-lg text-white">{ABOUT_INTRO}</p>
+    </div>
+    <div class="h-1 w-full bg-mala-gold"></div>
+  </section>
+
+  <!-- Stats -->
+  <section class="border-b-2 border-black/10 bg-mala-cream py-10" aria-label="At a glance">
+    <div class="container-rail">
+      <dl class="grid grid-cols-2 gap-6 lg:grid-cols-4">
+        {
+          ABOUT_STATS.map((stat) => (
+            <div class="reveal">
+              <dt class="sr-only">{stat.label}</dt>
+              <dd>
+                <span
+                  class="block text-[clamp(2.5rem,6vw,3.5rem)] leading-none text-mala-red"
+                  style="font-family: var(--font-display);"
+                >
+                  {stat.value}
+                </span>
+                <span class="mt-2 block text-sm font-semibold text-mala-ink-soft">
+                  {stat.label}
+                </span>
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <!-- Story -->
+  <section class="bg-white py-16 sm:py-20" aria-labelledby="story-heading">
+    <div class="container-rail">
+      <SectionHeading
+        id="story-heading"
+        eyebrow="The brand"
+        title="Why this place exists"
+        lede="Malatang is one of the best things you can eat for the money. We wanted more people to be able to eat it."
+      />
+
+      <div class="mt-12 space-y-14">
+        {
+          ABOUT_SECTIONS.map((section, index) => (
+            <article class="reveal grid gap-5 lg:grid-cols-[16rem_1fr] lg:gap-10">
+              <div>
+                <span
+                  class="block text-[2.75rem] leading-none text-mala-gold-dark"
+                  style="font-family: var(--font-display);"
+                  aria-hidden="true"
+                >
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <h2 class="mt-3 text-[length:var(--text-display-sm)] text-mala-ink">
+                  {section.heading}
+                </h2>
+              </div>
+              <div class="max-w-2xl space-y-4 text-mala-ink-soft">
+                {section.paragraphs.map((paragraph) => (
+                  <p>{paragraph}</p>
+                ))}
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Kitchen policy recap -->
+  <section class="bg-mala-cream py-16 sm:py-20" aria-labelledby="policy-heading">
+    <div class="container-rail">
+      <SectionHeading
+        id="policy-heading"
+        eyebrow="No asterisk"
+        title="What we will not do"
+        lede="Four rules that do not move, whatever the supplier price is that week."
+      />
+
+      <ul class="mt-10 grid gap-5 sm:grid-cols-2">
+        {
+          HALAL.policies.map((policy) => (
+            <li class="reveal card-hard border-l-[6px] border-l-mala-green p-6">
+              <div class="flex items-start gap-3">
+                <span class="mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-mala-green text-white">
+                  <Icon name="check" size={15} />
+                </span>
+                <div>
+                  <h3 class="text-[1.25rem] text-mala-ink">{policy.title}</h3>
+                  <p class="mt-2 text-sm text-mala-ink-soft">{policy.detail}</p>
+                </div>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="mt-8 max-w-3xl">
+        <p class="text-sm text-mala-ink-soft">
+          {HALAL.certificationFallback}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo band -->
+  <section class="bg-white py-16 sm:py-20" aria-labelledby="room-heading">
+    <div class="container-rail">
+      <h2 id="room-heading" class="sr-only">Inside the restaurant</h2>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <img
+          src="/images/room-cyberjaya.webp"
+          alt="The dining room at Cyberjaya with long wooden tables and red and gold signage on the wall"
+          width="1200"
+          height="900"
+          loading="lazy"
+          decoding="async"
+          class="reveal aspect-[4/3] w-full rounded-sm border-2 border-mala-ink object-cover"
+        />
+        <img
+          src="/images/team-counter.webp"
+          alt="Staff cooking bowls to order behind the counter in front of the soup pots"
+          width="1200"
+          height="900"
+          loading="lazy"
+          decoding="async"
+          class="reveal aspect-[4/3] w-full rounded-sm border-2 border-mala-ink object-cover"
+        />
+      </div>
+    </div>
+  </section>
+
+  <CtaBand line="Come and see whether we meant it." />
+</Base>

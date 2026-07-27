@@ -1,0 +1,699 @@
+---
+/**
+ * Build Your Bowl.
+ *
+ * The signature interactive strip. Tap ingredient chips, watch estimated grams and
+ * estimated ringgit update live, and see the bowl fill up.
+ *
+ * Interaction model:
+ *   - Tapping a chip toggles it into or out of the bowl.
+ *   - Once a chip is in, a stepper appears so you can take a second or third helping.
+ *   - Everything is a real button, so all of it works from the keyboard.
+ *
+ * All state lives in this component. No framework, no store, no dependency.
+ * Prices come from src/data/pricing.ts. Ingredients come from src/data/ingredients.ts.
+ */
+
+import { INGREDIENT_CATEGORIES, type CategoryColor } from '../data/ingredients';
+import { PRICE_PER_100G, CURRENCY } from '../data/pricing';
+import SectionHeading from './SectionHeading.astro';
+import Icon from './Icon.astro';
+
+/** Category colour token, resolved once at build time. */
+const COLOR_VAR: Record<CategoryColor, string> = {
+  red: 'var(--mala-red)',
+  green: 'var(--mala-green)',
+  gold: 'var(--mala-gold)',
+  ink: 'var(--mala-ink)',
+  blue: 'var(--mala-blue)',
+};
+
+const categories = INGREDIENT_CATEGORIES;
+---
+
+<section
+  id="build-your-bowl"
+  class="relative bg-mala-cream py-16 sm:py-20"
+  aria-labelledby="byb-heading"
+>
+  <div class="container-rail">
+    <SectionHeading
+      id="byb-heading"
+      eyebrow="The signature bit"
+      title="Build your bowl"
+      lede="Tap what you would take. We add up the weight and show you roughly what it costs. This is the same sum the scale at the counter does."
+    />
+
+    <!-- min-w-0 on the grid children matters. A wrapping flex list reports its
+         max-content width as the sum of every chip, which would blow the grid
+         track past the viewport on a phone. -->
+    <div class="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_21rem] lg:items-start lg:gap-8">
+      <!-- Chip picker -->
+      <div class="card-hard min-w-0 p-4 sm:p-6">
+        <!-- Category tabs -->
+        <div class="border-b-2 border-black/10 pb-1">
+          <div
+            role="tablist"
+            aria-label="Ingredient categories"
+            class="flex gap-1 overflow-x-auto pb-2"
+            id="byb-tablist"
+          >
+            {
+              categories.map((category, index) => (
+                <button
+                  type="button"
+                  role="tab"
+                  id={`byb-tab-${category.id}`}
+                  aria-controls={`byb-panel-${category.id}`}
+                  aria-selected={index === 0 ? 'true' : 'false'}
+                  tabindex={index === 0 ? 0 : -1}
+                  data-category={category.id}
+                  class="byb-tab"
+                  style={`--cat-color: ${COLOR_VAR[category.color]};`}
+                >
+                  {category.label}
+                </button>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Panels -->
+        {
+          categories.map((category, index) => (
+            <div
+              role="tabpanel"
+              id={`byb-panel-${category.id}`}
+              aria-labelledby={`byb-tab-${category.id}`}
+              hidden={index !== 0}
+              class="byb-panel pt-5"
+              data-category={category.id}
+              style={`--cat-color: ${COLOR_VAR[category.color]};`}
+            >
+              <p class="mb-4 flex items-start gap-2 text-sm text-mala-ink-soft">
+                <span class="byb-cat-dot" />
+                {category.blurb}
+              </p>
+
+              <ul class="flex flex-wrap gap-2">
+                {category.items.map((item) => (
+                  <li class="byb-item">
+                    <button
+                      type="button"
+                      class="byb-chip"
+                      data-name={item.name}
+                      data-grams={item.grams}
+                      aria-pressed="false"
+                    >
+                      <span class="byb-chip-dot" />
+                      <span class="byb-chip-name">{item.name}</span>
+                      <span class="byb-chip-grams tnum">{item.grams}g</span>
+                    </button>
+                    <span class="byb-stepper" hidden>
+                      <button
+                        type="button"
+                        class="byb-step byb-minus"
+                        data-name={item.name}
+                        aria-label={`Take one less ${item.name}`}
+                      >
+                        <Icon name="minus" size={14} />
+                      </button>
+                      <span class="byb-count tnum" aria-hidden="true">
+                        1
+                      </span>
+                      <button
+                        type="button"
+                        class="byb-step byb-plus"
+                        data-name={item.name}
+                        aria-label={`Take another ${item.name}`}
+                      >
+                        <Icon name="plus" size={14} />
+                      </button>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- The counter receipt -->
+      <div class="min-w-0 lg:sticky lg:top-28">
+        <div class="card-hard overflow-hidden" role="region" aria-labelledby="byb-receipt-heading">
+          <h3
+            id="byb-receipt-heading"
+            class="border-b-2 border-mala-ink bg-mala-red px-4 py-3 text-[1.25rem] text-white"
+          >
+            Your bowl, estimated
+          </h3>
+
+          <div class="p-4">
+            <!-- Bowl fill graphic -->
+            <div class="flex items-center gap-4">
+              <svg
+                viewBox="0 0 124 96"
+                width="104"
+                height="81"
+                class="shrink-0"
+                role="img"
+                aria-labelledby="byb-bowl-title"
+              >
+                <title id="byb-bowl-title">A bowl showing how full your selection is</title>
+                <defs>
+                  <clipPath id="byb-bowl-clip">
+                    <path d="M10 42h100c0 25.4-22.4 46-50 46S10 67.4 10 42Z"></path>
+                  </clipPath>
+                </defs>
+                <g clip-path="url(#byb-bowl-clip)">
+                  <rect x="0" y="88" width="120" height="96" fill="var(--mala-red)" id="byb-fill"
+                  ></rect>
+                </g>
+                <path
+                  d="M10 42h100c0 25.4-22.4 46-50 46S10 67.4 10 42Z"
+                  fill="none"
+                  stroke="var(--mala-ink)"
+                  stroke-width="3.5"
+                  stroke-linejoin="round"></path>
+                <path
+                  d="M4 42h112"
+                  stroke="var(--mala-ink)"
+                  stroke-width="3.5"
+                  stroke-linecap="round"></path>
+                <!-- Reference mark for a typical single bowl. -->
+                <path
+                  d="M104 65h18"
+                  stroke="var(--mala-gold)"
+                  stroke-width="3"
+                  stroke-linecap="round"></path>
+              </svg>
+
+              <div>
+                <p class="text-xs font-semibold tracking-widest text-mala-ink-soft uppercase">
+                  Estimated weight
+                </p>
+                <p class="tnum text-[2rem] leading-none font-bold" id="byb-grams">0 g</p>
+                <p class="mt-1.5 text-xs text-mala-ink-soft" id="byb-portion">
+                  The gold mark is a typical single bowl
+                </p>
+              </div>
+            </div>
+
+            <!-- Picked list -->
+            <div class="mt-5 border-t-2 border-dashed border-black/25 pt-4">
+              <p class="text-xs font-semibold tracking-widest text-mala-ink-soft uppercase">
+                In the bowl
+              </p>
+              <ul id="byb-list" class="mt-2 max-h-44 space-y-1 overflow-y-auto text-sm"></ul>
+              <p id="byb-empty" class="mt-2 text-sm text-mala-ink-soft">
+                Tap an ingredient to start filling the bowl.
+              </p>
+              <p id="byb-live" class="sr-only" aria-live="polite"></p>
+            </div>
+
+            <!-- Total -->
+            <div class="mt-4 border-t-2 border-mala-ink pt-4">
+              <div class="flex items-baseline justify-between gap-3">
+                <span class="text-sm font-semibold tracking-widest uppercase">Estimated</span>
+                <span class="tnum text-[2rem] leading-none font-bold text-mala-red" id="byb-price">
+                  {CURRENCY} 0.00
+                </span>
+              </div>
+              <p class="tnum mt-1 text-right text-xs text-mala-ink-soft">
+                {CURRENCY} {PRICE_PER_100G.toFixed(2)} per 100 g
+              </p>
+
+              <button type="button" id="byb-reset" class="btn btn-outline btn-sm mt-4 w-full">
+                Clear the bowl
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <p class="mt-3 flex items-start gap-2 text-sm font-semibold text-mala-ink">
+          <Icon name="scale" size={18} class="mt-0.5 shrink-0 text-mala-red" />
+          Estimate only. Your bowl is weighed at the counter.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile sticky total. Within thumb reach, and it clears the WhatsApp bubble. -->
+  <div id="byb-mobile-bar" hidden>
+    <div class="flex items-center justify-between gap-3 pr-16">
+      <div>
+        <p class="text-[0.625rem] font-semibold tracking-widest text-mala-ink-soft uppercase">
+          Estimated
+        </p>
+        <p class="tnum text-lg leading-tight font-bold">
+          <span id="byb-mobile-grams">0 g</span>
+          <span class="text-mala-ink-soft">&middot;</span>
+          <span class="text-mala-red" id="byb-mobile-price">{CURRENCY} 0.00</span>
+        </p>
+      </div>
+      <button type="button" id="byb-mobile-reset" class="byb-mobile-clear">Clear</button>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* The tab strip scrolls sideways on a narrow phone. Hide the scrollbar, since
+     the cut off tab at the edge is the affordance and a grey bar over the tabs
+     reads as a rendering fault. */
+  #byb-tablist {
+    scrollbar-width: none;
+  }
+
+  #byb-tablist::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* ---- Tabs ---- */
+  .byb-tab {
+    flex-shrink: 0;
+    border-radius: 0.25rem;
+    border: 2px solid color-mix(in srgb, #1a1110 20%, transparent);
+    padding: 0.625rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    white-space: nowrap;
+    color: var(--mala-ink);
+    background-color: transparent;
+    cursor: pointer;
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .byb-tab:hover {
+    border-color: var(--cat-color);
+  }
+
+  .byb-tab[aria-selected='true'] {
+    background-color: var(--cat-color);
+    border-color: var(--cat-color);
+    color: #fff;
+  }
+
+  /* Gold cannot carry white text, so the noodles tab flips to ink. */
+  .byb-tab[aria-selected='true'][data-category='noodles'] {
+    color: var(--mala-ink);
+  }
+
+  .byb-cat-dot {
+    margin-top: 0.4rem;
+    display: inline-block;
+    height: 0.625rem;
+    width: 0.625rem;
+    flex-shrink: 0;
+    border-radius: 9999px;
+    background-color: var(--cat-color);
+  }
+
+  /* ---- Chips ---- */
+  .byb-item {
+    display: inline-flex;
+    align-items: stretch;
+  }
+
+  .byb-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 0.25rem;
+    border: 2px solid color-mix(in srgb, #1a1110 25%, transparent);
+    background-color: #fff;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--mala-ink);
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .byb-chip:hover {
+    border-color: var(--cat-color);
+  }
+
+  .byb-chip-dot {
+    display: inline-block;
+    height: 0.625rem;
+    width: 0.625rem;
+    flex-shrink: 0;
+    border-radius: 9999px;
+    border: 2px solid var(--cat-color);
+  }
+
+  .byb-chip-grams {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--color-mala-ink-soft);
+  }
+
+  .byb-chip[aria-pressed='true'] {
+    background-color: var(--cat-color);
+    border-color: var(--cat-color);
+    color: #fff;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right-width: 0;
+  }
+
+  .byb-chip[aria-pressed='true'] .byb-chip-dot {
+    background-color: #fff;
+    border-color: #fff;
+  }
+
+  .byb-chip[aria-pressed='true'] .byb-chip-grams {
+    color: rgb(255 255 255 / 0.8);
+  }
+
+  /* Gold again. Ink text and ink meta so contrast holds. */
+  [data-category='noodles'] .byb-chip[aria-pressed='true'] {
+    color: var(--mala-ink);
+  }
+
+  [data-category='noodles'] .byb-chip[aria-pressed='true'] .byb-chip-dot {
+    background-color: var(--mala-ink);
+    border-color: var(--mala-ink);
+  }
+
+  [data-category='noodles'] .byb-chip[aria-pressed='true'] .byb-chip-grams {
+    color: rgb(26 17 16 / 0.7);
+  }
+
+  /* ---- Stepper ---- */
+  .byb-stepper {
+    display: inline-flex;
+    align-items: stretch;
+    border: 2px solid var(--cat-color);
+    border-left-width: 0;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+    background-color: var(--cat-color);
+    overflow: hidden;
+  }
+
+  .byb-stepper[hidden] {
+    display: none;
+  }
+
+  .byb-step {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.875rem;
+    color: #fff;
+    background-color: rgb(0 0 0 / 0.18);
+    cursor: pointer;
+  }
+
+  .byb-step:hover {
+    background-color: rgb(0 0 0 / 0.32);
+  }
+
+  .byb-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.5rem;
+    padding-inline: 0.125rem;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  [data-category='noodles'] .byb-step,
+  [data-category='noodles'] .byb-count {
+    color: var(--mala-ink);
+  }
+
+  /* ---- Mobile total bar ---- */
+  #byb-mobile-bar {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 30;
+    border-top: 2px solid var(--mala-ink);
+    background-color: #fff;
+    padding: 0.75rem 1rem;
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+    box-shadow: 0 -4px 14px rgb(0 0 0 / 0.12);
+  }
+
+  #byb-mobile-bar[hidden] {
+    display: none;
+  }
+
+  .byb-mobile-clear {
+    border: 2px solid var(--mala-ink);
+    border-radius: 0.25rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  /* The receipt panel is always visible on large screens, so the bar is redundant. */
+  @media (min-width: 1024px) {
+    #byb-mobile-bar {
+      display: none !important;
+    }
+  }
+
+  /* Tighter chips and tabs on a small phone, so two chips fit per row instead of
+     one and the tab strip needs less sideways scrolling. Both stay above the 44px
+     minimum tap height. */
+  @media (max-width: 420px) {
+    .byb-tab {
+      padding-inline: 0.625rem;
+      font-size: 0.8125rem;
+    }
+
+    .byb-chip {
+      gap: 0.375rem;
+      padding-inline: 0.5rem;
+      font-size: 0.8125rem;
+    }
+
+    .byb-chip-grams {
+      font-size: 0.6875rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    #byb-fill {
+      transition: y 0.35s ease-out;
+    }
+
+    .byb-chip {
+      transition:
+        background-color 0.15s ease,
+        border-color 0.15s ease,
+        color 0.15s ease,
+        transform 0.12s ease;
+    }
+
+    .byb-chip:active {
+      transform: scale(0.97);
+    }
+  }
+</style>
+
+<script>
+  import { PRICE_PER_100G, CURRENCY, PORTION_GUIDE } from '../data/pricing';
+
+  const root = document.getElementById('build-your-bowl');
+
+  if (root) {
+    /** ingredient name -> { grams per helping, number of helpings } */
+    const picked = new Map<string, { grams: number; count: number }>();
+
+    const gramsOut = document.getElementById('byb-grams');
+    const priceOut = document.getElementById('byb-price');
+    const portionOut = document.getElementById('byb-portion');
+    const listOut = document.getElementById('byb-list');
+    const emptyOut = document.getElementById('byb-empty');
+    const liveOut = document.getElementById('byb-live');
+    const fill = document.getElementById('byb-fill');
+    const mobileBar = document.getElementById('byb-mobile-bar');
+    const mobileGrams = document.getElementById('byb-mobile-grams');
+    const mobilePrice = document.getElementById('byb-mobile-price');
+    const bubble = document.querySelector<HTMLElement>('.whatsapp-bubble');
+
+    const items = Array.from(root.querySelectorAll<HTMLLIElement>('.byb-item'));
+    const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('.byb-tab'));
+
+    // ---- Tabs -------------------------------------------------------------
+    function selectTab(target: HTMLButtonElement) {
+      for (const tab of tabs) {
+        const selected = tab === target;
+        tab.setAttribute('aria-selected', String(selected));
+        tab.tabIndex = selected ? 0 : -1;
+        const panel = document.getElementById(tab.getAttribute('aria-controls') ?? '');
+        if (panel) panel.hidden = !selected;
+      }
+    }
+
+    for (const tab of tabs) {
+      tab.addEventListener('click', () => selectTab(tab));
+      tab.addEventListener('keydown', (event) => {
+        const keys = ['ArrowRight', 'ArrowLeft', 'Home', 'End'];
+        if (!keys.includes(event.key)) return;
+        event.preventDefault();
+        const index = tabs.indexOf(tab);
+        let next = index;
+        if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
+        if (event.key === 'ArrowLeft') next = (index - 1 + tabs.length) % tabs.length;
+        if (event.key === 'Home') next = 0;
+        if (event.key === 'End') next = tabs.length - 1;
+        const target = tabs[next];
+        if (target) {
+          selectTab(target);
+          target.focus();
+        }
+      });
+    }
+
+    // ---- Rendering --------------------------------------------------------
+    function totalGrams(): number {
+      let total = 0;
+      for (const entry of picked.values()) total += entry.grams * entry.count;
+      return total;
+    }
+
+    function portionNote(grams: number): string {
+      if (grams === 0) return 'The gold mark is a typical single bowl';
+      if (grams < PORTION_GUIDE.light) return 'A light bowl, or a side';
+      if (grams < PORTION_GUIDE.typical) return 'A normal bowl for one person';
+      if (grams < PORTION_GUIDE.large) return 'A generous bowl for one';
+      return 'Big appetite, or enough to share';
+    }
+
+    function render(announcement?: string) {
+      const grams = totalGrams();
+      const price = (grams / 100) * PRICE_PER_100G;
+      const gramsText = `${grams} g`;
+      const priceText = `${CURRENCY} ${price.toFixed(2)}`;
+
+      if (gramsOut) gramsOut.textContent = gramsText;
+      if (priceOut) priceOut.textContent = priceText;
+      if (portionOut) portionOut.textContent = portionNote(grams);
+      if (mobileGrams) mobileGrams.textContent = gramsText;
+      if (mobilePrice) mobilePrice.textContent = priceText;
+
+      // Bowl fill. The rect slides up from the base of the bowl as weight goes in.
+      if (fill) {
+        const ratio = Math.min(grams / PORTION_GUIDE.bowlCapacity, 1);
+        fill.setAttribute('y', String(88 - ratio * 46));
+      }
+
+      if (listOut) {
+        listOut.textContent = '';
+        for (const [name, entry] of picked) {
+          const row = document.createElement('li');
+          row.className = 'flex items-baseline justify-between gap-2';
+
+          const label = document.createElement('span');
+          label.textContent = entry.count > 1 ? `${name} x${entry.count}` : name;
+
+          const weight = document.createElement('span');
+          weight.className = 'tnum shrink-0 text-mala-ink-soft';
+          weight.textContent = `${entry.grams * entry.count} g`;
+
+          row.append(label, weight);
+          listOut.append(row);
+        }
+      }
+
+      const isEmpty = picked.size === 0;
+      if (emptyOut) emptyOut.hidden = !isEmpty;
+      if (mobileBar) mobileBar.hidden = isEmpty;
+
+      // Lift the WhatsApp bubble above the mobile total bar so neither covers the other.
+      if (bubble) {
+        bubble.style.bottom = isEmpty
+          ? 'max(1.25rem, env(safe-area-inset-bottom))'
+          : 'calc(max(1.25rem, env(safe-area-inset-bottom)) + 4.75rem)';
+      }
+
+      if (liveOut && announcement) {
+        liveOut.textContent = `${announcement}. ${gramsText}, about ${priceText}.`;
+      }
+    }
+
+    // ---- Chips and steppers ----------------------------------------------
+    for (const item of items) {
+      const chip = item.querySelector<HTMLButtonElement>('.byb-chip');
+      const stepper = item.querySelector<HTMLElement>('.byb-stepper');
+      const countOut = item.querySelector<HTMLElement>('.byb-count');
+      const minus = item.querySelector<HTMLButtonElement>('.byb-minus');
+      const plus = item.querySelector<HTMLButtonElement>('.byb-plus');
+      if (!chip || !stepper || !countOut || !minus || !plus) continue;
+
+      const name = chip.dataset.name ?? '';
+      const grams = Number(chip.dataset.grams ?? 0);
+
+      const sync = () => {
+        const entry = picked.get(name);
+        chip.setAttribute('aria-pressed', entry ? 'true' : 'false');
+        stepper.hidden = !entry;
+        countOut.textContent = String(entry?.count ?? 1);
+      };
+
+      item.dataset.sync = 'true';
+      (item as HTMLElement & { syncChip?: () => void }).syncChip = sync;
+
+      chip.addEventListener('click', () => {
+        if (picked.has(name)) {
+          picked.delete(name);
+          sync();
+          render(`Removed ${name}`);
+        } else {
+          picked.set(name, { grams, count: 1 });
+          sync();
+          render(`Added ${name}`);
+        }
+      });
+
+      plus.addEventListener('click', () => {
+        const entry = picked.get(name);
+        if (!entry) return;
+        entry.count += 1;
+        sync();
+        render(`${name}, ${entry.count} helpings`);
+      });
+
+      minus.addEventListener('click', () => {
+        const entry = picked.get(name);
+        if (!entry) return;
+        if (entry.count > 1) {
+          entry.count -= 1;
+          sync();
+          render(`${name}, ${entry.count} helpings`);
+        } else {
+          picked.delete(name);
+          sync();
+          render(`Removed ${name}`);
+          chip.focus();
+        }
+      });
+    }
+
+    // ---- Reset ------------------------------------------------------------
+    function reset() {
+      picked.clear();
+      for (const item of items) {
+        (item as HTMLElement & { syncChip?: () => void }).syncChip?.();
+      }
+      render('Bowl cleared');
+    }
+
+    document.getElementById('byb-reset')?.addEventListener('click', reset);
+    document.getElementById('byb-mobile-reset')?.addEventListener('click', reset);
+
+    render();
+  }
+</script>

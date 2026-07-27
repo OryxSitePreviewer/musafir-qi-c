@@ -1,0 +1,62 @@
+---
+import { HALAL } from '../data/halal';
+import Icon from './Icon.astro';
+
+/**
+ * The certification statement is only printed once the owner has replaced the
+ * placeholder in src/data/halal.ts. Until then the honest fallback runs instead.
+ * This guard exists so a forgotten TODO cannot ship as a halal claim.
+ */
+const ownerHasWritten =
+  HALAL.certificationStatement.trim().length > 0 &&
+  !HALAL.certificationStatement.startsWith('TODO');
+
+const statement = ownerHasWritten
+  ? HALAL.certificationStatement
+  : HALAL.certificationFallback;
+---
+
+<section class="bg-mala-cream py-16 sm:py-20" aria-labelledby="halal-heading">
+  <div class="container-rail">
+    <div class="reveal card-hard border-l-[6px] border-l-mala-green p-6 sm:p-10">
+      <div class="flex items-start gap-4">
+        <span
+          class="hidden h-14 w-14 shrink-0 items-center justify-center rounded-full bg-mala-green text-white sm:inline-flex"
+        >
+          <Icon name="no-pork" size={30} />
+        </span>
+
+        <div class="max-w-3xl">
+          <p class="mb-3 text-xs font-bold tracking-[0.2em] text-mala-green-dark uppercase">
+            Kitchen policy
+          </p>
+          <h2 id="halal-heading" class="text-[length:var(--text-display-md)] text-mala-ink">
+            {HALAL.heading}
+          </h2>
+          <p class="mt-4 text-base text-mala-ink-soft sm:text-lg">{HALAL.intro}</p>
+        </div>
+      </div>
+
+      <ul class="mt-8 grid gap-5 sm:grid-cols-2">
+        {
+          HALAL.policies.map((policy) => (
+            <li class="flex gap-3">
+              <span class="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-mala-green text-white">
+                <Icon name="check" size={13} />
+              </span>
+              <div>
+                <h3 class="text-[1.125rem] text-mala-ink">{policy.title}</h3>
+                <p class="mt-1 text-sm text-mala-ink-soft">{policy.detail}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="mt-8 rounded-sm border-2 border-mala-green-dark bg-white p-5">
+        <h3 class="text-[1.125rem] text-mala-green-dark">Certification status</h3>
+        <p class="mt-2 text-sm text-mala-ink-soft">{statement}</p>
+      </div>
+    </div>
+  </div>
+</section>

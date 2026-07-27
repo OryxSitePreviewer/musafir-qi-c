@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#DA291C"/>
+  <rect x="0" y="0" width="1200" height="10" fill="#D4AF37"/>
+  <rect x="0" y="620" width="1200" height="10" fill="#D4AF37"/>
+  <g transform="translate(84 150)">
+    <g transform="scale(1.85)">
+      <path d="M6 21h36c0 10.5-8.06 19-18 19S6 31.5 6 21Z" fill="#DA291C" stroke="#D4AF37" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M3 21h42" stroke="#D4AF37" stroke-width="3" stroke-linecap="round"/>
+      <path d="M18 15c0-3 2.5-3.5 2.5-6.5M27 15c0-3.5 3-4 3-7" stroke="#D4AF37" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="24" cy="29" r="3.5" fill="#FFFFFF"/>
+    </g>
+  </g>
+  <text x="84" y="330" font-family="Arial Narrow, Haettenschweiler, Impact, sans-serif" font-size="118" font-weight="700" fill="#D4AF37" letter-spacing="2">DR.MALA</text>
+  <text x="84" y="386" font-family="Segoe UI, Arial, sans-serif" font-size="27" font-weight="600" fill="#FFFFFF" letter-spacing="7">MUSAFIR QI MALATANG</text>
+  <text x="84" y="464" font-family="Segoe UI, Arial, sans-serif" font-size="34" fill="#FFFFFF" opacity="0.92">Fill your own bowl. Pay for what you took.</text>
+  <text x="84" y="530" font-family="Segoe UI, Arial, sans-serif" font-size="25" font-weight="600" fill="#D4AF37">Pork-Free  &#183;  Lard-Free  &#183;  60+ Ingredients  &#183;  Pay By Weight</text>
+  <text x="84" y="578" font-family="Segoe UI, Arial, sans-serif" font-size="23" fill="#FFFFFF" opacity="0.75">Cyberjaya  &#183;  Kuala Lumpur</text>
+</svg>

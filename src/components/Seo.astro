@@ -1,0 +1,59 @@
+---
+/**
+ * Every meta tag, every page. Open Graph, Twitter card, canonical, JSON-LD.
+ */
+import { SITE } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Path relative to the site root, for example "/menu". */
+  path: string;
+  /** Absolute or root relative image path. Defaults to the site card. */
+  image?: string;
+  /** Any number of JSON-LD graphs to emit. */
+  schemas?: Record<string, unknown>[];
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  path,
+  image = '/images/og-default.png',
+  schemas = [],
+  noindex = false,
+} = Astro.props;
+
+const canonical = new URL(path, SITE.url).href;
+const ogImage = new URL(image, SITE.url).href;
+const fullTitle = path === '/' ? title : `${title} | ${SITE.shortName}`;
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={SITE.name} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={`${SITE.name} in Cyberjaya and Kuala Lumpur`} />
+<meta property="og:locale" content="en_MY" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+<meta name="twitter:image:alt" content={`${SITE.name} in Cyberjaya and Kuala Lumpur`} />
+
+{
+  schemas.map((schema) => (
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />
+  ))
+}
