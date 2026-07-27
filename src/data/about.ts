@@ -11,7 +11,7 @@ export interface AboutSection {
 }
 
 export const ABOUT_INTRO =
-  'Musafir Qi Malatang started with a plain observation. Malatang is one of the best things you can eat for the money, and almost nobody in Malaysia could eat it without first asking whether it was safe for them.';
+  'Musafir Qi Stesen Mala started with a plain observation. Malatang is one of the best things you can eat for the money, and almost nobody in Malaysia could eat it without first asking whether it was safe for them.';
 
 export const ABOUT_SECTIONS: AboutSection[] = [
   {
@@ -49,7 +49,7 @@ export const ABOUT_SECTIONS: AboutSection[] = [
   {
     heading: 'The room',
     paragraphs: [
-      'We built both outlets with space, which is unusual for this kind of shop. Long tables, room between chairs, and somewhere to park a stroller.',
+      'We built the room with space, which is unusual for this kind of shop. Long tables, room between chairs, and somewhere to park a stroller.',
       'The sign outside is loud on purpose. Red, gold, and hard to miss. Inside it is quieter than you would expect from the frontage. You are meant to sit down, take your time, and finish the bowl.',
     ],
   },
@@ -57,7 +57,7 @@ export const ABOUT_SECTIONS: AboutSection[] = [
 
 export const ABOUT_STATS = [
   { value: '60+', label: 'Fresh ingredients on the bar' },
-  { value: '2', label: 'Outlets in the Klang Valley' },
+  { value: '1', label: 'Outlet, in Cyberjaya' },
   { value: '0', label: 'Pork or lard in the kitchen' },
   { value: '5', label: 'Spice levels, from none to extra' },
 ];

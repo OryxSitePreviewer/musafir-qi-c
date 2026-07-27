@@ -111,7 +111,7 @@ export const SOUP_BASES: SoupBase[] = [
     type: 'soup',
     name: 'Tomato Soup',
     chineseName: '番茄汤底',
-    // TODO: confirm with owner that this base is on the menu at both outlets.
+    // TODO: confirm with owner that this base is on the menu.
     spice: 0,
     taste: 'Sweet and sour, built on stewed tomato. The one children finish fastest.',
     image: '/images/soup-tomato.webp',
@@ -123,7 +123,7 @@ export const SOUP_BASES: SoupBase[] = [
     type: 'soup',
     name: 'Clear Chicken Broth',
     chineseName: '清汤底',
-    // TODO: confirm with owner that this base is on the menu at both outlets.
+    // TODO: confirm with owner that this base is on the menu.
     spice: 0,
     taste: 'Light chicken stock with garlic and white pepper. It lets the ingredients taste like themselves.',
     image: '/images/soup-clear.webp',

@@ -40,9 +40,8 @@ scattered star anise as a border, anything shot on grey slate.
 | `bar-wide.webp` | 1600 x 900 | The hero shot of the whole site. The full length of the ingredient bar, straight on, every tray loaded. This is the shot that sells the concept, so give it the most attention. | `src/components/IngredientBarShowcase.astro` |
 | `bar-vegetables.webp` | 800 x 600 | The vegetable section of the bar, close. Leafy greens, corn, lotus root, mushrooms, all fresh and stacked high. | `src/components/IngredientBarShowcase.astro` |
 | `bar-meatballs.webp` | 800 x 600 | The protein section of the bar, close. Beef and chicken balls, fish tofu, sliced meat rolls in their trays with tongs. | `src/components/IngredientBarShowcase.astro` |
-| `outlet-cyberjaya.webp` | 1200 x 800 | The Cyberjaya shopfront at CBD Perdana 3, from across the walkway. Signage legible, glass frontage, ideally at dusk when the sign reads brightest. | `src/data/locations.ts`, locations page |
-| `outlet-kuala-lumpur.webp` | 1200 x 800 | The MyTOWN Level B1 unit frontage, from the mall walkway. Signage legible. | `src/data/locations.ts`, locations page |
-| `room-cyberjaya.webp` | 1200 x 900 | The Cyberjaya dining room with people in it. Long tables, the red and gold wall, enough width to show the room is spacious. | `src/pages/about.astro` |
+| `outlet-cyberjaya.webp` | 1200 x 800 | The shopfront at CBD Perdana 3, from across the walkway. Signage legible, glass frontage, ideally at dusk when the sign reads brightest. | `src/data/locations.ts`, locations page |
+| `room-cyberjaya.webp` | 1200 x 900 | The dining room with people in it. Long tables, the red and gold wall, enough width to show the room is spacious. | `src/pages/about.astro` |
 | `team-counter.webp` | 1200 x 900 | Staff cooking bowls to order behind the counter, in front of the soup pots. Faces optional, hands and steam essential. Get written consent from anyone identifiable. | `src/pages/about.astro` |
 
 ## Brand and social assets

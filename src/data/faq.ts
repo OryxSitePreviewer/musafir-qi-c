@@ -37,17 +37,17 @@ export const FAQS: FaqItem[] = [
   {
     question: 'Can children eat here?',
     answer:
-      'Yes. Order the collagen or tomato base at no chilli and let them pick their own ingredients, which most children enjoy more than the eating. High chairs are available at both outlets. Ask staff to cut noodles short for small children.',
+      'Yes. Order the collagen or tomato base at no chilli and let them pick their own ingredients, which most children enjoy more than the eating. High chairs are available. Ask staff to cut noodles short for small children.',
   },
   {
     question: 'Is there parking?',
     answer:
-      'At Cyberjaya there is open surface parking along the CBD Perdana 3 shop row, and it is free after office hours. At Kuala Lumpur use the MyTOWN multi storey car park and take the lift down to Level B1. Mall parking rates apply there.',
+      'There is open surface parking along the CBD Perdana 3 shop row, and it is free after office hours. Arrive before 12:30 PM on a weekday and you will still find a bay near the door.',
   },
   {
     question: 'Do you have seating for a group or a family?',
     answer:
-      'Yes. The Cyberjaya outlet has long tables that seat eight and room to park a stroller beside you. The Kuala Lumpur outlet seats smaller groups more comfortably. For a party of ten or more, message us on WhatsApp the day before so we can hold tables together.',
+      'Yes. We have long tables that seat eight and room to park a stroller beside you. For a party of ten or more, message us on WhatsApp the day before so we can hold tables together.',
     // TODO: confirm with owner whether groups can actually reserve, and what the
     // minimum size and notice period are.
   },
@@ -61,7 +61,7 @@ export const FAQS: FaqItem[] = [
     // TODO: confirm with owner which delivery platforms are live at each outlet, then
     // replace this with the platform names and add direct links.
     answer:
-      'Delivery is available through the major food delivery apps for both outlets. Search for Musafir Qi Malatang or Dr.MaLa in your app. Delivery orders are picked from a set list rather than the full bar, because the bar is a walk-in counter. Message us on WhatsApp if you want to check what is available before you order.',
+      'Delivery is available through the major food delivery apps. Search for Musafir Qi Stesen Mala in your app. Delivery orders are picked from a set list rather than the full bar, because the bar is a walk-in counter. Message us on WhatsApp if you want to check what is available before you order.',
   },
   {
     question: 'What payment methods do you take?',

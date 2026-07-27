@@ -7,7 +7,7 @@ import Icon from '../components/Icon.astro';
 import CtaBand from '../components/CtaBand.astro';
 
 import { LOCATIONS, directionsLink } from '../data/locations';
-import { whatsappLink } from '../data/site';
+import { SITE, whatsappLink } from '../data/site';
 import { allRestaurantsSchema, breadcrumbSchema } from '../lib/schema';
 
 const schemas = [
@@ -21,7 +21,7 @@ const schemas = [
 
 <Base
   title="Locations"
-  description="Find Dr.MaLa. Cyberjaya at CBD Perdana 3, open 10:30 AM to 11:30 PM daily. Kuala Lumpur at MyTOWN Shopping Centre Level B1, open 10:00 AM to 10:00 PM daily."
+  description="Find Musafir Qi Stesen Mala at CBD Perdana 3, Cyberjaya. Open 10:30 AM to 11:30 PM daily."
   path="/locations"
   schemas={schemas}
 >
@@ -30,25 +30,10 @@ const schemas = [
       <p class="text-xs font-bold tracking-[0.2em] text-white uppercase">Walk in</p>
       <h1 class="gold-on-red mt-3 max-w-3xl text-[length:var(--text-display-lg)]">Find us</h1>
       <p class="mt-5 max-w-2xl text-lg text-white">
-        Two outlets in the Klang Valley. No booking and no waiting list. Come in, take a bowl, and
-        start filling.
+        One outlet in Cyberjaya. No booking and no waiting list. Come in, take a bowl, and start
+        filling.
       </p>
 
-      <!-- Outlet switcher. Anchors, so it works with no JavaScript. -->
-      <nav class="mt-8" aria-label="Jump to an outlet">
-        <ul class="flex flex-wrap gap-3">
-          {
-            LOCATIONS.map((location) => (
-              <li>
-                <a href={`#${location.id}`} class="btn btn-ghost-on-red btn-sm">
-                  <Icon name="pin" size={16} />
-                  {location.name}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </nav>
     </div>
     <div class="h-1 w-full bg-mala-gold"></div>
   </section>
@@ -66,7 +51,7 @@ const schemas = [
         <div class="container-rail">
           <SectionHeading
             id={`${location.id}-heading`}
-            eyebrow={`Outlet ${index + 1} of ${LOCATIONS.length}`}
+            eyebrow="Our outlet"
             title={location.name}
             lede={location.room}
           />
@@ -159,7 +144,7 @@ const schemas = [
                 </a>
                 <a
                   href={whatsappLink(
-                    `Hi Dr.MaLa ${location.name}, I would like to ask about ordering.`
+                    `Hi ${SITE.name}, I would like to ask about ordering.`
                   )}
                   target="_blank"
                   rel="noopener"

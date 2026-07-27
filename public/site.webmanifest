@@ -1,7 +1,7 @@
 {
-  "name": "Musafir Qi Malatang (Dr.MaLa)",
-  "short_name": "Dr.MaLa",
-  "description": "Pick and weigh malatang in Cyberjaya and Kuala Lumpur. Pork free and lard free.",
+  "name": "Musafir Qi Stesen Mala",
+  "short_name": "Stesen Mala",
+  "description": "Pick and weigh malatang in Cyberjaya. Pork free and lard free.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#FFF6E9",

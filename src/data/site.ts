@@ -39,13 +39,13 @@ export interface SiteConfig {
 }
 
 export const SITE: SiteConfig = {
-  name: 'Musafir Qi Malatang',
-  shortName: 'Dr.MaLa',
+  name: 'Musafir Qi Stesen Mala',
+  shortName: 'Stesen Mala',
   chineseName: '麻辣烫',
   tagline: 'Pick your ingredients. We weigh it. You pay for exactly what you took.',
   /** Keep this under 155 characters or Google will cut it off mid sentence. */
   description:
-    'Pick and weigh malatang in Cyberjaya and Kuala Lumpur. Fill your own bowl from over 60 fresh ingredients and pay by weight. Pork free and lard free.',
+    'Pick and weigh malatang in Cyberjaya. Fill your own bowl from over 60 fresh ingredients and pay by weight. Pork free and lard free.',
   url: 'https://drmala.com.my',
 
   // TODO: confirm with owner before launch. This is a placeholder.

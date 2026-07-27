@@ -1,6 +1,6 @@
 ---
 import { LOCATIONS, directionsLink } from '../data/locations';
-import { whatsappLink } from '../data/site';
+import { SITE, whatsappLink } from '../data/site';
 import SectionHeading from './SectionHeading.astro';
 import OpenStatus from './OpenStatus.astro';
 import Icon from './Icon.astro';
@@ -11,8 +11,8 @@ import Icon from './Icon.astro';
     <SectionHeading
       id="locations-heading"
       eyebrow="Come in"
-      title="Two outlets"
-      lede="Both are walk in. No booking, no waiting list. The badge below is live, in Malaysian time."
+      title="Where to find us"
+      lede="Walk in. No booking, no waiting list. The badge below is live, in Malaysian time."
     />
 
     <ul class="mt-10 grid gap-6 md:grid-cols-2">
@@ -57,7 +57,7 @@ import Icon from './Icon.astro';
               </a>
               <a
                 href={whatsappLink(
-                  `Hi Dr.MaLa ${location.name}, I would like to ask about ordering.`
+                  `Hi ${SITE.name}, I would like to ask about ordering.`
                 )}
                 target="_blank"
                 rel="noopener"

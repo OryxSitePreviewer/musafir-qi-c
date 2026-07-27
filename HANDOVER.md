@@ -21,17 +21,14 @@ grep -rn "TODO" src/
 `src/data/site.ts` → `whatsappNumber: '60120000000'`
 
 Every WhatsApp link on the site is built from this one value: the nav button, the floating
-bubble, both location cards, both outlet blocks, and all four closing call-to-action bands.
+bubble, the location card, the outlet block, and all four closing call-to-action bands.
 They all currently go nowhere.
 
 Replace it with the real number in international format, no plus sign, no spaces, no dashes.
 A Malaysian mobile looks like `60123456789`.
 
-Also update `phoneDisplay` in the same file, and `phoneDisplay` for each outlet in
-`src/data/locations.ts`. Those currently read `+60 12-000 0000`.
-
-If the two outlets use different numbers, replace the shared `PLACEHOLDER_WHATSAPP` constant
-in `src/data/locations.ts` with the two real ones.
+Also update `phoneDisplay` in the same file and in `src/data/locations.ts`. Both currently
+read `+60 12-000 0000`.
 
 ### 1.2 The halal certification wording is a placeholder
 
@@ -76,7 +73,7 @@ the `Sitemap:` line at the bottom of `public/robots.txt` to match.
 
 ### 1.5 Every image is a placeholder
 
-`public/images/` contains twelve generated WebP graphics, correctly sized and clearly
+`public/images/` contains eleven generated WebP graphics, correctly sized and clearly
 labelled. See `public/images/README.md` for the filename, dimensions, and shot brief for each
 one. The `bar-wide.webp` slot is the one that matters most, because the wide ingredient bar
 shot is what sells the concept.
@@ -162,19 +159,17 @@ block.
 
 ### Outlet coordinates
 
-`src/data/locations.ts` has approximate latitude and longitude taken from the district and
-the mall, not from your shopfronts:
+`src/data/locations.ts` has an approximate latitude and longitude taken from the district,
+not from your shopfront:
 
 - Cyberjaya: `2.9188, 101.6541`
-- Kuala Lumpur: `3.1290, 101.7223`
 
-Drop a pin on each actual door and replace them. Google uses these for the map and for local
+Drop a pin on the actual door and replace it. Google uses these for the map and for local
 search, so being 200 metres out costs you walk-ins.
 
 ### Parking and landmarks
 
-I wrote the parking notes and nearby landmarks for both outlets from general knowledge of
-those two sites. Read them and correct anything that is not true. The claim that Cyberjaya
+I wrote the parking notes and nearby landmarks from general knowledge of the area. Read them and correct anything that is not true. The claim that Cyberjaya
 parking is free after office hours is the one most likely to be wrong.
 
 ### Room descriptions
@@ -206,7 +201,7 @@ because I do not have your handles. They are in the footer on every page. Fix or
 ### The Chinese characters
 
 The site shows 麻辣烫 next to the Latin name in the header eyebrow, the footer, and the About
-page. That is the dish name, málàtàng, which is factual. If Dr.MaLa has an official Chinese
+page. That is the dish name, málàtàng, which is factual. If Musafir Qi Stesen Mala has an official Chinese
 wordmark that differs, change `chineseName` in `src/data/site.ts`.
 
 Note that the Chinese font is subset to only the glyphs currently used, for size. If you add

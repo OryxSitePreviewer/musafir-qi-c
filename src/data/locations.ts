@@ -1,5 +1,5 @@
 /**
- * Outlets.
+ * Outlet.
  *
  * Hours drive three things: the printed opening hours, the JSON-LD
  * openingHoursSpecification, and the live open or closed badge that the browser
@@ -72,15 +72,14 @@ export interface Location {
   imageAlt: string;
 }
 
-// TODO: confirm with owner. Both outlets currently share one placeholder WhatsApp
-// number from site.ts. Replace with the real per-outlet numbers if they differ.
+// TODO: confirm with owner. This is a placeholder, shared with site.ts.
 const PLACEHOLDER_WHATSAPP = '60120000000';
 
 export const LOCATIONS: Location[] = [
   {
     id: 'cyberjaya',
     name: 'Cyberjaya',
-    fullName: 'Musafir Qi Malatang Cyberjaya',
+    fullName: 'Musafir Qi Stesen Mala Cyberjaya',
     streetAddress: 'CBD Perdana 3',
     locality: 'Cyberjaya',
     region: 'Selangor',
@@ -102,34 +101,7 @@ export const LOCATIONS: Location[] = [
     room: 'The larger of the two rooms, with long tables that seat eight and space to park a stroller beside you.',
     image: '/images/outlet-cyberjaya.webp',
     imageAlt:
-      'The Musafir Qi Malatang Cyberjaya shopfront at CBD Perdana 3 with red signage and glass frontage',
-  },
-  {
-    id: 'kuala-lumpur',
-    name: 'Kuala Lumpur',
-    fullName: 'Musafir Qi Malatang MyTOWN',
-    streetAddress: 'MyTOWN Shopping Centre, Level B1',
-    locality: 'Kuala Lumpur',
-    region: 'Wilayah Persekutuan Kuala Lumpur',
-    postalCode: '55100',
-    country: 'MY',
-    shortAddress: 'MyTOWN Shopping Centre, Level B1, Kuala Lumpur',
-    geo: { lat: 3.129, lng: 101.7223 },
-    hours: [{ opens: '10:00', closes: '22:00', days: ALL_DAYS }],
-    hoursDisplay: '10:00 AM to 10:00 PM, daily',
-    phoneDisplay: '+60 12-000 0000',
-    whatsappNumber: PLACEHOLDER_WHATSAPP,
-    parking:
-      'Use the MyTOWN multi storey car park and take the lift down to B1. Mall parking rates apply. The IKEA Cheras car park connects on the same level if MyTOWN fills up on a weekend.',
-    landmarks: [
-      'MyTOWN Shopping Centre, Level B1',
-      'Connected to IKEA Cheras',
-      'Five minutes on foot from Cochrane MRT station',
-    ],
-    room: 'A mall unit on the lower ground floor, air conditioned, with high chairs available at the counter.',
-    image: '/images/outlet-kuala-lumpur.webp',
-    imageAlt:
-      'The Musafir Qi Malatang outlet on Level B1 of MyTOWN Shopping Centre in Kuala Lumpur',
+      'The Musafir Qi Stesen Mala Cyberjaya shopfront at CBD Perdana 3 with red signage and glass frontage',
   },
 ];
 

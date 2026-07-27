@@ -1,7 +1,7 @@
-# Musafir Qi Malatang (Dr.MaLa)
+# Musafir Qi Stesen Mala
 
-Marketing website for a pick-and-weigh, pork-free malatang restaurant with outlets in
-Cyberjaya and Kuala Lumpur.
+Marketing website for a pick-and-weigh, pork-free malatang restaurant with one outlet in
+Cyberjaya, Selangor.
 
 Built with [Astro](https://astro.build) and [Tailwind CSS](https://tailwindcss.com). It
 builds to plain static HTML with no server, no database, and no CMS. Drop the output folder
@@ -44,7 +44,7 @@ in typed files under `src/data/`. Each file has comments at the top explaining w
 | `src/data/pricing.ts` | **The price per 100 grams.** One number, used everywhere. Also the portion size guides. |
 | `src/data/ingredients.ts` | Every ingredient on the bar, grouped by category, with average gram weights. |
 | `src/data/dishes.ts` | Soup bases, spice levels, sides, drinks, and their prices. |
-| `src/data/locations.ts` | Outlet addresses, opening hours, coordinates, parking notes, landmarks. |
+| `src/data/locations.ts` | The outlet address, opening hours, coordinates, parking notes, landmarks. |
 | `src/data/faq.ts` | The questions and answers in the home page accordion. |
 | `src/data/halal.ts` | The kitchen policy and the halal certification wording. **Read the notes in this file before editing.** |
 | `src/data/steps.ts` | The four step flow and the first timer guide. |
@@ -76,7 +76,7 @@ deleting that line.
 
 ### Changing opening hours
 
-Open `src/data/locations.ts`. Each outlet has both a machine readable `hours` array and a
+Open `src/data/locations.ts`. The outlet has both a machine readable `hours` array and a
 human readable `hoursDisplay` string. **Change both.** The array drives the live open or
 closed badge and the search engine structured data. The string is what visitors read.
 

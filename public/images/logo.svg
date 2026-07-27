@@ -1,11 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 140" width="520" height="140" role="img" aria-label="Musafir Qi Malatang, Dr.MaLa">
-  <title>Musafir Qi Malatang (Dr.MaLa)</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 140" width="520" height="140" role="img" aria-label="Musafir Qi Stesen Mala">
+  <title>Musafir Qi Stesen Mala</title>
   <!--
     ==========================================================================
     TEMPORARY STAND-IN WORDMARK
     ==========================================================================
     Reconstructed from the brand name and the red and gold palette. This is NOT
-    the real Dr.MaLa logo. Replace this file with the supplied artwork before
+    the real Musafir Qi Stesen Mala logo. Replace this file with the supplied artwork before
     launch and keep the filename so nothing else needs changing.
 
     The type is set in a condensed system stack rather than converted to
@@ -26,6 +26,6 @@
   </g>
 
   <!-- Wordmark -->
-  <text x="130" y="80" font-family="Anton, 'Arial Narrow', Haettenschweiler, Impact, sans-serif" font-size="60" font-weight="700" fill="#D4AF37" letter-spacing="1">DR.MALA</text>
-  <text x="132" y="106" font-family="'IBM Plex Sans', 'Segoe UI', Arial, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF" letter-spacing="5.5">MUSAFIR QI MALATANG</text>
+  <text x="130" y="80" font-family="Anton, 'Arial Narrow', Haettenschweiler, Impact, sans-serif" font-size="60" font-weight="700" fill="#D4AF37" letter-spacing="1">STESEN MALA</text>
+  <text x="132" y="106" font-family="'IBM Plex Sans', 'Segoe UI', Arial, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF" letter-spacing="4">MUSAFIR QI STESEN MALA</text>
 </svg>
