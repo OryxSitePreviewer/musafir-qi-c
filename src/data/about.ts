@@ -47,6 +47,14 @@ export const ABOUT_SECTIONS: AboutSection[] = [
     ],
   },
   {
+    heading: 'More than the malatang bar',
+    paragraphs: [
+      'The sign outside lists three things. Hot pot, charcoal skewers, and malatang. The pick and weigh bar is what most people come for, and it is what the rest of this site explains.',
+      'The charcoal grill runs alongside it. Lamb, beef, and chicken skewers go on over coals and come off dusted with chilli and cumin. There is a tray of prepared dishes on the counter too, if you want rice and something cooked rather than building a bowl.',
+      'We are a Chinese Muslim kitchen. That is what the second line of the shopfront sign says, and it is the whole point of the place.',
+    ],
+  },
+  {
     heading: 'The room',
     paragraphs: [
       'We built the room with space, which is unusual for this kind of shop. Long tables, room between chairs, and somewhere to park a stroller.',

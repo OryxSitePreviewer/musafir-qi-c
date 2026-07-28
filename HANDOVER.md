@@ -73,13 +73,51 @@ the `Sitemap:` line at the bottom of `public/robots.txt` to match.
 
 ### 1.5 Every image is a placeholder
 
-`public/images/` contains eleven generated WebP graphics, correctly sized and clearly
-labelled. See `public/images/README.md` for the filename, dimensions, and shot brief for each
+`public/images/` now holds five real photographs and four generated placeholders. See `public/images/README.md` for the filename, dimensions, and shot brief for each
 one. The `bar-wide.webp` slot is the one that matters most, because the wide ingredient bar
 shot is what sells the concept.
 
 The logo is a reconstruction. `public/images/logo.svg` and `src/components/Wordmark.astro`
 are both marked as temporary stand-ins in comments.
+
+---
+
+## 1.6 The shopfront sign says the site is describing the wrong business
+
+The photographs you sent settle two things the brief did not.
+
+The sign reads **Hot Pot, Charcoal Skewers, Malatang**, and the second line reads
+**Restoran Masakan Asli China Muslim**. The photographs back it up. There are charcoal
+skewers of lamb and sweetcorn, grilled chicken wings, trays of prepared dishes on the
+counter, and takeaway tubs with rice.
+
+This site describes a pick-and-weigh malatang bar and nothing else, because that is what
+the brief described. That is at best a third of what you sell.
+
+I have not invented a hot pot menu or a skewers menu, because I do not have the items or
+the prices. What I did:
+
+- Added a section to the About page, `More than the malatang bar` in `src/data/about.ts`,
+  that names hot pot and charcoal skewers and says the pick-and-weigh bar is what the rest
+  of the site explains. It is honest and it is short.
+- Put the skewers photograph on the About page and in the ingredient bar band so the
+  grill is visible somewhere.
+- Added `signBoard` to `src/data/site.ts` holding the exact sign wording.
+
+**What you need to decide.** Either the site stays a malatang site with hot pot and skewers
+acknowledged, or it becomes a site for all three. The second option means new menu data for
+the grill and the hot pot, and probably a section on the home page. Tell me which and I will
+build it.
+
+## 1.7 The real logo is still not a file
+
+You sent a picture of it. The arched black and gold emblem with the crescent and the
+scrollwork, with `MUSAFIR QI` set across the base.
+
+I could not extract it from the message as a usable file, so `public/images/logo.svg` and
+`src/components/Wordmark.astro` are both still the reconstruction. Send the original as an
+SVG, or as a PNG at 1024px wide or larger with a transparent background, and I will replace
+both and rebuild the share card.
 
 ---
 

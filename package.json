@@ -1,16 +1,17 @@
 {
-  "name": "musafir-qi-malatang",
+  "name": "musafir-qi-stesen-mala",
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Marketing website for Musafir Qi Malatang (Dr.MaLa), a pick-and-weigh Chinese Muslim style malatang restaurant in Malaysia.",
+  "description": "Marketing website for Musafir Qi Stesen Mala, a pork-free Chinese Muslim hot pot, charcoal skewer, and pick-and-weigh malatang restaurant in Cyberjaya.",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "test": "tsx tests/hours.test.mts"
+    "test": "tsx tests/hours.test.mts",
+    "images": "node scripts/process-photos.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

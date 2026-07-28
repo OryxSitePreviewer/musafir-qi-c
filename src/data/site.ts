@@ -15,6 +15,7 @@ export interface SiteConfig {
   shortName: string;
   chineseName: string;
   tagline: string;
+  signBoard: string;
   description: string;
   /** Production URL. Change this before you deploy or the sitemap and og:url will be wrong. */
   url: string;
@@ -43,6 +44,8 @@ export const SITE: SiteConfig = {
   shortName: 'Stesen Mala',
   chineseName: '麻辣烫',
   tagline: 'Pick your ingredients. We weigh it. You pay for exactly what you took.',
+  /** The three things the shopfront sign advertises, in the order it lists them. */
+  signBoard: 'Hot Pot, Charcoal Skewers, Malatang',
   /** Keep this under 155 characters or Google will cut it off mid sentence. */
   description:
     'Pick and weigh malatang in Cyberjaya. Fill your own bowl from over 60 fresh ingredients and pay by weight. Pork free and lard free.',

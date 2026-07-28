@@ -2,30 +2,31 @@
 import { INGREDIENT_CATEGORIES, INGREDIENT_CLAIM } from '../data/ingredients';
 
 /**
- * The ingredient bar band. A wide photo grid with one stat overlaid.
- * The first image is the widest and carries the stat, so the eye lands there first.
+ * The ingredient bar band. A lead photo with one stat overlaid, then two tiles.
+ *
+ * The lead image is 3:2 rather than 16:9 because every photograph we have is a
+ * portrait phone shot. A 16:9 crop of a portrait frame throws away most of the
+ * picture. Restore the 16:9 lead once a proper wide shot of the bar exists.
+ * See public/images/README.md.
  */
 const shots = [
   {
-    src: '/images/bar-wide.webp',
-    alt: 'The full length of the ingredient bar with trays of meatballs, vegetables, noodles, and seafood on ice',
-    width: 1600,
-    height: 900,
-    span: true,
+    src: '/images/bar-trays.webp',
+    alt: 'Steel trays on the counter holding prepared dishes, including stir fried cabbage, sliced beef with peppers, and scrambled egg with tomato',
+    width: 500,
+    height: 333,
   },
   {
-    src: '/images/bar-vegetables.webp',
-    alt: 'Trays of leafy greens, corn, lotus root, and mushrooms on the vegetable section of the bar',
-    width: 800,
-    height: 600,
-    span: false,
+    src: '/images/dish-skewers.webp',
+    alt: 'Charcoal grilled skewers of marinated lamb and sweetcorn dusted with chilli and cumin, resting on a black tray',
+    width: 500,
+    height: 375,
   },
   {
-    src: '/images/bar-meatballs.webp',
-    alt: 'Trays of beef and chicken meatballs, fish tofu, and sliced meat rolls',
-    width: 800,
-    height: 600,
-    span: false,
+    src: '/images/bowls-table.webp',
+    alt: 'Five bowls of mala soup with noodles, fishballs, and vegetables set out on a marble table',
+    width: 480,
+    height: 360,
   },
 ];
 ---
@@ -42,7 +43,7 @@ const shots = [
         height={shots[0]!.height}
         loading="lazy"
         decoding="async"
-        class="aspect-[16/9] w-full rounded-sm border-2 border-mala-ink object-cover"
+        class="aspect-[3/2] w-full rounded-sm border-2 border-mala-ink object-cover"
       />
 
       <!-- The single stat. Gold display type at 40px and up, which clears the

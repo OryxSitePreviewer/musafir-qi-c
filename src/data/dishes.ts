@@ -78,7 +78,7 @@ export const SOUP_BASES: SoupBase[] = [
       'Beef bone stock loaded with Sichuan peppercorn, dried chilli, and star anise. It numbs before it burns, and it clings to everything you put in it. Pick your own heat from no chilli up to extra spicy.',
     badge: 'Most ordered',
     image: '/images/soup-mala.webp',
-    imageAlt: 'A bowl of thick red mala soup with chilli and Sichuan peppercorn floating on the surface',
+    imageAlt: 'Three bowls of mala soup with noodles, fishballs, and vegetables in an orange red broth, with small dishes of chilli sauce beside them',
     signature: true,
   },
   {

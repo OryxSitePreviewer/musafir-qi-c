@@ -98,10 +98,10 @@ export const LOCATIONS: Location[] = [
       'Walking distance from Cyberjaya City Centre',
       'Ten minutes from MMU and Limkokwing campuses',
     ],
-    room: 'The larger of the two rooms, with long tables that seat eight and space to park a stroller beside you.',
+    room: 'An open corner unit with roadside seating under the awning, long tables that seat eight, and space to park a stroller beside you.',
     image: '/images/outlet-cyberjaya.webp',
     imageAlt:
-      'The Musafir Qi Stesen Mala Cyberjaya shopfront at CBD Perdana 3 with red signage and glass frontage',
+      'The Musafir Qi Stesen Mala shopfront at CBD Perdana 3 at night, with the orange illuminated sign reading Hot Pot, Charcoal Skewers, Malatang above a red awning and open roadside seating',
   },
 ];
 
