@@ -2,7 +2,6 @@
 import { SITE, LABELS, whatsappLink } from '../data/site';
 import { INGREDIENT_CLAIM } from '../data/ingredients';
 import { LOCATIONS } from '../data/locations';
-import Wordmark from './Wordmark.astro';
 import OpenStatus from './OpenStatus.astro';
 import Icon from './Icon.astro';
 
@@ -23,17 +22,6 @@ const offerBullets = [
 ---
 
 <section class="on-red relative overflow-hidden bg-mala-red text-white">
-  <!-- Semi-transparent Storefront Signboard Background Layer -->
-  <div class="pointer-events-none absolute inset-0 z-0 opacity-25 mix-blend-overlay overflow-hidden">
-    <img
-      src="/images/storefront-sign.jpg"
-      alt=""
-      aria-hidden="true"
-      class="h-full w-full object-cover object-center scale-105 filter contrast-125 brightness-110"
-    />
-    <div class="absolute inset-0 bg-gradient-to-r from-mala-red via-mala-red/70 to-mala-red"></div>
-  </div>
-
   <!-- Steam / Shimmer animation background -->
   <div class="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
     <div
@@ -56,13 +44,8 @@ const offerBullets = [
   <div class="container-rail relative z-10 py-12 sm:py-20 lg:py-24">
     <div class="grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
       
-      <!-- Left Column: Prominent Logo, Headline, CTAs, Halal Badges -->
+      <!-- Left Column: Headline, CTAs, Halal Badges -->
       <div class="lg:col-span-7 animate-fadeInLeft">
-        
-        <!-- Extra Large Prominent Logo Header Emblem -->
-        <div class="mb-6 flex flex-wrap items-center gap-4">
-          <Wordmark variant="light" size="xl" class="drop-shadow-2xl" />
-        </div>
 
         <div class="flex flex-wrap items-center gap-3 animate-fadeInUp delay-100">
           <a
