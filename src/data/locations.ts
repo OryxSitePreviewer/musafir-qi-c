@@ -75,14 +75,13 @@ export interface Location {
   imageNightAlt?: string;
 }
 
-// TODO: confirm with owner. This is a placeholder, shared with site.ts.
-const PLACEHOLDER_WHATSAPP = '60120000000';
+const OFFICIAL_WHATSAPP = '60179916692';
 
 export const LOCATIONS: Location[] = [
   {
     id: 'cyberjaya',
     name: 'Cyberjaya',
-    fullName: 'Musafir Qi Stesen Mala Cyberjaya',
+    fullName: 'Musafir China Muslim BBQ& Hot Pot&Malatang',
     streetAddress: 'CBD Perdana 3',
     locality: 'Cyberjaya',
     region: 'Selangor',
@@ -90,10 +89,10 @@ export const LOCATIONS: Location[] = [
     country: 'MY',
     shortAddress: 'CBD Perdana 3, Cyberjaya, Selangor',
     geo: { lat: 2.9188, lng: 101.6541 },
-    hours: [{ opens: '10:30', closes: '23:30', days: ALL_DAYS }],
-    hoursDisplay: '10:30 AM to 11:30 PM, daily',
-    phoneDisplay: '+60 12-000 0000',
-    whatsappNumber: PLACEHOLDER_WHATSAPP,
+    hours: [{ opens: '10:30', closes: '23:00', days: ALL_DAYS }],
+    hoursDisplay: '10:30 AM to 11:00 PM, daily',
+    phoneDisplay: '+60 17-991 6692',
+    whatsappNumber: OFFICIAL_WHATSAPP,
     parking:
       'Open surface parking runs along the CBD Perdana 3 shop row and is free after office hours. Arrive before 12:30 PM on a weekday and you will still find a bay near the door.',
     landmarks: [
@@ -112,9 +111,13 @@ export const LOCATIONS: Location[] = [
 ];
 
 /** Builds a Google Maps directions URL. Works without an API key. */
-export function directionsLink(location: Location): string {
-  const query = `${location.fullName}, ${location.shortAddress}`;
-  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(query)}`;
+export function directionsLink(_location: Location): string {
+  return `https://www.google.com/maps/search/?api=1&query=Musafir%20China%20Muslim%20BBQ%20Hot%20Pot%20Malatang%20Cyberjaya`;
+}
+
+/** Builds a Waze navigation URL. */
+export function wazeLink(location: Location): string {
+  return `https://waze.com/ul?ll=${location.geo.lat},${location.geo.lng}&navigate=yes`;
 }
 
 /** Builds a Google Maps embed URL. Works without an API key. */

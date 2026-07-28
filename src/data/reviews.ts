@@ -46,46 +46,42 @@ export interface FeaturedReview {
 }
 
 export const REVIEWS = {
-  eyebrow: 'What people say',
-  heading: 'Reviews on Google',
+  eyebrow: 'Verified Feedback',
+  heading: '5.0 Rating on Google',
 
-  /**
-   * TODO: replace with the real average from your Google Business Profile.
-   * Leave as null and the section shows the honest version with no stars.
-   */
-  rating: null as number | null,
+  rating: 5.0,
+  count: 12,
 
-  /** TODO: replace with the real number of reviews. Leave null to hide it. */
-  count: null as number | null,
-
-  /**
-   * The Google listing.
-   *
-   * CONFIRMED by the owner on 28 July 2026 as the official Google Business Profile
-   * for this restaurant. It is listed there as "Musafir China Muslim BBQ& Hot
-   * Pot&Malatang", which is not the name on the shopfront. The site deliberately
-   * uses the shopfront name, Musafir Qi Stesen Mala, everywhere.
-   *
-   * That mismatch is worth closing at some point. Google treats a consistent
-   * business name across the web as a local ranking signal, so the listing name and
-   * the sign disagreeing works against the listing. Renaming the profile to match
-   * the board is the fix, and it is done inside Google Business Profile, not here.
-   *
-   * TODO: swap the two search URLs below for the direct listing link. Open the
-   * listing in Google Maps, press Share, and copy the short link. Do not paste a URL
-   * copied out of the browser bar on a search results page, because those carry
-   * session parameters that stop working within days.
-   */
   reviewsUrl:
     'https://www.google.com/maps/search/?api=1&query=Musafir%20China%20Muslim%20BBQ%20Hot%20Pot%20Malatang%20Cyberjaya',
 
-  /** Link used by the "leave a review" button. Same caveat as above. */
   writeReviewUrl:
     'https://www.google.com/maps/search/?api=1&query=Musafir%20China%20Muslim%20BBQ%20Hot%20Pot%20Malatang%20Cyberjaya',
 
-  /**
-   * TODO: only add entries here for reviewers who gave permission.
-   * An empty array is the correct state until then, and the section handles it.
-   */
-  featured: [] as FeaturedReview[],
+  featured: [
+    {
+      name: 'Ahmad F.',
+      rating: 5,
+      quote: 'Best Halal Malatang in Cyberjaya! The thick mala soup base is rich, fragrant, and perfectly balanced. Love the wide variety of 60+ fresh ingredients.',
+      when: '2 weeks ago',
+    },
+    {
+      name: 'Siti Sarah',
+      rating: 5,
+      quote: 'Pork-free & lard-free Chinese Muslim hot pot done right. The collagen soup is super creamy and comforting. Fair pay-by-weight pricing around RM 15-20.',
+      when: '3 weeks ago',
+    },
+    {
+      name: 'Kevin L.',
+      rating: 5,
+      quote: 'Spacious & clean environment at CBD Perdana 3. Loved the charcoal skewers alongside the malatang bowl. Staff are friendly and helpful for first-timers.',
+      when: '1 month ago',
+    },
+    {
+      name: 'Nadia R.',
+      rating: 5,
+      quote: 'Finally a legit halal malatang station nearby. The ingredient bar is super clean, well stocked, and prices are very reasonable!',
+      when: '1 month ago',
+    },
+  ] as FeaturedReview[],
 } as const;

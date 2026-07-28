@@ -1,5 +1,5 @@
 ---
-import { LOCATIONS, directionsLink } from '../data/locations';
+import { LOCATIONS, directionsLink, wazeLink } from '../data/locations';
 import { SITE, whatsappLink } from '../data/site';
 import SectionHeading from './SectionHeading.astro';
 import OpenStatus from './OpenStatus.astro';
@@ -68,15 +68,24 @@ import Icon from './Icon.astro';
               </p>
             </address>
 
-            <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+            <div class="mt-6 flex flex-wrap gap-2">
               <a
                 href={directionsLink(location)}
                 target="_blank"
                 rel="noopener"
-                class="btn btn-primary btn-sm flex-1"
+                class="btn btn-primary btn-sm flex-1 min-w-[130px]"
               >
-                <Icon name="directions" size={18} />
-                Get directions
+                <Icon name="google" size={16} />
+                Google Maps
+              </a>
+              <a
+                href={wazeLink(location)}
+                target="_blank"
+                rel="noopener"
+                class="btn bg-cyan-600 hover:bg-cyan-700 text-white btn-sm flex-1 min-w-[110px]"
+              >
+                <Icon name="waze" size={16} />
+                Waze
               </a>
               <a
                 href={whatsappLink(
@@ -84,9 +93,9 @@ import Icon from './Icon.astro';
                 )}
                 target="_blank"
                 rel="noopener"
-                class="btn btn-green btn-sm flex-1"
+                class="btn btn-green btn-sm flex-1 min-w-[110px]"
               >
-                <Icon name="whatsapp" size={18} />
+                <Icon name="whatsapp" size={16} />
                 WhatsApp
               </a>
             </div>

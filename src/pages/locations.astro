@@ -6,7 +6,7 @@ import MapEmbed from '../components/MapEmbed.astro';
 import Icon from '../components/Icon.astro';
 import CtaBand from '../components/CtaBand.astro';
 
-import { LOCATIONS, directionsLink } from '../data/locations';
+import { LOCATIONS, directionsLink, wazeLink } from '../data/locations';
 import { SITE, whatsappLink } from '../data/site';
 import { allRestaurantsSchema, breadcrumbSchema } from '../lib/schema';
 
@@ -146,15 +146,24 @@ const schemas = [
                 </ul>
               </div>
 
-              <div class="mt-7 flex flex-col gap-3 sm:flex-row">
+              <div class="mt-7 flex flex-wrap gap-3">
                 <a
                   href={directionsLink(location)}
                   target="_blank"
                   rel="noopener"
-                  class="btn btn-primary flex-1"
+                  class="btn btn-primary flex-1 min-w-[140px]"
                 >
-                  <Icon name="directions" size={18} />
-                  Get directions
+                  <Icon name="google" size={18} />
+                  Google Maps
+                </a>
+                <a
+                  href={wazeLink(location)}
+                  target="_blank"
+                  rel="noopener"
+                  class="btn bg-cyan-600 hover:bg-cyan-700 text-white flex-1 min-w-[120px]"
+                >
+                  <Icon name="waze" size={18} />
+                  Waze
                 </a>
                 <a
                   href={whatsappLink(
@@ -162,10 +171,10 @@ const schemas = [
                   )}
                   target="_blank"
                   rel="noopener"
-                  class="btn btn-green flex-1"
+                  class="btn btn-green flex-1 min-w-[140px]"
                 >
                   <Icon name="whatsapp" size={18} />
-                  Order on WhatsApp
+                  WhatsApp
                 </a>
               </div>
             </div>

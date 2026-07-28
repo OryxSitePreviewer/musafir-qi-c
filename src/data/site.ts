@@ -16,6 +16,8 @@ export interface SiteConfig {
   chineseName: string;
   tagline: string;
   signBoard: string;
+  officialListingName?: string;
+  priceRange?: string;
   description: string;
   /** Production URL. Change this before you deploy or the sitemap and og:url will be wrong. */
   url: string;
@@ -40,24 +42,24 @@ export interface SiteConfig {
 }
 
 export const SITE: SiteConfig = {
-  name: 'Musafir Qi Stesen Mala',
+  name: 'Musafir Qi Malatang (Dr.MaLa)',
   shortName: 'Stesen Mala',
   chineseName: '麻辣烫',
+  officialListingName: 'Musafir China Muslim BBQ& Hot Pot&Malatang',
   tagline: 'Pick your ingredients. We weigh it. You pay for exactly what you took.',
   /** The three things the shopfront sign advertises, in the order it lists them. */
   signBoard: 'Hot Pot · Charcoal Skewers · Malatang',
   /** Keep this under 155 characters or Google will cut it off mid sentence. */
   description:
-    'Halal Chinese Muslim malatang and hot pot in Cyberjaya. No pork, no lard, no cooking wine, no alcohol. Fill your own bowl and pay by weight.',
-  url: 'https://drmala.com.my',
+    'Halal Chinese Muslim malatang, hot pot & charcoal skewers in Cyberjaya. No pork, no lard, no alcohol. Fill your own bowl and pay by weight.',
+  url: 'https://musafir-qi-c.vercel.app',
+  priceRange: 'RM 1–20',
 
-  // TODO: confirm with owner before launch. This is a placeholder.
-  whatsappNumber: '60120000000',
-  phoneDisplay: '+60 12-000 0000',
+  whatsappNumber: '60179916692',
+  phoneDisplay: '+60 17-991 6692',
   email: 'hello@drmala.com.my',
 
   socials: [
-    // TODO: confirm with owner. These point at plausible handles that may not exist yet.
     { label: 'Facebook', href: 'https://www.facebook.com/', icon: 'facebook' },
     { label: 'Instagram', href: 'https://www.instagram.com/', icon: 'instagram' },
     { label: 'TikTok', href: 'https://www.tiktok.com/', icon: 'tiktok' },

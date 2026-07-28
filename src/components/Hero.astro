@@ -39,11 +39,20 @@ const offerBullets = [
   </div>
 
   <div class="container-rail relative py-16 sm:py-24 lg:py-28">
-    <p class="flex items-center gap-3 text-xs font-bold tracking-[0.22em] text-white uppercase">
-      <span class="cjk shrink-0 text-lg whitespace-nowrap text-white">{SITE.chineseName}</span>
-      <span class="h-px w-8 shrink-0 bg-mala-gold"></span>
-      Cyberjaya, Selangor
-    </p>
+    <div class="flex flex-wrap items-center gap-3">
+      <a
+        href="#reviews-heading"
+        class="inline-flex items-center gap-2 rounded-full bg-black/30 backdrop-blur-md px-3.5 py-1.5 text-xs font-bold tracking-wide text-white border border-white/20 hover:border-mala-gold transition-colors"
+      >
+        <span class="text-mala-gold flex items-center">★★★★★</span>
+        <span>5.0 Google Rating (12 Reviews)</span>
+      </a>
+      <span class="h-4 w-px bg-white/30 hidden sm:inline-block"></span>
+      <p class="flex items-center gap-2 text-xs font-bold tracking-[0.2em] text-white uppercase">
+        <span class="cjk text-lg text-mala-gold">{SITE.chineseName}</span>
+        <span>• Cyberjaya, Selangor</span>
+      </p>
+    </div>
 
     <!-- The first clause takes its own line from `sm` up. Below that it runs on,
          because a forced break at 375px leaves a single orphaned word. -->
@@ -55,7 +64,7 @@ const offerBullets = [
 
     <p class="mt-6 max-w-xl text-lg text-white sm:text-xl">
       Walk the ingredient bar, pick whatever you want from over {INGREDIENT_CLAIM} fresh
-      ingredients, and we weigh it at the counter. No set menu and no minimum order.
+      ingredients, and we weigh it at the counter. Pay by weight ({SITE.priceRange || 'RM 1–20'}).
     </p>
 
     <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">

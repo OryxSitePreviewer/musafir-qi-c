@@ -62,52 +62,61 @@ const subColor = variant === 'light' ? 'var(--mala-white)' : 'var(--color-mala-i
 </span>
 
 <style>
-  /* The badge is 332x115, so height drives it and width follows the ratio. */
+  /* The badge is 332x115, height drives it and width follows ratio. Enhanced size & prominence. */
   .wordmark-badge {
-    height: 1.875rem;
+    height: 2.5rem;
     width: auto;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));
+    transition: transform 0.2s ease;
+  }
+
+  .wordmark:hover .wordmark-badge {
+    transform: scale(1.05);
   }
 
   .wordmark-name {
     font-family: var(--font-display);
-    font-size: 1.25rem;
-    letter-spacing: 0.02em;
+    font-size: 1.5rem;
+    letter-spacing: 0.03em;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   }
 
-  /* The sign line is the longest part of the lockup, and on a 320px phone it is
-     what pushes the menu button off the edge. It starts small and tight, then
-     opens up once there is room. Measured against the 44px menu button plus the
-     container padding, so the two never collide. */
   .wordmark-sub {
-    font-size: 0.5rem;
-    letter-spacing: 0.02em;
+    font-size: 0.6rem;
+    letter-spacing: 0.05em;
     white-space: nowrap;
+    opacity: 0.95;
   }
 
   @media (min-width: 420px) {
     .wordmark-badge {
-      height: 2.125rem;
+      height: 3rem;
     }
 
     .wordmark-name {
-      font-size: 1.5rem;
+      font-size: 1.75rem;
     }
 
     .wordmark-sub {
-      font-size: 0.5625rem;
-      letter-spacing: 0.06em;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
     }
   }
 
   @media (min-width: 640px) {
+    .wordmark-badge {
+      height: 3.25rem;
+    }
+
+    .wordmark-name {
+      font-size: 2rem;
+    }
+
     .wordmark-sub {
       letter-spacing: 0.12em;
     }
   }
 
-  /* At 320px the badge, the name, the sign line, and a 44px menu button cannot
-     all fit on one row. The sign line is the part that gives way, because it also
-     appears in the footer and in the hero. */
   .wordmark[data-compact='true'] .wordmark-sub {
     display: none;
   }
@@ -118,17 +127,18 @@ const subColor = variant === 'light' ? 'var(--mala-white)' : 'var(--color-mala-i
     }
   }
 
-  /* The large lockup is only ever used where it has a column to itself. */
+  /* Large emblem lockup used in Hero or Footer */
   .wordmark[data-size='lg'] .wordmark-badge {
-    height: 3rem;
+    height: 4.5rem;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.35));
   }
 
   .wordmark[data-size='lg'] .wordmark-name {
-    font-size: 2.5rem;
+    font-size: 3rem;
   }
 
   .wordmark[data-size='lg'] .wordmark-sub {
-    font-size: 0.75rem;
-    letter-spacing: 0.16em;
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
   }
 </style>
