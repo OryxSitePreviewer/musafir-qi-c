@@ -9,164 +9,123 @@ const cyberjayaLoc = LOCATIONS[0];
 const waHref = whatsappLink(`Hi ${SITE.shortName}, I would like to ask about ordering.`);
 
 const trustBullets = [
-  { label: 'No Pork', mark: true },
-  { label: 'No Lard', mark: true },
-  { label: 'No Cooking Wine', mark: true },
-  { label: 'No Alcohol', mark: true },
-];
-
-const offerBullets = [
-  { label: `${INGREDIENT_CLAIM}+ Fresh Ingredients`, mark: false },
-  { label: 'Pay By Weight', mark: false },
+  { label: 'No Pork & No Lard', mark: true },
+  { label: `${INGREDIENT_CLAIM}+ Fresh Ingredients`, mark: true },
+  { label: `Pay By Weight (${SITE.priceRange || 'RM 1–20'})`, mark: true },
+  { label: 'Open 10:30 AM – 11:00 PM Daily', mark: true },
 ];
 ---
 
-<section class="on-red relative overflow-hidden bg-mala-red text-white">
-  <!-- Steam / Shimmer animation background -->
-  <div class="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
-    <div
-      class="steam absolute top-1/4 left-[8%] h-72 w-56 rounded-full bg-white/10 blur-3xl"
-      style="animation-delay: 0s;"
-    >
-    </div>
-    <div
-      class="steam absolute top-1/3 left-[40%] h-80 w-64 rounded-full bg-mala-gold/15 blur-3xl"
-      style="animation-delay: 2.4s;"
-    >
-    </div>
-    <div
-      class="steam absolute top-1/4 right-[5%] h-72 w-56 rounded-full bg-white/10 blur-3xl"
-      style="animation-delay: 4.6s;"
-    >
-    </div>
+<section class="relative overflow-hidden bg-mala-ink text-white py-16 sm:py-24 lg:py-28 min-h-[580px] flex items-center">
+  <!-- Full Bleed Storefront Background Photo -->
+  <div class="absolute inset-0 z-0 overflow-hidden">
+    <img
+      src="/images/outlet-cyberjaya-day.webp"
+      alt="Musafir Qi Malatang storefront at CBD Perdana 3 Cyberjaya"
+      width="1920"
+      height="1080"
+      loading="eager"
+      decoding="async"
+      class="h-full w-full object-cover object-center filter brightness-90 contrast-105 scale-105 transition-transform duration-1000"
+    />
+    <!-- Dark Vignette & Brand Red Gradient Overlay for Maximum Text Contrast -->
+    <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/80 to-mala-ink/65"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/50"></div>
   </div>
 
-  <div class="container-rail relative z-10 py-12 sm:py-20 lg:py-24">
-    <div class="grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
+  <div class="container-rail relative z-10 w-full">
+    <div class="max-w-3xl animate-fadeInLeft">
       
-      <!-- Left Column: Headline, CTAs, Halal Badges -->
-      <div class="lg:col-span-7 animate-fadeInLeft">
+      <!-- Location Pill Badge -->
+      <div class="inline-flex items-center gap-2 rounded-full bg-black/60 backdrop-blur-md px-4 py-1.5 text-xs font-bold tracking-wide text-white border border-white/20 shadow-lg">
+        <span class="text-mala-gold">📍</span>
+        <span>CBD Perdana 3, Cyberjaya & surrounding Selangor areas</span>
+      </div>
 
-        <div class="flex flex-wrap items-center gap-3 animate-fadeInUp delay-100">
-          <a
-            href="#reviews-heading"
-            class="inline-flex items-center gap-2 rounded-full bg-black/40 backdrop-blur-md px-4 py-1.5 text-xs font-bold tracking-wide text-white border border-mala-gold/40 hover:border-mala-gold transition-all transform hover:scale-105 shadow-lg"
-          >
-            <span class="text-mala-gold flex items-center text-sm">★★★★★</span>
-            <span class="font-semibold">5.0 Google Rating (12 Reviews)</span>
-          </a>
-          <span class="h-4 w-px bg-white/30 hidden sm:inline-block"></span>
-          <p class="flex items-center gap-2 text-xs font-bold tracking-[0.2em] text-white uppercase">
-            <span class="cjk text-lg text-mala-gold">{SITE.chineseName}</span>
-            <span>• Cyberjaya, Selangor</span>
-          </p>
+      <!-- Main Business Title & Headline -->
+      <h1 class="mt-5 text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+        <span class="text-mala-gold uppercase tracking-wider block font-display text-5xl sm:text-6xl lg:text-7xl drop-shadow-md">
+          {SITE.name}
+        </span>
+        <span class="mt-2 block text-2xl sm:text-3xl lg:text-4xl font-bold text-white/95">
+          Halal Chinese Muslim Hot Pot, Charcoal Skewers & Malatang
+        </span>
+      </h1>
+
+      <!-- Description Copy -->
+      <p class="mt-5 text-base sm:text-lg lg:text-xl text-gray-200 leading-relaxed font-medium">
+        Walk the ingredient bar, pick whatever you want from over {INGREDIENT_CLAIM} fresh ingredients, and pay by weight.
+        <span class="font-bold text-white"> Rated 5.0/5 from 12 Google reviews.</span>
+      </p>
+
+      <!-- Google Rating Row -->
+      <div class="mt-4 flex flex-wrap items-center gap-3">
+        <div class="flex items-center gap-1.5 text-amber-400">
+          <span class="text-lg">★★★★★</span>
+          <span class="text-sm font-bold text-white">5.0</span>
+          <span class="text-sm text-gray-300">• 12 Google reviews</span>
         </div>
-
-        <!-- Main Display Headline -->
-        <h1 class="gold-on-red mt-5 max-w-2xl text-[length:var(--text-display-xl)] leading-tight animate-fadeInUp delay-200">
-          <span class="sm:block">Fill your own bowl.</span>{' '}
-          <span>Pay for what you took.</span>
-        </h1>
-
-        <p class="mt-6 max-w-xl text-lg text-white/95 sm:text-xl leading-relaxed animate-fadeInUp delay-300">
-          Walk the ingredient bar, pick whatever you want from over {INGREDIENT_CLAIM} fresh
-          ingredients, and we weigh it at the counter. Pay by weight ({SITE.priceRange || 'RM 1–20'}).
-        </p>
-
-        <!-- CTA Buttons -->
-        <div class="mt-8 flex flex-wrap items-center gap-3 animate-fadeInUp delay-400">
-          <a href="/menu" class="btn btn-on-red transform transition-transform hover:scale-105 shadow-lg">
-            {LABELS.menu}
-            <Icon name="arrow-right" size={18} />
-          </a>
-          <a href="/locations" class="btn btn-ghost-on-red transform transition-transform hover:scale-105">
-            <Icon name="pin" size={18} />
-            {LABELS.find}
-          </a>
-          <a href={waHref} target="_blank" rel="noopener" class="btn btn-gold transform transition-transform hover:scale-105 shadow-md">
-            <Icon name="whatsapp" size={18} />
-            WhatsApp Order
-          </a>
-        </div>
-
-        <!-- Halal & Quality Trust Badges -->
-        <div class="mt-10 border-t-2 border-white/20 pt-6 animate-fadeInUp delay-500">
-          <h2 class="text-xs font-bold tracking-[0.2em] text-white/90 uppercase">
-            Halal Chinese Muslim Kitchen
-          </h2>
-
-          <ul class="mt-4 flex flex-wrap items-center gap-x-6 gap-y-3">
-            {
-              trustBullets.map((bullet) => (
-                <li class="flex items-center gap-2 text-sm font-semibold text-white sm:text-base">
-                  <span class="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-mala-green text-white shadow-sm">
-                    <Icon name="check" size={13} />
-                  </span>
-                  {bullet.label}
-                </li>
-              ))
-            }
-          </ul>
-
-          <ul class="mt-4 flex flex-wrap items-center gap-x-6 gap-y-3">
-            {
-              offerBullets.map((bullet) => (
-                <li class="flex items-center gap-2 text-sm font-semibold text-white sm:text-base">
-                  <span class="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 border-mala-gold text-mala-gold">
-                    <Icon name="check" size={13} />
-                  </span>
-                  {bullet.label}
-                </li>
-              ))
-            }
-          </ul>
+        <span class="text-gray-500">•</span>
+        <div class="inline-flex items-center gap-2">
+          <OpenStatus location={cyberjayaLoc} />
         </div>
       </div>
 
-      <!-- Right Column: Storefront Main Picture Showcase -->
-      <div class="lg:col-span-5 animate-fadeInRight delay-200">
-        <div class="relative group mx-auto max-w-lg lg:max-w-none">
-          <!-- Ambient Glow aura -->
-          <div class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-mala-gold to-yellow-300 opacity-30 blur-lg transition duration-500 group-hover:opacity-60"></div>
-          
-          <div class="relative overflow-hidden rounded-2xl border-4 border-mala-gold bg-black shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]">
-            <img
-              src="/images/outlet-cyberjaya-day.webp"
-              alt="Musafir Qi Malatang storefront at CBD Perdana 3 Cyberjaya"
-              width="680"
-              height="450"
-              loading="eager"
-              decoding="async"
-              class="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-105"
-            />
+      <!-- Main Action Buttons -->
+      <div class="mt-8 flex flex-wrap items-center gap-4">
+        <a
+          href="/menu"
+          class="btn bg-white text-mala-ink hover:bg-mala-gold hover:text-mala-ink font-bold px-7 py-3.5 rounded-full shadow-xl transition-all transform hover:scale-105 flex items-center gap-2"
+        >
+          <Icon name="bowl" size={20} class="text-mala-red" />
+          See Our Menu
+        </a>
+        <a
+          href={waHref}
+          target="_blank"
+          rel="noopener"
+          class="btn bg-emerald-600 text-white hover:bg-emerald-700 font-bold px-7 py-3.5 rounded-full shadow-xl transition-all transform hover:scale-105 flex items-center gap-2"
+        >
+          <Icon name="whatsapp" size={20} />
+          WhatsApp Order
+        </a>
+        <a
+          href="/locations"
+          class="btn border-2 border-white/40 text-white hover:bg-white/10 font-bold px-6 py-3.5 rounded-full backdrop-blur-sm transition-all flex items-center gap-2"
+        >
+          <Icon name="pin" size={18} />
+          Directions
+        </a>
+      </div>
 
-            <!-- Top Tag: Location -->
-            <div class="absolute top-4 left-4 rounded-full bg-black/75 backdrop-blur-md px-3.5 py-1.5 text-xs font-bold text-white border border-white/20 shadow-md">
-              📍 Cyberjaya • CBD Perdana 3
-            </div>
+      <!-- Phone Contact Link -->
+      <p class="mt-5 text-sm text-gray-300">
+        Prefer to call?{' '}
+        <a
+          href={`tel:${cyberjayaLoc.phoneDisplay.replace(/\s/g, '')}`}
+          class="font-bold text-mala-gold hover:underline underline-offset-4"
+        >
+          {cyberjayaLoc.phoneDisplay}
+        </a>
+      </p>
 
-            <!-- Floating Pill Badge: Storefront Verified -->
-            <div class="absolute top-4 right-4 rounded-full bg-mala-gold text-mala-ink px-3 py-1 text-xs font-extrabold shadow-lg animate-pulse-glow">
-              ★ 5.0 Google Rated
-            </div>
-
-            <!-- Bottom Floating Overlay: Live Hours Status -->
-            <div class="absolute bottom-4 left-4 right-4 rounded-xl bg-black/80 backdrop-blur-md p-3.5 border border-white/20 shadow-xl flex items-center justify-between">
-              <div>
-                <p class="text-xs font-semibold text-white/80">Storefront Counter</p>
-                <p class="text-sm font-bold text-white">10:30 AM to 11:00 PM Daily</p>
-              </div>
-              <div>
-                <OpenStatus location={cyberjayaLoc} />
-              </div>
-            </div>
-          </div>
-        </div>
+      <!-- Trust Bullets Band -->
+      <div class="mt-8 border-t border-white/20 pt-6">
+        <ul class="flex flex-wrap items-center gap-x-6 gap-y-3">
+          {trustBullets.map((bullet) => (
+            <li class="flex items-center gap-2 text-xs sm:text-sm font-semibold text-white/95">
+              <span class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-mala-gold text-mala-ink font-extrabold text-xs">
+                ✓
+              </span>
+              <span>{bullet.label}</span>
+            </li>
+          ))}
+        </ul>
       </div>
 
     </div>
   </div>
 
-  <!-- Gold rule closing the band. -->
-  <div class="h-1.5 w-full bg-gradient-to-r from-mala-gold via-yellow-200 to-mala-gold"></div>
+  <!-- Bottom Gold Border Line -->
+  <div class="absolute bottom-0 left-0 right-0 h-1.5 bg-gradient-to-r from-mala-gold via-amber-300 to-mala-gold z-20"></div>
 </section>
