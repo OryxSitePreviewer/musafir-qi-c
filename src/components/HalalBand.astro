@@ -1,19 +1,19 @@
 ---
 import { HALAL } from '../data/halal';
+import { isCertified as checkCertified } from '../lib/halalStatus';
 import Icon from './Icon.astro';
 
 /**
- * The certification statement is only printed once the owner has replaced the
- * placeholder in src/data/halal.ts. Until then the honest fallback runs instead.
- * This guard exists so a forgotten TODO cannot ship as a halal claim.
+ * The certified wording prints ONLY when the owner has set status to 'certified'
+ * AND filled in all three of certifier, number, and expiry. Anything short of that
+ * falls back to the in-progress wording.
+ *
+ * This guard is deliberate. A half finished edit in the data file must not be able
+ * to turn "we have applied" into "we are certified" on a live page.
  */
-const ownerHasWritten =
-  HALAL.certificationStatement.trim().length > 0 &&
-  !HALAL.certificationStatement.startsWith('TODO');
+const { certification } = HALAL;
 
-const statement = ownerHasWritten
-  ? HALAL.certificationStatement
-  : HALAL.certificationFallback;
+const isCertified = checkCertified(certification);
 ---
 
 <section class="bg-mala-cream py-16 sm:py-20" aria-labelledby="halal-heading">
@@ -28,7 +28,7 @@ const statement = ownerHasWritten
 
         <div class="max-w-3xl">
           <p class="mb-3 text-xs font-bold tracking-[0.2em] text-mala-green-dark uppercase">
-            Kitchen policy
+            {HALAL.eyebrow}
           </p>
           <h2 id="halal-heading" class="text-[length:var(--text-display-md)] text-mala-ink">
             {HALAL.heading}
@@ -53,9 +53,41 @@ const statement = ownerHasWritten
         }
       </ul>
 
+      <p class="mt-7 border-t-2 border-black/10 pt-6 text-sm text-mala-ink-soft">
+        {HALAL.handling}
+      </p>
+
       <div class="mt-8 rounded-sm border-2 border-mala-green-dark bg-white p-5">
-        <h3 class="text-[1.125rem] text-mala-green-dark">Certification status</h3>
-        <p class="mt-2 text-sm text-mala-ink-soft">{statement}</p>
+        <div class="flex items-start gap-3">
+          <span
+            class="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 border-mala-green-dark text-mala-green-dark"
+          >
+            <Icon name={isCertified ? 'check' : 'clock'} size={13} />
+          </span>
+
+          <div>
+            <h3 class="text-[1.125rem] text-mala-green-dark">{certification.heading}</h3>
+
+            {
+              isCertified ? (
+                <p class="mt-2 text-sm text-mala-ink-soft">
+                  Certified by {certification.certifier}. Certificate number
+                  <span class="tnum font-semibold text-mala-ink"> {certification.number}</span>,
+                  valid until {certification.expiry}.
+                </p>
+              ) : (
+                <Fragment>
+                  <p class="mt-2 inline-block rounded-sm bg-mala-cream px-2 py-1 text-xs font-bold tracking-widest text-mala-green-dark uppercase">
+                    Verification in progress
+                  </p>
+                  <p class="mt-2 text-sm text-mala-ink-soft">{certification.inProgress}</p>
+                </Fragment>
+              )
+            }
+
+            <p class="mt-3 text-sm text-mala-ink-soft">{certification.inTheMeantime}</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -4,8 +4,14 @@ import { INGREDIENT_CLAIM } from '../data/ingredients';
 import Icon from './Icon.astro';
 
 const trustBullets = [
-  { label: 'Pork-Free', mark: true },
-  { label: 'Lard-Free', mark: true },
+  { label: 'No Pork', mark: true },
+  { label: 'No Lard', mark: true },
+  { label: 'No Cooking Wine', mark: true },
+  { label: 'No Alcohol', mark: true },
+];
+
+// The second row is what the shop is, rather than what it excludes.
+const offerBullets = [
   { label: `${INGREDIENT_CLAIM}+ Fresh Ingredients`, mark: false },
   { label: 'Pay By Weight', mark: false },
 ];
@@ -49,7 +55,7 @@ const trustBullets = [
 
     <p class="mt-6 max-w-xl text-lg text-white sm:text-xl">
       Walk the ingredient bar, pick whatever you want from over {INGREDIENT_CLAIM} fresh
-      ingredients, and we weigh it at the counter. No set menu, no pork, no lard.
+      ingredients, and we weigh it at the counter. No set menu and no minimum order.
     </p>
 
     <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -63,25 +69,52 @@ const trustBullets = [
       </a>
     </div>
 
-    <!-- Trust bullets. Green mark on the two that are kitchen policy claims. -->
-    <ul class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3">
-      {
-        trustBullets.map((bullet) => (
-          <li class="flex items-center gap-2 text-sm font-semibold text-white sm:text-base">
-            {bullet.mark ? (
+    <!--
+      Two rows. The first is the halal kitchen policy and carries the green mark
+      on every item, because every item is a policy claim. The second is what the
+      shop offers, marked in gold so the two do not read as one list.
+    -->
+    <div class="mt-10 border-t-2 border-white/25 pt-6">
+      <h2 class="text-xs font-bold tracking-[0.2em] text-white uppercase">
+        Halal kitchen
+      </h2>
+
+      <ul class="mt-4 flex flex-wrap items-center gap-x-6 gap-y-3">
+        {
+          trustBullets.map((bullet) => (
+            <li class="flex items-center gap-2 text-sm font-semibold text-white sm:text-base">
               <span class="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-mala-green text-white">
                 <Icon name="check" size={13} />
               </span>
-            ) : (
+              {bullet.label}
+            </li>
+          ))
+        }
+      </ul>
+
+      <p class="mt-4 text-sm text-white">
+        JAKIM certification in progress.{' '}
+        <a
+          href="#halal-heading"
+          class="font-semibold underline decoration-mala-gold decoration-2 underline-offset-4 hover:text-mala-gold"
+        >
+          Read the kitchen policy
+        </a>
+      </p>
+
+      <ul class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+        {
+          offerBullets.map((bullet) => (
+            <li class="flex items-center gap-2 text-sm font-semibold text-white sm:text-base">
               <span class="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 border-mala-gold text-mala-gold">
                 <Icon name="check" size={13} />
               </span>
-            )}
-            {bullet.label}
-          </li>
-        ))
-      }
-    </ul>
+              {bullet.label}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
   </div>
 
   <!-- Gold rule closing the band. -->

@@ -31,18 +31,18 @@ export const ABOUT_SECTIONS: AboutSection[] = [
     ],
   },
   {
-    heading: 'Pork free and lard free, without an asterisk',
+    heading: 'Halal, without an asterisk',
     paragraphs: [
-      'This is a Chinese Muslim style kitchen. There is no pork and no pork product anywhere in the building, because we do not buy it. There is no lard in any stock, any sauce, or any wok, because we cook in vegetable oil. There is no cooking wine.',
+      'This is a Chinese Muslim kitchen. There is no pork and no pork product anywhere in the building, because we do not buy it. There is no lard in any stock, any sauce, or any wok, because we cook in vegetable oil. There is no cooking wine, no rice wine, and no mirin. There is no alcohol on the premises at all.',
       'Meat, seafood, and vegetables sit in separate trays with their own tongs, and staff change gloves between the raw bar and the cooking line.',
-      'We publish our halal certification status openly rather than implying it. If the paperwork is not on this website, it is because it is not yet in our hands, and we will say so. Ask at the counter and staff will show you what we currently hold.',
+      'Our JAKIM certification is in progress. We have applied and verification is underway. We are not certified yet, and you will not find the word certified anywhere on this site until the document is issued and published here with its number and expiry date. Ask at the counter in the meantime and staff will show you the supplier documents.',
     ],
   },
   {
     heading: 'How we buy ingredients',
     paragraphs: [
       'Vegetables come in fresh and go out the same day. What sits on the bar at 10 in the morning is not what sits there at 8 at night, because we restock through the day rather than filling the trays once and letting them wilt.',
-      'Meat comes from halal certified suppliers only, and we keep the supplier documents on file at each outlet.',
+      'Meat comes from halal certified suppliers only, and we keep the supplier documents on file at the outlet.',
       'The mala base is made in house. Sichuan peppercorn, dried chilli, star anise, and beef bone, simmered long. It is not a bought paste thinned with water, which is why it tastes different from the malatang two doors down.',
     ],
   },

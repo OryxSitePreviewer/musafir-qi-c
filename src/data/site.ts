@@ -48,7 +48,7 @@ export const SITE: SiteConfig = {
   signBoard: 'Hot Pot · Charcoal Skewers · Malatang',
   /** Keep this under 155 characters or Google will cut it off mid sentence. */
   description:
-    'Pick and weigh malatang in Cyberjaya. Fill your own bowl from over 60 fresh ingredients and pay by weight. Pork free and lard free.',
+    'Halal Chinese Muslim malatang and hot pot in Cyberjaya. No pork, no lard, no cooking wine, no alcohol. Fill your own bowl and pay by weight.',
   url: 'https://drmala.com.my',
 
   // TODO: confirm with owner before launch. This is a placeholder.

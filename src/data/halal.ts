@@ -1,21 +1,22 @@
 /**
- * Halal and pork-free assurance.
+ * Halal and kitchen policy.
  *
  * ============================================================================
- * TODO FOR THE OWNER, READ THIS BEFORE LAUNCH
+ * READ THIS BEFORE CHANGING THE CERTIFICATION WORDING
  * ============================================================================
- * The `certificationStatement` below is deliberately written without naming a
- * certifying authority and without a certificate number, because nobody supplied
- * one. Replace it with your exact wording.
+ * The site currently states that JAKIM verification is IN PROGRESS. That is a
+ * statement about an application, not a claim of certification, and the two are
+ * not interchangeable.
  *
- * If you hold JAKIM certification, state it and give the certificate number and
- * expiry. If you hold a state authority certificate, name the state authority. If
- * certification is still in progress, say so plainly and give the honest status.
+ * Do NOT write "JAKIM certified", "halal certified", or "halal approved", and do
+ * NOT put a JAKIM logo anywhere on this site, until the certificate is issued and
+ * in your hands. When it is, set `certification.status` to 'certified' and fill in
+ * `certification.certifier`, `certification.number`, and `certification.expiry`.
+ * The page prints the certified wording only when all three are present.
  *
- * Do not add a JAKIM logo, a certificate number, or the word "certified" to this
- * file or to any page unless you hold the document. Misstating halal status is a
- * legal problem in Malaysia under the Trade Descriptions Act, not just a marketing
- * problem.
+ * Misstating halal status in Malaysia is an offence under the Trade Descriptions
+ * (Certification and Marking of Halal) Order and the Trade Descriptions Act. It is
+ * a legal exposure, not a marketing choice.
  * ============================================================================
  */
 
@@ -24,46 +25,66 @@ export interface KitchenPolicy {
   detail: string;
 }
 
+export type CertificationStatus = 'in-progress' | 'certified';
+
 export const HALAL = {
-  heading: 'Pork free and lard free, in the kitchen and on the bar',
+  eyebrow: 'Halal kitchen',
+
+  heading: 'No pork. No lard. No cooking wine. No alcohol.',
 
   intro:
-    'This is a Chinese Muslim style kitchen. That is not a label we put on the sign, it is how the room is stocked and run.',
+    'This is a Chinese Muslim kitchen. The shopfront says Restoran Masakan Asli China Muslim, and that is how the room is stocked and run, not a line we put on a sign.',
 
-  /**
-   * TODO: replace this entire string with the owner's exact certification wording.
-   * It currently states only what can be stated honestly with no document in hand.
-   */
-  certificationStatement:
-    'TODO: replace with your exact halal certification wording before launch.',
-
-  /**
-   * Shown on the page in place of the certification statement until the owner
-   * fills in the real wording. Keep this honest.
-   */
-  certificationFallback:
-    'We do not display a halal certificate on this website yet. We will publish the certifying authority, the certificate number, and the expiry date here as soon as the document is in hand. Until then, ask at the counter and our staff will show you the current paperwork and answer any question about how the kitchen is run.',
-
+  /** The four hard rules, stated as rules rather than as reassurance. */
   policies: [
     {
-      title: 'No pork in the building',
+      title: 'No pork, anywhere',
       detail:
-        'We do not buy, store, or serve pork or any pork product. It does not come through the back door, so it cannot end up in your bowl.',
+        'We do not buy, store, or serve pork or any pork product. It does not come through the back door, so it cannot reach your bowl.',
     },
     {
-      title: 'No lard, ever',
+      title: 'No lard, in anything',
       detail:
-        'Every base is built on beef bone, chicken bone, or vegetable stock. We cook in vegetable oil. There is no lard in the stockpot and none in the wok.',
+        'Every base is built on beef bone, chicken bone, or vegetable stock, and we cook in vegetable oil. There is no lard in the stockpot, the wok, or the grill.',
     },
     {
-      title: 'Separate handling',
+      title: 'No cooking wine',
       detail:
-        'Meat, seafood, and vegetables sit in separate trays with their own tongs. Staff change gloves between the raw bar and the cooking line.',
+        'No shaoxing, no rice wine, no mirin. The depth in the mala base comes from Sichuan peppercorn, dried chilli, star anise, and long simmering.',
     },
     {
-      title: 'No alcohol in the cooking',
+      title: 'No alcohol on the premises',
       detail:
-        'No cooking wine, no rice wine, no mirin. The depth in the mala base comes from peppercorn, chilli, and long simmering.',
+        'We do not cook with it and we do not sell it. There is no alcohol behind the counter and none in the fridge.',
     },
   ] satisfies KitchenPolicy[],
+
+  /** Handling practice. Secondary to the four rules above. */
+  handling:
+    'Meat, seafood, and vegetables sit in separate trays with their own tongs, and staff change gloves between the raw bar and the cooking line. Meat comes from halal certified suppliers only, and we keep the supplier documents on file at the outlet.',
+
+  certification: {
+    /**
+     * 'in-progress' prints the application wording.
+     * 'certified' prints the certified wording, and ONLY if certifier, number, and
+     * expiry are all filled in below. See src/components/HalalBand.astro.
+     */
+    status: 'in-progress' as CertificationStatus,
+
+    heading: 'JAKIM certification',
+
+    /** Printed while status is 'in-progress'. */
+    inProgress:
+      'Our JAKIM halal certification is in progress. We have applied and the verification is underway. We are not certified yet, and we will not say otherwise until the certificate is issued. When it is, the certifying body, the certificate number, and the expiry date will be published on this page.',
+
+    /** Printed alongside either status. This is what a customer can act on today. */
+    inTheMeantime:
+      'What you can check today is the kitchen itself. Ask at the counter. Our staff will show you the supplier documents and answer any question about how the food is handled.',
+
+    // TODO: fill these three in the day the certificate is issued, then change
+    // status above to 'certified'. Leave them empty until then.
+    certifier: '',
+    number: '',
+    expiry: '',
+  },
 } as const;

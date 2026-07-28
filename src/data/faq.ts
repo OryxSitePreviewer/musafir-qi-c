@@ -18,11 +18,10 @@ export const FAQS: FaqItem[] = [
   },
   {
     question: 'Is the food halal?',
-    // TODO: confirm with owner. Replace this answer once the certification status is
-    // final. Do not name a certifying body or a certificate number until the owner
-    // supplies the document. See src/data/halal.ts.
+    // Update this the day the certificate is issued, together with
+    // certification.status in src/data/halal.ts. Do not write "certified" before then.
     answer:
-      'The kitchen is pork free and lard free. We do not carry pork, pork products, or lard in the building, and we do not use alcohol in the cooking. Our halal certification status is listed on the assurance section of this page. Ask any staff member at the counter and they will show you the current documents.',
+      'This is a Chinese Muslim kitchen. There is no pork and no pork product in the building, no lard in any stock or wok, no cooking wine, and no alcohol on the premises. Our JAKIM certification is in progress, which means we have applied and verification is underway. We are not certified yet and we will not claim to be until the certificate is issued. Ask at the counter and staff will show you the supplier documents.',
   },
   {
     question: 'How spicy is the mala?',

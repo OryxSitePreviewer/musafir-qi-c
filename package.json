@@ -10,7 +10,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "test": "tsx tests/hours.test.mts",
+    "test": "tsx tests/hours.test.mts && tsx tests/halal.test.mts",
     "images": "node scripts/process-photos.mjs",
     "brand": "node scripts/build-brand-art.mjs"
   },

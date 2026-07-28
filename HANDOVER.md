@@ -30,27 +30,45 @@ A Malaysian mobile looks like `60123456789`.
 Also update `phoneDisplay` in the same file and in `src/data/locations.ts`. Both currently
 read `+60 12-000 0000`.
 
-### 1.2 The halal certification wording is a placeholder
+### 1.2 RESOLVED. Halal is now stated, and JAKIM is stated as in progress
 
-`src/data/halal.ts`
+You confirmed the kitchen policy and that JAKIM verification is underway, so this is no
+longer a blocker. What the site now says, and where:
 
-This is the one that carries legal risk, so I built a guard rather than trusting the TODO to
-be spotted. The page will not print a certification claim until you write one. Right now it
-prints this instead:
+- **The hero** leads with a Halal Kitchen block: No Pork, No Lard, No Cooking Wine, No
+  Alcohol, each with the green mark, then the line "JAKIM certification in progress" and a
+  jump link to the full policy.
+- **The halal band** heading is now the four rules verbatim, and the certification box shows
+  a "Verification in progress" badge with wording that says plainly that we are **not**
+  certified yet.
+- **The FAQ**, the **About** page, and the **meta description** all match.
 
-> We do not display a halal certificate on this website yet. We will publish the certifying
-> authority, the certificate number, and the expiry date here as soon as the document is in
-> hand. Until then, ask at the counter and our staff will show you the current paperwork.
+**The word "certified" appears nowhere on the site as a claim.** That is deliberate and it is
+enforced in code, not just in copy. `src/lib/halalStatus.ts` will only let the certified
+wording print when `status` is `'certified'` **and** the certifier, the certificate number,
+and the expiry are all filled in. A half finished edit falls back to "in progress". There are
+eleven tests on it in `tests/halal.test.mts`, including one that fails the build if the
+shipped data ever starts claiming certification.
 
-That is honest and safe. Replace `certificationStatement` with your exact wording and the
-guard releases automatically.
+**The day the certificate arrives**, open `src/data/halal.ts` and set all four fields at once:
 
-**I did not invent a certificate number, a certifying authority, a JAKIM reference, or a
-logo, and you should not add one unless you hold the document.** Misstating halal status in
-Malaysia is a Trade Descriptions Act problem, not a marketing problem.
+```ts
+status: 'certified',
+certifier: 'JAKIM',
+number: '<the number on the certificate>',
+expiry: '<the expiry on the certificate>',
+```
 
-The FAQ answer "Is the food halal?" in `src/data/faq.ts` also needs a pass once the status is
-settled.
+Do not add a JAKIM logo before that day. Under the Trade Descriptions (Certification and
+Marking of Halal) Order, saying you are certified before you are is an offence, and "the
+website was out of date" is not a defence.
+
+**One claim in this area is still unconfirmed.** The site says "Meat comes from halal
+certified suppliers only, and we keep the supplier documents on file at the outlet", in the
+halal band and on the About page. You confirmed the kitchen rules but not the sourcing, and I
+wrote that line before you confirmed anything. It is close to unavoidable for a halal kitchen,
+but it is a specific claim about your suppliers and their paperwork. Confirm it or reword it,
+in `src/data/halal.ts` and `src/data/about.ts`.
 
 ### 1.3 The price per 100 grams is a guess
 
@@ -71,14 +89,20 @@ included in the weighed price.
 Used for the sitemap, the canonical URLs, and the social share cards. Update it, then update
 the `Sitemap:` line at the bottom of `public/robots.txt` to match.
 
-### 1.5 Every image is a placeholder
+### 1.5 Four food photographs are still placeholders
 
-`public/images/` now holds five real photographs and four generated placeholders. See `public/images/README.md` for the filename, dimensions, and shot brief for each
-one. The `bar-wide.webp` slot is the one that matters most, because the wide ingredient bar
-shot is what sells the concept.
+`public/images/` now holds eight real photographs, the real logo, and four generated
+placeholders. `public/images/README.md` lists every one with its filename, dimensions, and
+what it shows.
 
-The logo is a reconstruction. `public/images/logo.svg` and `src/components/Wordmark.astro`
-are both marked as temporary stand-ins in comments.
+The four still outstanding are the soup base cards: collagen, tomato, clear broth, and the
+mala stir-fried noodles. They are the only images on the site that are not real.
+
+The shot most worth paying for is still the ingredient bar, wide and straight on, down the
+length of the counter with every tray loaded. Nothing you have sent shows it, and it is the
+thing that explains the concept in one picture. The band on the home page was designed for a
+16:9 image and is running at 3:2 because every food photograph so far is a portrait phone
+shot. The README says how to switch it back.
 
 ---
 
@@ -128,6 +152,42 @@ share card. It is not enough for print, a shopfront reprint, or a large hero tre
 If your designer still has the source, send the AI, EPS, or SVG. Drop it in
 `src/assets/brand/`, point the `BRAND` table in `scripts/process-photos.mjs` at it, delete
 `scripts/cutout-logo.mjs`, and run `npm run images` then `npm run brand`.
+
+## 1.9 The Google reviews section is built but shows no rating
+
+There is a Reviews on Google band on the home page, between the outlet card and the FAQ. It
+currently shows no stars and no review count, and links out to your listing instead. Three
+reasons, and you can fix the first one in a minute.
+
+**1. I could not read a rating I could stand behind.** The link you sent is a Google search
+results URL, which blocks automated reading, and a web search turned up other Cyberjaya
+restaurants rather than yours. Printing a number I had not verified would have put a made up
+rating on your live site. Open `src/data/reviews.ts`, set `rating` and `count` from your
+Google Business Profile, and the stars appear.
+
+**2. I did not copy any review text across.** Those words belong to the people who wrote
+them, and reprinting them on a commercial site is a licensing and privacy question rather
+than a technical one. The `featured` array is empty and should stay empty unless you ask a
+reviewer and they agree.
+
+**3. The site deliberately emits no `aggregateRating` structured data.** Google's own
+structured data guidelines say a business must not mark up ratings collected on another
+platform, and doing it is a common cause of a manual action against the listing. The rating,
+once you fill it in, is shown to humans and is not in the JSON-LD. If you want star ratings
+in search results, you need reviews collected on your own site, which is a different and
+larger piece of work.
+
+**Also replace the two URLs in that file.** They currently point at a Google Maps search for
+the business name, which lands close but not on the listing. Open your listing in Google
+Maps, press Share, and paste the short link. Do not paste a URL copied from the browser bar
+on a search page, because those carry session parameters that stop working within days. The
+one you sent me had ten of them.
+
+**One more thing.** That link calls the business **Musafir China Muslim BBQ& Hot Pot&Malatang**,
+which is a fourth name variant, after Musafir Qi Malatang, Dr.MaLa, and Musafir Qi Stesen
+Mala. The site uses Musafir Qi Stesen Mala throughout, matching the shopfront. Your Google
+Business Profile name should match the sign, because Google uses name consistency across the
+web as a local ranking signal and four variants actively work against you.
 
 ## 1.8 The sign shows a company registration I did not publish
 

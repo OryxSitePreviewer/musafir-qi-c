@@ -7,6 +7,7 @@ import StepsStrip from '../components/StepsStrip.astro';
 import HalalBand from '../components/HalalBand.astro';
 import IngredientBarShowcase from '../components/IngredientBarShowcase.astro';
 import LocationsBand from '../components/LocationsBand.astro';
+import Reviews from '../components/Reviews.astro';
 import Faq from '../components/Faq.astro';
 import CtaBand from '../components/CtaBand.astro';
 
@@ -28,7 +29,7 @@ const schemas = [
 
 <!-- Title stays under 60 characters, so Google shows it whole. -->
 <Base
-  title={`${SITE.name} | Halal Malatang in Cyberjaya`}
+  title={`${SITE.name} | Halal Malatang, Cyberjaya`}
   description={SITE.description}
   path="/"
   schemas={schemas}
@@ -40,6 +41,7 @@ const schemas = [
   <HalalBand />
   <IngredientBarShowcase />
   <LocationsBand />
+  <Reviews />
   <Faq />
   <CtaBand />
 </Base>
