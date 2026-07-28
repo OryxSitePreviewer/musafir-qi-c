@@ -18,12 +18,10 @@ interface Props {
   /** 'light' sits on a red or dark band. 'dark' sits on white or cream. */
   variant?: 'light' | 'dark';
   class?: string;
-  /** Renders an h1-adjacent large lockup instead of the compact header size. */
-  size?: 'sm' | 'lg';
+  /** Renders a standard, large, or extra-large brand emblem lockup. */
+  size?: 'sm' | 'lg' | 'xl';
   /**
-   * Drops the sign line on narrow screens. The header needs this because it also
-   * has to fit a 44px menu button. The footer does not, because it has a column
-   * to itself.
+   * Drops the sign line on narrow screens.
    */
   compact?: boolean;
 }
@@ -38,7 +36,7 @@ const subColor = variant === 'light' ? 'var(--mala-white)' : 'var(--color-mala-i
 ---
 
 <span
-  class={`wordmark inline-flex items-center gap-2.5 ${className}`}
+  class={`wordmark inline-flex items-center gap-3.5 ${className}`}
   data-size={size}
   data-compact={compact ? "true" : undefined}
 >
@@ -62,58 +60,58 @@ const subColor = variant === 'light' ? 'var(--mala-white)' : 'var(--color-mala-i
 </span>
 
 <style>
-  /* The badge is 332x115, height drives it and width follows ratio. Enhanced size & prominence. */
+  /* Prominent logo scaling & glow styling */
   .wordmark-badge {
-    height: 2.5rem;
+    height: 3.25rem;
     width: auto;
-    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));
-    transition: transform 0.2s ease;
+    filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.35));
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .wordmark:hover .wordmark-badge {
-    transform: scale(1.05);
+    transform: scale(1.08);
   }
 
   .wordmark-name {
     font-family: var(--font-display);
-    font-size: 1.5rem;
+    font-size: 1.85rem;
     letter-spacing: 0.03em;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   }
 
   .wordmark-sub {
-    font-size: 0.6rem;
-    letter-spacing: 0.05em;
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
     white-space: nowrap;
     opacity: 0.95;
   }
 
   @media (min-width: 420px) {
     .wordmark-badge {
-      height: 3rem;
+      height: 3.75rem;
     }
 
     .wordmark-name {
-      font-size: 1.75rem;
+      font-size: 2.25rem;
     }
 
     .wordmark-sub {
-      font-size: 0.65rem;
-      letter-spacing: 0.08em;
+      font-size: 0.7rem;
+      letter-spacing: 0.09em;
     }
   }
 
   @media (min-width: 640px) {
     .wordmark-badge {
-      height: 3.25rem;
+      height: 4.25rem;
     }
 
     .wordmark-name {
-      font-size: 2rem;
+      font-size: 2.6rem;
     }
 
     .wordmark-sub {
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
     }
   }
 
@@ -127,18 +125,33 @@ const subColor = variant === 'light' ? 'var(--mala-white)' : 'var(--color-mala-i
     }
   }
 
-  /* Large emblem lockup used in Hero or Footer */
+  /* Large emblem lockup */
   .wordmark[data-size='lg'] .wordmark-badge {
-    height: 4.5rem;
-    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.35));
+    height: 5.5rem;
+    filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.4));
   }
 
   .wordmark[data-size='lg'] .wordmark-name {
-    font-size: 3rem;
+    font-size: 3.5rem;
   }
 
   .wordmark[data-size='lg'] .wordmark-sub {
-    font-size: 0.85rem;
-    letter-spacing: 0.18em;
+    font-size: 0.95rem;
+    letter-spacing: 0.2em;
+  }
+
+  /* XL Extra Large emblem lockup for Hero section */
+  .wordmark[data-size='xl'] .wordmark-badge {
+    height: 7rem;
+    filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.5));
+  }
+
+  .wordmark[data-size='xl'] .wordmark-name {
+    font-size: 4.25rem;
+  }
+
+  .wordmark[data-size='xl'] .wordmark-sub {
+    font-size: 1.1rem;
+    letter-spacing: 0.22em;
   }
 </style>
