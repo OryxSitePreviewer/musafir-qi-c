@@ -83,7 +83,7 @@ export function organisationSchema(): Record<string, unknown> {
     name: SITE.name,
     alternateName: SITE.shortName,
     url: SITE.url,
-    logo: new URL('/images/logo.svg', SITE.url).href,
+    logo: new URL('/images/logo-musafir-qi.png', SITE.url).href,
     description: SITE.description,
     sameAs: SITE.socials.map((social) => social.href),
   };

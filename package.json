@@ -11,7 +11,8 @@
     "preview": "astro preview",
     "check": "astro check",
     "test": "tsx tests/hours.test.mts",
-    "images": "node scripts/process-photos.mjs"
+    "images": "node scripts/process-photos.mjs",
+    "brand": "node scripts/build-brand-art.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

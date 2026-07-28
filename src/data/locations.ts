@@ -70,6 +70,9 @@ export interface Location {
   room: string;
   image: string;
   imageAlt: string;
+  /** Optional second photograph. The locations page shows it under the first. */
+  imageNight?: string;
+  imageNightAlt?: string;
 }
 
 // TODO: confirm with owner. This is a placeholder, shared with site.ts.
@@ -101,7 +104,10 @@ export const LOCATIONS: Location[] = [
     room: 'An open corner unit with roadside seating under the awning, long tables that seat eight, and space to park a stroller beside you.',
     image: '/images/outlet-cyberjaya.webp',
     imageAlt:
-      'The Musafir Qi Stesen Mala shopfront at CBD Perdana 3 at night, with the orange illuminated sign reading Hot Pot, Charcoal Skewers, Malatang above a red awning and open roadside seating',
+      'The Musafir Qi Stesen Mala shopfront at CBD Perdana 3, photographed straight on. A wide red sign carries the Musafir Qi badge, the words Stesen Mala, and the line Hot Pot, Charcoal Skewers, Malatang, above a red awning and the open counter',
+    imageNight: '/images/outlet-cyberjaya-night.webp',
+    imageNightAlt:
+      'The same shopfront after dark, with the sign lit orange and diners at the roadside tables under the awning',
   },
 ];
 

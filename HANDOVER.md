@@ -109,15 +109,37 @@ acknowledged, or it becomes a site for all three. The second option means new me
 the grill and the hot pot, and probably a section on the home page. Tell me which and I will
 build it.
 
-## 1.7 The real logo is still not a file
+## 1.7 The logo is in, but it wants a clean master
 
-You sent a picture of it. The arched black and gold emblem with the crescent and the
-scrollwork, with `MUSAFIR QI` set across the base.
+The real badge is now the logo everywhere: the header, the footer, the share card, and the
+`Organization` structured data. The reconstruction is deleted.
 
-I could not extract it from the message as a usable file, so `public/images/logo.svg` and
-`src/components/Wordmark.astro` are both still the reconstruction. Send the original as an
-SVG, or as a PNG at 1024px wide or larger with a transparent background, and I will replace
-both and rebuild the share card.
+Two things about the file you gave me.
+
+**It had no transparency.** Every pixel was opaque and the badge sat on a slab of sign red
+(`#AC2526`) that does not match the brand red (`#DA291C`), so dropped straight in it read as
+a rectangle of slightly wrong red around the badge. `scripts/cutout-logo.mjs` knocks the
+surround out by flooding inward from the border, which protects the reds inside the badge.
+The result is `src/assets/brand/musafir-qi-logo-cutout.png` and that is what the site uses.
+
+**It is 332 x 115.** That is enough for the header, where it runs at 34px tall, and for the
+share card. It is not enough for print, a shopfront reprint, or a large hero treatment.
+
+If your designer still has the source, send the AI, EPS, or SVG. Drop it in
+`src/assets/brand/`, point the `BRAND` table in `scripts/process-photos.mjs` at it, delete
+`scripts/cutout-logo.mjs`, and run `npm run images` then `npm run brand`.
+
+## 1.8 The sign shows a company registration I did not publish
+
+The straight on shopfront photograph is high enough resolution to read the fine print under
+the sign board:
+
+> DIMILIKI OLEH MUSAFIR DI SDN. BHD. 202601008310 (1460322 - H)
+
+That is the registered operating entity. I have **not** put it anywhere on the site, because
+publishing a company number is your call and I could not confirm it belongs in the footer.
+Most Malaysian restaurant sites carry it in the footer copyright line. Tell me and I will add
+it to `src/data/site.ts`.
 
 ---
 

@@ -45,7 +45,7 @@ export const SITE: SiteConfig = {
   chineseName: '麻辣烫',
   tagline: 'Pick your ingredients. We weigh it. You pay for exactly what you took.',
   /** The three things the shopfront sign advertises, in the order it lists them. */
-  signBoard: 'Hot Pot, Charcoal Skewers, Malatang',
+  signBoard: 'Hot Pot · Charcoal Skewers · Malatang',
   /** Keep this under 155 characters or Google will cut it off mid sentence. */
   description:
     'Pick and weigh malatang in Cyberjaya. Fill your own bowl from over 60 fresh ingredients and pay by weight. Pork free and lard free.',

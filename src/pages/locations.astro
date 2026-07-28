@@ -69,6 +69,20 @@ const schemas = [
                 class="aspect-[3/2] w-full rounded-sm border-2 border-mala-ink object-cover"
               />
 
+              {
+                location.imageNight && (
+                  <img
+                    src={location.imageNight}
+                    alt={location.imageNightAlt}
+                    width="660"
+                    height="440"
+                    loading="lazy"
+                    decoding="async"
+                    class="mt-4 aspect-[3/2] w-full rounded-sm border-2 border-mala-ink object-cover"
+                  />
+                )
+              }
+
               <div class="mt-6">
                 <OpenStatus location={location} />
               </div>

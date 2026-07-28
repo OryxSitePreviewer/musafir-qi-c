@@ -37,9 +37,11 @@ const OUT = 'public/images';
  *          top, which is what you want for a shopfront where the sign matters.
  */
 const SHOTS = [
-  // 'centre' keeps the sign and the awning and seating below it. 'north' pulls in
-  // three storeys of the building above the shop and pushes the sign off the bottom.
-  { from: 'storefront-night.webp', to: 'outlet-cyberjaya.webp', w: 660, h: 440, position: 'centre' },
+  // The straight on shot is the only high resolution photograph we have, so it
+  // carries the outlet slot at full size with no upscaling at all.
+  { from: 'storefront-straight.png', to: 'outlet-cyberjaya.webp', w: 1200, h: 800, position: 'centre' },
+  // The night shot keeps the locations page from being one photograph.
+  { from: 'storefront-night.webp', to: 'outlet-cyberjaya-night.webp', w: 660, h: 440, position: 'centre' },
   { from: 'bowls-mala-soup.webp', to: 'soup-mala.webp', w: 480, h: 360, position: 'centre' },
   { from: 'counter-trays.webp', to: 'bar-trays.webp', w: 500, h: 333, position: 'centre' },
   { from: 'skewers-charcoal.webp', to: 'dish-skewers.webp', w: 500, h: 375, position: 'centre' },
@@ -48,10 +50,39 @@ const SHOTS = [
   { from: 'wings-grilled.jpg', to: 'sides-wings.webp', w: 400, h: 300, position: 'centre' },
 ];
 
+/**
+ * Brand marks from src/assets/brand/. These are never cropped, because cropping a
+ * logo is vandalism. They are resized inside their own aspect ratio and keep their
+ * transparency, so PNG rather than WebP.
+ */
+const BRAND = [
+  // The cutout, not the raw file. See scripts/cutout-logo.mjs for why.
+  { from: 'musafir-qi-logo-cutout.png', to: 'logo-musafir-qi.png', w: 332 },
+];
+
 /** Upscaling past this ratio turns a phone photo to mush. Warn, do not fail. */
 const SOFT_LIMIT = 1.8;
 
 let warnings = 0;
+
+for (const mark of BRAND) {
+  const from = join('src/assets/brand', mark.from);
+
+  if (!existsSync(from)) {
+    console.log(`  SKIP   ${mark.from} is not in src/assets/brand`);
+    warnings += 1;
+    continue;
+  }
+
+  await sharp(from)
+    .resize(mark.w, null, { fit: 'inside', withoutEnlargement: true, kernel: 'lanczos3' })
+    .png({ compressionLevel: 9 })
+    .toFile(join(OUT, mark.to));
+
+  const meta = await sharp(join(OUT, mark.to)).metadata();
+  const kb = Math.round(statSync(join(OUT, mark.to)).size / 1024);
+  console.log(`  ${mark.to.padEnd(24)} ${meta.width}x${meta.height}  ${String(kb).padStart(3)}KB  brand mark`);
+}
 
 for (const shot of SHOTS) {
   const from = join(ASSETS, shot.from);

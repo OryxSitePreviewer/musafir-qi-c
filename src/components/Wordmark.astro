@@ -1,19 +1,15 @@
 ---
 /**
- * ============================================================================
- * TEMPORARY STAND-IN LOGO
- * ============================================================================
- * This wordmark was reconstructed from the brand name and the red and gold
- * palette. It is NOT the real Musafir Qi Stesen Mala logo and must be replaced before launch.
+ * The brand lockup: the real Musafir Qi badge, then STESEN MALA set beside it.
  *
- * To replace it:
- *   1. Drop the real logo at public/images/logo.svg
- *   2. Swap the markup below for a single <img> pointing at that file
- *   3. Keep the accessible name identical so screen readers stay consistent
+ * This mirrors how the shopfront sign is laid out. The badge carries "Musafir Qi",
+ * the outlet name sits under it, and the three things the shop sells run below that.
  *
- * Everything here is drawn with shapes and live text rather than converted
- * outlines, so it scales cleanly and stays selectable and searchable.
- * ============================================================================
+ * The badge is the supplied artwork at public/images/logo-musafir-qi.png, built from
+ * the master in src/assets/brand/ by `npm run images`. It is 332px wide, which is
+ * about 2.5x the largest size it is ever displayed at, so it stays sharp on a
+ * retina screen. If a vector version turns up, drop it in src/assets/brand/ and
+ * point the BRAND table in scripts/process-photos.mjs at it.
  */
 
 import { SITE } from '../data/site';
@@ -24,75 +20,115 @@ interface Props {
   class?: string;
   /** Renders an h1-adjacent large lockup instead of the compact header size. */
   size?: 'sm' | 'lg';
+  /**
+   * Drops the sign line on narrow screens. The header needs this because it also
+   * has to fit a 44px menu button. The footer does not, because it has a column
+   * to itself.
+   */
+  compact?: boolean;
 }
 
-const { variant = 'light', class: className = '', size = 'sm' } = Astro.props;
+const { variant = 'light', class: className = '', size = 'sm', compact = false } = Astro.props;
 
-const markStroke = variant === 'light' ? 'var(--mala-gold)' : 'var(--mala-red)';
-const markFill = variant === 'light' ? 'var(--mala-white)' : 'var(--mala-ink)';
 // Reads from the shared property so the contrast switch documented in
 // global.css covers the lockup as well as the headlines.
 const nameColor = variant === 'light' ? 'var(--mala-gold-on-red)' : 'var(--mala-red)';
 const subColor = variant === 'light' ? 'var(--mala-white)' : 'var(--color-mala-ink-soft, #4a3d3b)';
 
-const markSize = size === 'lg' ? 52 : 38;
-const nameSize = size === 'lg' ? '2.5rem' : '1.5rem';
-const subSize = size === 'lg' ? '0.75rem' : '0.5625rem';
 ---
 
-<span class={`inline-flex items-center gap-2.5 ${className}`}>
-  {/* Bowl mark. Gold rim, steam, and a chilli notch. */}
-  <svg
-    width={markSize}
-    height={markSize}
-    viewBox="0 0 48 48"
-    fill="none"
-    aria-hidden="true"
-    focusable="false"
-    class="shrink-0"
-  >
-    <path
-      d="M6 21h36c0 10.5-8.06 19-18 19S6 31.5 6 21Z"
-      fill={variant === 'light' ? 'var(--mala-red)' : 'var(--mala-cream)'}
-      stroke={markStroke}
-      stroke-width="3"
-      stroke-linejoin="round"></path>
-    <path d="M3 21h42" stroke={markStroke} stroke-width="3" stroke-linecap="round"></path>
-    <path
-      d="M18 15c0-3 2.5-3.5 2.5-6.5M27 15c0-3.5 3-4 3-7"
-      stroke={markStroke}
-      stroke-width="3"
-      stroke-linecap="round"></path>
-    <circle cx="24" cy="29" r="3.5" fill={markFill}></circle>
-  </svg>
+<span
+  class={`wordmark inline-flex items-center gap-2.5 ${className}`}
+  data-size={size}
+  data-compact={compact ? "true" : undefined}
+>
+  <img
+    src="/images/logo-musafir-qi.png"
+    alt=""
+    width="332"
+    height="115"
+    decoding="async"
+    class="wordmark-badge shrink-0"
+  />
 
-  <span class="flex flex-col leading-none">
-    <span
-      style={`font-family: var(--font-display); color: ${nameColor}; font-size: ${nameSize}; letter-spacing: 0.02em;`}
-      class="uppercase leading-none"
-    >
+  <span class="flex min-w-0 flex-col leading-none">
+    <span class="wordmark-name uppercase leading-none" style={`color: ${nameColor};`}>
       {SITE.shortName}
     </span>
-    <span
-      style={`color: ${subColor}; font-size: ${subSize};`}
-      class="wordmark-sub mt-1 font-semibold uppercase leading-none"
-    >
-      {SITE.name}
+    <span class="wordmark-sub mt-1 font-semibold uppercase leading-none" style={`color: ${subColor};`}>
+      {SITE.signBoard}
     </span>
   </span>
 </span>
 
 <style>
-  /* Tracking is generous on wide screens and tightens on a small phone, so the
-     lockup never pushes the header past the viewport. */
+  /* The badge is 332x115, so height drives it and width follows the ratio. */
+  .wordmark-badge {
+    height: 1.875rem;
+    width: auto;
+  }
+
+  .wordmark-name {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    letter-spacing: 0.02em;
+  }
+
+  /* The sign line is the longest part of the lockup, and on a 320px phone it is
+     what pushes the menu button off the edge. It starts small and tight, then
+     opens up once there is room. Measured against the 44px menu button plus the
+     container padding, so the two never collide. */
   .wordmark-sub {
-    letter-spacing: 0.08em;
+    font-size: 0.5rem;
+    letter-spacing: 0.02em;
     white-space: nowrap;
   }
 
-  @media (min-width: 400px) {
-    .wordmark-sub {
-      letter-spacing: 0.16em;
+  @media (min-width: 420px) {
+    .wordmark-badge {
+      height: 2.125rem;
     }
+
+    .wordmark-name {
+      font-size: 1.5rem;
+    }
+
+    .wordmark-sub {
+      font-size: 0.5625rem;
+      letter-spacing: 0.06em;
+    }
+  }
+
+  @media (min-width: 640px) {
+    .wordmark-sub {
+      letter-spacing: 0.12em;
+    }
+  }
+
+  /* At 320px the badge, the name, the sign line, and a 44px menu button cannot
+     all fit on one row. The sign line is the part that gives way, because it also
+     appears in the footer and in the hero. */
+  .wordmark[data-compact='true'] .wordmark-sub {
+    display: none;
+  }
+
+  @media (min-width: 420px) {
+    .wordmark[data-compact='true'] .wordmark-sub {
+      display: block;
+    }
+  }
+
+  /* The large lockup is only ever used where it has a column to itself. */
+  .wordmark[data-size='lg'] .wordmark-badge {
+    height: 3rem;
+  }
+
+  .wordmark[data-size='lg'] .wordmark-name {
+    font-size: 2.5rem;
+  }
+
+  .wordmark[data-size='lg'] .wordmark-sub {
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
   }
 </style>

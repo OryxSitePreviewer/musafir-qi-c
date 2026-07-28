@@ -30,6 +30,8 @@ Then open http://localhost:4321.
 | `npm run build` | Builds the production site into `dist/`. |
 | `npm run preview` | Serves the built `dist/` folder so you can check it before deploying. |
 | `npm run check` | Type checks every page and component. Run this before you deploy. |
+| `npm run images` | Rebuilds every photo in `public/images/` from the masters in `src/assets/`. |
+| `npm run brand` | Rebuilds the share card and the favicon from the logo. |
 
 ---
 

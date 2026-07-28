@@ -27,7 +27,8 @@ above about 1.8x looks soft on a laptop screen.
 
 | Published file | Master | Size | Scale | Shows | Used in |
 | --- | --- | --- | --- | --- | --- |
-| `outlet-cyberjaya.webp` | `storefront-night.webp` | 660 x 440 | 1.73x | The shopfront at night. Orange illuminated sign, red awning, roadside seating. | `src/data/locations.ts`, locations page, footer |
+| `outlet-cyberjaya.webp` | `storefront-straight.png` | 1200 x 800 | 0.50x | The shopfront straight on, in daylight. The whole sign is legible. **The only high resolution photograph on the site.** | `src/data/locations.ts`, locations page |
+| `outlet-cyberjaya-night.webp` | `storefront-night.webp` | 660 x 440 | 1.73x | The same shopfront after dark, sign lit, diners under the awning. | Locations page, below the daylight shot |
 | `soup-mala.webp` | `bowls-mala-soup.webp` | 480 x 360 | 1.67x | Three bowls of mala soup with noodles and fishballs, chilli sauce beside them. | `src/data/dishes.ts`, home page dish card |
 | `bar-trays.webp` | `counter-trays.webp` | 500 x 333 | 1.74x | Steel trays of prepared dishes on the counter. | Ingredient bar band, About page |
 | `dish-skewers.webp` | `skewers-charcoal.webp` | 500 x 375 | 1.31x | Charcoal skewers of lamb and sweetcorn with chilli and cumin. | Ingredient bar band, About page |
@@ -71,15 +72,21 @@ show the room is spacious.
 
 ## Brand assets
 
+All three are generated. Do not edit them by hand.
+
+```bash
+npm run brand
+```
+
 | Filename | Dimensions | Notes |
 | --- | --- | --- |
-| `logo.svg` | 520 x 140 | **Still a reconstruction.** The real logo is the arched black and gold emblem with the crescent. It has not been supplied as a file yet. See the handover note. |
-| `og-default.png` | 1200 x 630 | Share card for WhatsApp, Facebook, and X. Generated from `og-default.svg`. Rebuild it once the real logo and the wide bar shot exist. |
-| `og-default.svg` | 1200 x 630 | Source for the PNG above. Edit this and re-export. |
+| `logo-musafir-qi.png` | 332 x 115 | **The real badge.** Built by `npm run images` from `src/assets/brand/musafir-qi-logo-cutout.png`. The supplied file had no transparency, so `scripts/cutout-logo.mjs` knocked the sign red out from behind it. If a vector master turns up, see handover 1.7. |
+| `og-default.png` | 1200 x 630 | Share card for WhatsApp, Facebook, and X. Built by `npm run brand`, which embeds the badge into the SVG and renders it. |
+| `og-default.svg` | 1200 x 630 | Written by `npm run brand`. Edit `scripts/build-brand-art.mjs`, not this file. |
+| `../favicon.svg` | 48 x 48 | Also written by `npm run brand`. The full badge is unreadable at 16px, so the favicon keeps only the gold arch and the crescent on the badge's dark ground. |
 | `apple-touch-icon.png` | 180 x 180 | Home screen icon on iOS. |
 | `icon-192.png` | 192 x 192 | Android home screen icon, referenced by `site.webmanifest`. |
 | `icon-512.png` | 512 x 512 | Android splash icon, referenced by `site.webmanifest`. |
-| `../favicon.svg` | 48 x 48 viewBox | Browser tab icon. Lives one level up, in `public/`. |
 
 ---
 
