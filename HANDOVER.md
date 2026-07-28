@@ -63,12 +63,10 @@ Do not add a JAKIM logo before that day. Under the Trade Descriptions (Certifica
 Marking of Halal) Order, saying you are certified before you are is an offence, and "the
 website was out of date" is not a defence.
 
-**One claim in this area is still unconfirmed.** The site says "Meat comes from halal
-certified suppliers only, and we keep the supplier documents on file at the outlet", in the
-halal band and on the About page. You confirmed the kitchen rules but not the sourcing, and I
-wrote that line before you confirmed anything. It is close to unavoidable for a halal kitchen,
-but it is a specific claim about your suppliers and their paperwork. Confirm it or reword it,
-in `src/data/halal.ts` and `src/data/about.ts`.
+**The supplier claim is confirmed.** "Meat comes from halal certified suppliers only, and we
+keep the supplier documents on file at the outlet" was confirmed by the owner on 28 July 2026
+and is recorded as such in `src/data/halal.ts`. It stays live in the halal band and on the
+About page. If a supplier ever changes, that line needs rechecking rather than assuming.
 
 ### 1.3 The price per 100 grams is a guess
 
@@ -183,11 +181,18 @@ Maps, press Share, and paste the short link. Do not paste a URL copied from the 
 on a search page, because those carry session parameters that stop working within days. The
 one you sent me had ten of them.
 
-**One more thing.** That link calls the business **Musafir China Muslim BBQ& Hot Pot&Malatang**,
-which is a fourth name variant, after Musafir Qi Malatang, Dr.MaLa, and Musafir Qi Stesen
-Mala. The site uses Musafir Qi Stesen Mala throughout, matching the shopfront. Your Google
-Business Profile name should match the sign, because Google uses name consistency across the
-web as a local ranking signal and four variants actively work against you.
+**The listing is confirmed official.** Confirmed by the owner on 28 July 2026. It is the real
+Google Business Profile, and the site links to it.
+
+It is listed there as **Musafir China Muslim BBQ& Hot Pot&Malatang**, which is not the name on
+the shopfront. The site uses **Musafir Qi Stesen Mala** throughout, matching the board, and
+that is the right call for the website.
+
+The mismatch is worth closing on the Google side rather than here. Google treats a consistent
+business name across the web as a local ranking signal, so a listing name that disagrees with
+the sign, the site, and the receipts works against the listing in local results. Renaming the
+profile to match the board is done inside Google Business Profile and takes a few minutes.
+Nothing in this repository needs to change when you do it.
 
 ## 1.8 The sign shows a company registration I did not publish
 

@@ -42,6 +42,9 @@ const SHOTS = [
   { from: 'storefront-straight.png', to: 'outlet-cyberjaya.webp', w: 1200, h: 800, position: 'centre' },
   // The night shot keeps the locations page from being one photograph.
   { from: 'storefront-night.webp', to: 'outlet-cyberjaya-night.webp', w: 660, h: 440, position: 'centre' },
+  // The angled daylight shot runs beside the outlet card on the home page. Kept at
+  // its native size, so no upscaling at all.
+  { from: 'storefront-day.webp', to: 'outlet-cyberjaya-day.webp', w: 680, h: 383, position: 'centre' },
   { from: 'bowls-mala-soup.webp', to: 'soup-mala.webp', w: 480, h: 360, position: 'centre' },
   { from: 'counter-trays.webp', to: 'bar-trays.webp', w: 500, h: 333, position: 'centre' },
   { from: 'skewers-charcoal.webp', to: 'dish-skewers.webp', w: 500, h: 375, position: 'centre' },

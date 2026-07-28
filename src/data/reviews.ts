@@ -61,11 +61,20 @@ export const REVIEWS = {
   /**
    * The Google listing.
    *
-   * TODO: replace with the direct review link. To get it, open your listing in
-   * Google Maps, press Share, and copy the short link. The URL below is a plain
-   * search, which works but drops people on a results page rather than on the
-   * listing. Do not paste a URL copied out of the browser bar on a search results
-   * page, because those carry session parameters that stop working within days.
+   * CONFIRMED by the owner on 28 July 2026 as the official Google Business Profile
+   * for this restaurant. It is listed there as "Musafir China Muslim BBQ& Hot
+   * Pot&Malatang", which is not the name on the shopfront. The site deliberately
+   * uses the shopfront name, Musafir Qi Stesen Mala, everywhere.
+   *
+   * That mismatch is worth closing at some point. Google treats a consistent
+   * business name across the web as a local ranking signal, so the listing name and
+   * the sign disagreeing works against the listing. Renaming the profile to match
+   * the board is the fix, and it is done inside Google Business Profile, not here.
+   *
+   * TODO: swap the two search URLs below for the direct listing link. Open the
+   * listing in Google Maps, press Share, and copy the short link. Do not paste a URL
+   * copied out of the browser bar on a search results page, because those carry
+   * session parameters that stop working within days.
    */
   reviewsUrl:
     'https://www.google.com/maps/search/?api=1&query=Musafir%20China%20Muslim%20BBQ%20Hot%20Pot%20Malatang%20Cyberjaya',

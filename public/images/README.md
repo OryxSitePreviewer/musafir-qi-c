@@ -29,6 +29,7 @@ above about 1.8x looks soft on a laptop screen.
 | --- | --- | --- | --- | --- | --- |
 | `outlet-cyberjaya.webp` | `storefront-straight.png` | 1200 x 800 | 0.50x | The shopfront straight on, in daylight. The whole sign is legible. **The only high resolution photograph on the site.** | `src/data/locations.ts`, locations page |
 | `outlet-cyberjaya-night.webp` | `storefront-night.webp` | 660 x 440 | 1.73x | The same shopfront after dark, sign lit, diners under the awning. | Locations page, below the daylight shot |
+| `outlet-cyberjaya-day.webp` | `storefront-day.webp` | 680 x 383 | 1.00x | The shopfront from the corner, showing the awning and the roadside tables. | Home page, beside the outlet card |
 | `soup-mala.webp` | `bowls-mala-soup.webp` | 480 x 360 | 1.67x | Three bowls of mala soup with noodles and fishballs, chilli sauce beside them. | `src/data/dishes.ts`, home page dish card |
 | `bar-trays.webp` | `counter-trays.webp` | 500 x 333 | 1.74x | Steel trays of prepared dishes on the counter. | Ingredient bar band, About page |
 | `dish-skewers.webp` | `skewers-charcoal.webp` | 500 x 375 | 1.31x | Charcoal skewers of lamb and sweetcorn with chilli and cumin. | Ingredient bar band, About page |

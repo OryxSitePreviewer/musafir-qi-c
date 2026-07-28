@@ -59,7 +59,13 @@ export const HALAL = {
     },
   ] satisfies KitchenPolicy[],
 
-  /** Handling practice. Secondary to the four rules above. */
+  /**
+   * Handling and sourcing. Secondary to the four rules above.
+   *
+   * The halal certified suppliers claim was CONFIRMED by the owner on 28 July 2026.
+   * It is a claim about your suppliers documents, so if a supplier ever changes,
+   * this line has to be checked again rather than assumed.
+   */
   handling:
     'Meat, seafood, and vegetables sit in separate trays with their own tongs, and staff change gloves between the raw bar and the cooking line. Meat comes from halal certified suppliers only, and we keep the supplier documents on file at the outlet.',
 

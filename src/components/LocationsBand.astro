@@ -15,7 +15,30 @@ import Icon from './Icon.astro';
       lede="Walk in. No booking, no waiting list. The badge below is live, in Malaysian time."
     />
 
-    <ul class="mt-10 grid gap-6 md:grid-cols-2">
+    <!--
+      Two columns: the shopfront on the left, the outlet card on the right. There
+      is one outlet, so a two-up grid of cards would leave half the row empty. The
+      photograph is doing real work here rather than filling a hole, because
+      recognising the shopfront from the road is the actual problem a first timer
+      has once they have parked at CBD Perdana 3.
+    -->
+    <div class="mt-10 grid items-start gap-6 md:grid-cols-2">
+      <figure class="reveal">
+        <img
+          src="/images/outlet-cyberjaya-day.webp"
+          alt="The Musafir Qi Stesen Mala shopfront at CBD Perdana 3 seen from the corner, with a red sign board, a dark red awning, and roadside tables under it"
+          width="680"
+          height="383"
+          loading="lazy"
+          decoding="async"
+          class="w-full rounded-sm border-2 border-mala-ink object-cover"
+        />
+        <figcaption class="mt-2 text-sm text-mala-ink-soft">
+          Look for the red board and the awning. The counter runs along the front.
+        </figcaption>
+      </figure>
+
+      <ul class="grid gap-6">
       {
         LOCATIONS.map((location) => (
           <li class="reveal card-hard flex flex-col p-6">
@@ -70,7 +93,8 @@ import Icon from './Icon.astro';
           </li>
         ))
       }
-    </ul>
+      </ul>
+    </div>
 
     <p class="mt-8">
       <a href="/locations" class="btn btn-outline">
