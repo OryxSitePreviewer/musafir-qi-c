@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# Update the domain here if you deploy somewhere other than drmala.com.my.
-Sitemap: https://drmala.com.my/sitemap-index.xml
+Sitemap: https://musafir-qi-c.vercel.app/sitemap-index.xml

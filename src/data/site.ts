@@ -42,7 +42,7 @@ export interface SiteConfig {
 }
 
 export const SITE: SiteConfig = {
-  name: 'Musafir Qi Malatang (Dr.MaLa)',
+  name: 'Musafir Qi Stesen Mala',
   shortName: 'Stesen Mala',
   chineseName: '麻辣烫',
   officialListingName: 'Musafir China Muslim BBQ& Hot Pot&Malatang',
@@ -57,7 +57,7 @@ export const SITE: SiteConfig = {
 
   whatsappNumber: '60179916692',
   phoneDisplay: '+60 17-991 6692',
-  email: 'hello@drmala.com.my',
+  email: 'hello@musafirqi.com.my',
 
   socials: [
     { label: 'Facebook', href: 'https://www.facebook.com/', icon: 'facebook' },
