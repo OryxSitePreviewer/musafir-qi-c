@@ -32,15 +32,11 @@ above about 1.8x looks soft on a laptop screen.
 | `bar-trays.webp` | `counter-trays.webp` | 500 x 333 | 1.74x | Steel trays of prepared dishes on the counter. | Ingredient bar band, About page |
 | `dish-skewers.webp` | `skewers-charcoal.webp` | 500 x 375 | 1.31x | Charcoal skewers of lamb and sweetcorn with chilli and cumin. | Ingredient bar band, About page |
 | `bowls-table.webp` | `bowls-on-table.webp` | 480 x 360 | 1.67x | Five bowls of mala soup set out on a marble table. | Ingredient bar band |
+| `sides-wings.webp` | `wings-grilled.jpg` | 400 x 300 | 1.65x | Charcoal grilled chicken wings on a rack, greens and dishes behind. | Menu page, sides and drinks |
+| `dishes-takeaway.webp` | `dishes-takeaway.webp` | 480 x 360 | 1.67x | Takeaway tubs of stir fried dishes with bowls of white rice. | Menu page, sides and drinks |
 
-### Built but not yet placed
-
-Both are ready to use. Nothing on the site points at them.
-
-| Published file | Master | Size | Shows |
-| --- | --- | --- | --- |
-| `dishes-takeaway.webp` | `dishes-takeaway.webp` | 480 x 360 | Takeaway tubs of stir fried dishes with rice. |
-| `sides-wings.webp` | `wings-grilled.jpg` | 400 x 300 | Grilled chicken wings on a rack with side dishes. |
+Every photograph the owner has supplied is now placed. The two figures on the menu page are
+marked `no-print`, so they do not appear on the printed menu.
 
 ---
 
